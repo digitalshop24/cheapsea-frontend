@@ -1,0 +1,40 @@
+include ./includes/components.jade
+
+doctype html
+html
+	+head ('Index')
+
+	body.location-body
+		+header-back("Мое место нахождения")
+		.location 
+			.container
+				form.location-wrap
+
+					.location-icon
+					.location-subtitle Определить автоматически
+					.location-title Балашиха
+					.location-input
+						input(type="text" value="Вся Россия")
+					.location-slider
+						.location-slider-wrap-outer
+							.location-slider-wrap(style="min-width:990px")
+								a(href="#/").location-slider-unit Все
+								a(href="#/").location-slider-unit.active А
+								a(href="#/").location-slider-unit Б
+								a(href="#/").location-slider-unit В
+								a(href="#/").location-slider-unit Г
+								a(href="#/").location-slider-unit Д
+								a(href="#/").location-slider-unit Е
+								a(href="#/").location-slider-unit Ё
+								a(href="#/").location-slider-unit Ж
+				.location-list
+						.location-list-unit
+							.location-list-unit-title А
+							.location-list-unit-body
+								a(href="#/").location-list-unit-body-item Арзамас
+								a(href="#/").location-list-unit-body-item Айнанэйск
+						.location-list-unit
+							.location-list-unit-title Б
+							.location-list-unit-body
+								a(href="#/").location-list-unit-body-item Бабаба
+								a(href="#/").location-list-unit-body-item Ббабаба

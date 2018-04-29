@@ -1,0 +1,118 @@
+include ./includes/components.jade
+
+doctype html
+html
+	+head ('Index')
+
+	body
+		+header
+
+		.main
+			.container
+				.main-banner_search
+					.main-banner_search-title
+						|Хочу на море дешево!!!
+						img(src="images/icons/icon-swimsuit.png" alt="icon")
+						img(src="images/icons/icon-glasses.png" alt="icon")
+					.main-banner_search-icon
+				.main-weekly
+					.main-weekly-title Лучшие предложения недели
+					.main-weekly-wrap-outer
+						.main-weekly-wrap(style="min-width:450px")
+							.main-weekly-unit(style="background-image:url(images/main-weekly-01.png)")
+								.main-weekly-unit-filter
+								.main-weekly-unit-content
+									.main-weekly-unit-info 16 часов. Без пересадок. Из Москвы
+									a(href="#/").main-weekly-unit-title Комсомольск-на-Амуре
+									.main-weekly-unit-price от 6 500 руб.
+							.main-weekly-unit(style="background-image:url(images/main-weekly-01.png)")
+								.main-weekly-unit-filter
+								.main-weekly-unit-content
+									.main-weekly-unit-info 16 часов. Без
+									a(href="#/").main-weekly-unit-title Кефлавик
+									.main-weekly-unit-price от 7 900 руб.
+				.main-list
+				.main-list-tabs
+					.main-list-tabs-unit Турция
+					.main-list-tabs-unit.active Индия
+					.main-list-tabs-unit Ю. Америка
+					.main-list-tabs-next
+				.main-list-filter
+					.main-list-filter-title Сначала дешевые
+					.main-list-filter-button Фильтр
+				.main-list-wrap
+					.card.twoSides
+						.card-header
+							.card-header-info 2 пересадки. В пути 1 д. 15 ч.
+							.card-header-title
+								.card-header-title-unit.card-header-title-unit_form Самарканд
+								.card-header-title-unit.card-header-title-unit_to Комсомольск-на-Амуре
+						.card-body
+							.card-segment
+								.card-segment-header
+									.card-segment-unit.card-segment-unit_from
+										.card-segment-unit-time 20:55
+										.card-segment-unit-title Самарканд
+										.card-segment-unit-date 26 Апр 2018, Чт
+									.card-segment-unit.card-segment-unit_to
+										.card-segment-unit-time 09:35
+										.card-segment-unit-title Комсомольск-на-Амуре
+										.card-segment-unit-date 27 Апр 2018, Пт
+								.card-segment-path
+									.card-segment-path-unit dme
+									.card-segment-path-unit hrb
+									.card-segment-path-unit vvo
+									.card-segment-path-unit khk
+							.card-segment
+								.card-segment-header
+									.card-segment-unit.card-segment-unit_from
+										.card-segment-unit-time 12:31
+										.card-segment-unit-title Комсомольск-на-Амуре
+										.card-segment-unit-date 26 Апр 2018, Чт
+									.card-segment-unit.card-segment-unit_to
+										.card-segment-unit-time 21:47
+										.card-segment-unit-title Самарканд 
+										.card-segment-unit-date 27 Апр 2018, Пт
+								.card-segment-path
+									.card-segment-path-unit dme
+									.card-segment-path-unit hrb
+									.card-segment-path-unit vvo
+									.card-segment-path-unit khk
+						.card-result
+							.card-result-button от ₽ 926 700
+							.card-result-icons
+								.card-result-icons-unit.card-result-icons-unit_wing
+								.card-result-icons-unit.card-result-icons-unit_wing
+								.card-result-icons-unit.card-result-icons-unit_weight 8
+								.card-result-icons-unit.card-result-icons-unit_luggage
+					.card.oneSide
+						.card-header
+							.card-header-info 2 пересадки. В пути 1 д. 15 ч.
+							.card-header-title
+								.card-header-title-unit.card-header-title-unit_form Самарканд
+								.card-header-title-unit.card-header-title-unit_to Комсомольск-на-Амуре
+						.card-body
+							.card-segment
+								.card-segment-header
+									.card-segment-unit.card-segment-unit_from
+										.card-segment-unit-time 20:55
+										.card-segment-unit-title Самарканд
+										.card-segment-unit-date 26 Апр 2018, Чт
+									.card-segment-unit.card-segment-unit_to
+										.card-segment-unit-time 09:35
+										.card-segment-unit-title Комсомольск-на-Амуре
+										.card-segment-unit-date 27 Апр 2018, Пт
+								.card-segment-path
+									.card-segment-path-unit dme
+									.card-segment-path-unit hrb
+									.card-segment-path-unit vvo
+									.card-segment-path-unit khk
+						
+						.card-result
+							.card-result-button от ₽ 926 700
+							.card-result-icons
+								.card-result-icons-unit.card-result-icons-unit_wing
+								.card-result-icons-unit.card-result-icons-unit_wing
+								.card-result-icons-unit.card-result-icons-unit_weight 8
+								.card-result-icons-unit.card-result-icons-unit_luggage
+		+footer

@@ -1,0 +1,36 @@
+mixin head(title)
+	head
+		meta(charset="utf-8")
+		title= title
+
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no")
+		meta(name="format-detection" content="telephone=no")
+
+		link(rel="stylesheet" type="text/css" href="css/style.css")
+		
+		script(type="text/javascript" src="js/libs.js")
+		block
+		script(type="text/javascript" src="js/scripts.js")
+
+mixin header
+	header.header
+		.container
+			.header-menu
+			a(href="#/").header-logo
+				img(src="images/logo.svg" alt="cheapsea")
+			.header-buttons
+				.header-add
+				.header-profile
+
+mixin header-back(title)
+	header.header.header_back
+		.container
+			a(href="#/").header-back
+				.header-back-icon
+				.header-back-title=title
+mixin footer
+	footer.footer
+		.container
+			.footer-button
+			
+

@@ -1,0 +1,172 @@
+include ./includes/components.jade
+
+doctype html
+html
+	+head ('Index')
+
+	body.filter-body
+		+header-back("Фильтр")
+		form.filter
+			.filter-top
+				.container
+					.filter-wrap
+						.search-type
+							.search-type-title Тип предложения
+							.search-type-wrap
+								.search-type-unit.plane
+									.search-type-unit-title самолет
+									.search-type-unit-image
+								.search-type-unit.train.active
+									.search-type-unit-title поезд
+									.search-type-unit-image
+								.search-type-unit.tour
+									.search-type-unit-title тур
+									.search-type-unit-image
+								.search-type-unit.car
+									.search-type-unit-title авто
+									.search-type-unit-image
+						.filter-price
+							.filter-price-form
+								.filter-price-form-unit
+									.filter-price-form-unit-subtitle от
+									.filter-price-form-unit-input-wrap
+										input(type="text" value="25 000")
+								.filter-price-form-divider
+								.filter-price-form-unit
+									.filter-price-form-unit-subtitle до
+									.filter-price-form-unit-input-wrap
+										input(type="text" value="35 000")
+						.filter-slider
+							.filter-slider-button(style="left:20%")
+							.filter-slider-button(style="left:50%")
+						.filter-location 
+							.filter-location-title Вы находитесь: <a href="#/">Москва</a>
+			.filter-list
+				.container
+					.filter-list-unit
+						.filter-list-unit-title Виза не нужна
+						.filter-list-unit-content
+					.filter-list-unit.active
+						.filter-list-unit-title Куда: Вся Исландия — 145
+						.filter-list-unit-content
+							.location-slider
+								.location-slider-wrap-outer
+									.location-slider-wrap(style="min-width:990px")
+										a(href="#/").location-slider-unit Все
+										a(href="#/").location-slider-unit.active А
+										a(href="#/").location-slider-unit Б
+										a(href="#/").location-slider-unit В
+										a(href="#/").location-slider-unit Г
+										a(href="#/").location-slider-unit Д
+										a(href="#/").location-slider-unit Е
+										a(href="#/").location-slider-unit Ё
+										a(href="#/").location-slider-unit Ж
+								.location-list
+										.location-list-unit
+											.location-list-unit-title 
+												|А
+												.location-list-unit-title-total 5 предложений
+											.location-list-unit-body
+												a(href="#/").location-list-unit-body-item
+													| Арзамас
+													.location-list-unit-body-item-total 1
+												a(href="#/").location-list-unit-body-item
+													| Акюрейри
+													.location-list-unit-body-item-total 4
+										.location-list-unit
+											.location-list-unit-title 
+												|Б
+												.location-list-unit-title-total 31 предложение
+											.location-list-unit-body
+												a(href="#/").location-list-unit-body-item
+													| Борганрес
+													.location-list-unit-body-item-total 3
+												a(href="#/").location-list-unit-body-item
+													| Боргарфьордур
+													.location-list-unit-body-item-total 4
+												a(href="#/").location-list-unit-body-item.active
+													| Бэйстри
+													.location-list-unit-body-item-total 21
+												a(href="#/").location-list-unit-body-item
+													| Бреиддэлсвик
+													.location-list-unit-body-item-total 2
+												a(href="#/").location-list-unit-body-item
+													| Будардалур
+													.location-list-unit-body-item-total 1
+										.location-list-unit
+											.location-list-unit-title 
+												|Г
+												.location-list-unit-title-total 1 предложение
+											.location-list-unit-body
+												a(href="#/").location-list-unit-body-item
+													| Гардур
+													.location-list-unit-body-item-total 1
+					.filter-list-unit
+						.filter-list-unit-title Откуда: Москва
+						.filter-list-unit-content
+							.location-slider
+								.location-slider-wrap-outer
+									.location-slider-wrap(style="min-width:990px")
+										a(href="#/").location-slider-unit Все
+										a(href="#/").location-slider-unit.active А
+										a(href="#/").location-slider-unit Б
+										a(href="#/").location-slider-unit В
+										a(href="#/").location-slider-unit Г
+										a(href="#/").location-slider-unit Д
+										a(href="#/").location-slider-unit Е
+										a(href="#/").location-slider-unit Ё
+										a(href="#/").location-slider-unit Ж
+								.location-list
+										.location-list-unit
+											.location-list-unit-title 
+												|А
+												.location-list-unit-title-total 5 предложений
+											.location-list-unit-body
+												a(href="#/").location-list-unit-body-item
+													| Арзамас
+													.location-list-unit-body-item-total 1
+												a(href="#/").location-list-unit-body-item
+													| Акюрейри
+													.location-list-unit-body-item-total 4
+										.location-list-unit
+											.location-list-unit-title 
+												|Б
+												.location-list-unit-title-total 31 предложение
+											.location-list-unit-body
+												a(href="#/").location-list-unit-body-item
+													| Борганрес
+													.location-list-unit-body-item-total 3
+												a(href="#/").location-list-unit-body-item
+													| Боргарфьордур
+													.location-list-unit-body-item-total 4
+												a(href="#/").location-list-unit-body-item
+													| Бэйстри
+													.location-list-unit-body-item-total 21
+												a(href="#/").location-list-unit-body-item
+													| Бреиддэлсвик
+													.location-list-unit-body-item-total 2
+												a(href="#/").location-list-unit-body-item
+													| Будардалур
+													.location-list-unit-body-item-total 1
+										.location-list-unit
+											.location-list-unit-title 
+												|Г
+												.location-list-unit-title-total 1 предложение
+											.location-list-unit-body
+												a(href="#/").location-list-unit-body-item
+													| Гардур
+													.location-list-unit-body-item-total 1
+					.filter-list-unit
+						.filter-list-unit-title Все авиакомпании — 15
+						.filter-list-unit-content
+					.filter-list-unit
+						.filter-list-unit-title Сначала скидочные предложения
+						.filter-list-unit-content
+
+					.filter-list-unit
+						.filter-list-unit-title Пересадки — 2
+						.filter-list-unit-content
+			.container
+				.filter-submit
+					input(type="submit" value="Показать 316 предложений").button.button_blue
+

@@ -1,0 +1,29 @@
+include ./includes/components.jade
+
+doctype html
+html
+	+head ('Index')
+
+	body.registration-body
+		+header-back("Регистрация")
+		.registration
+			.container
+				form.registration-wrap
+					.registration-unit
+						.registration-unit-input-wrap
+							
+							input(type="text")
+							span.registration-unit-input-placeholder Имя
+					.registration-unit
+						.registration-unit-input-wrap
+							
+							input(type="tel")
+							span.registration-unit-input-placeholder Телефон
+					.registration-unit
+						.registration-unit-input-wrap
+							
+							input(type="email")
+							span.registration-unit-input-placeholder Почта
+					.registration-rules Нажимая «Далее», вы подтверждаете свое cогласие с <a href="#/">Условиями Соглашения</a>
+					input(type="submit" value="Нужно заполнить все поля").registration-submit
+					

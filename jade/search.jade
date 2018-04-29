@@ -1,0 +1,38 @@
+include ./includes/components.jade
+
+doctype html
+html
+	+head ('Index')
+
+	body
+		+header-back("Поиск предложений")
+		.search
+			.container
+				form.search-wrap
+					.search-unit
+						.search-unit-input-wrap
+							input(type="text")
+							span.search-unit-input-placeholder Откуда
+						.search-unit-input-wrap
+							input(type="tel")
+							span.search-unit-input-placeholder Куда
+					.search-unit
+						.search-unit-input-wrap.filled.search-unit-input-wrap_date
+							input(type="date" value="2018-04-10")
+							span.search-unit-input-placeholder Когда
+					.search-type
+						.search-type-title Тип предложения
+						.search-type-wrap
+							.search-type-unit.plane
+								.search-type-unit-title самолет
+								.search-type-unit-image
+							.search-type-unit.train.active
+								.search-type-unit-title поезд
+								.search-type-unit-image
+							.search-type-unit.tour
+								.search-type-unit-title тур
+								.search-type-unit-image
+							.search-type-unit.car
+								.search-type-unit-title авто
+								.search-type-unit-image
+					input(type="submit" value="Показать 16 предложений").button.button_blue

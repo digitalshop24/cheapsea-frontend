@@ -1,0 +1,34 @@
+<svg width="13" height="11" viewBox="0 0 13 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Canvas" fill="none">
+<g id="Group 7">
+<g id="Rectangle 5">
+<rect width="4" height="3" rx="1" transform="translate(6 0)" fill="#2F80ED"/>
+</g>
+<g id="Rectangle 5.2">
+<rect width="4" height="3" rx="1" transform="translate(6 8)" fill="#2F80ED"/>
+</g>
+<g id="Rectangle 5.1">
+<rect width="4" height="3" rx="1" transform="translate(3 4)" fill="#2F80ED"/>
+</g>
+<g id="Line">
+<line y1="-0.5" x2="5" y2="-0.5" transform="translate(0 2)" stroke="#B0D2FF"/>
+</g>
+<g id="Line_2">
+<line y1="-0.5" x2="2" y2="-0.5" transform="translate(11 2)" stroke="#B0D2FF"/>
+</g>
+<g id="Line_3">
+<line y1="-0.5" x2="5" y2="-0.5" transform="translate(0 10)" stroke="#B0D2FF"/>
+</g>
+<g id="Line_4">
+<line y1="-0.5" x2="2" y2="-0.5" transform="translate(11 10)" stroke="#B0D2FF"/>
+</g>
+<g id="Line_5">
+<line y1="-0.5" x2="2" y2="-0.5" transform="translate(0 6)" stroke="#B0D2FF"/>
+</g>
+<g id="Line_6">
+<line y1="-0.5" x2="5" y2="-0.5" transform="translate(8 6)" stroke="#B0D2FF"/>
+</g>
+</g>
+</g>
+</svg>
+
