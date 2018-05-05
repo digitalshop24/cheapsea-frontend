@@ -21,10 +21,9 @@ export default function(Vue) {
         if (!value) return '';
 
         const date = new Date(value);
-
-        const hours = pad(date.getHours(), 2, '0');
-        const minutes = pad(date.getMinutes(), 2, '0');
+        const hours = pad(date.getUTCHours(), 2, '0');
+        const minutes = pad(date.getUTCMinutes(), 2, '0');
 
         return `${hours}:${minutes}`;
-    })
+    });
 }

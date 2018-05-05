@@ -1,5 +1,5 @@
 <template lang="pug">
-.front.route-page
+.front
     .front-head
         img(src="/static/images/front-head.jpg")
         .front-head__search
@@ -53,6 +53,7 @@ export default class FrontRoute extends RoutePage {
             box: horizontal middle right;
             position: absolute;
             width: $md;
+            max-width: calc(100% - 48px);
             height: 104px;
             background: #FFF;
             right: 0;

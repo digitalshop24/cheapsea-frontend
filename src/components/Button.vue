@@ -23,7 +23,7 @@ export default class CsButton extends Vue {
     justify-content: center;
     align-items: center;
     min-width: 88px;
-    padding: 0 8px;
+    padding: 0 16px;
     margin: 0;
     border: none;
     border-radius: 4px;
@@ -42,5 +42,9 @@ export default class CsButton extends Vue {
     background: $primary-color;
     color: $primary-text-color;
     @apply --text-nowrap;
+
+    &:hover {
+        background: $light-blue-700;
+    }
 }
 </style>
