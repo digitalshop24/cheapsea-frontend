@@ -1,5 +1,6 @@
-import dict from './dict.json';
 import { pad } from './parse';
+import acc from 'accounting';
+import dict from './dict.json';
 
 export default function(Vue) {
 
@@ -26,4 +27,9 @@ export default function(Vue) {
 
         return `${hours}:${minutes}`;
     });
+
+    Vue.filter('money', function(value) {
+        
+        return acc.formatMoney(value, "", 0, " ", ""); // €4.999,99
+    })
 }

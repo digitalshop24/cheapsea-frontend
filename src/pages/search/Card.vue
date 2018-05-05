@@ -25,13 +25,13 @@
             i.material-icons flight
             i.material-icons local_mall
             i.material-icons local_dining
-        cs-button от {{ item.price }} ₽
+        cs-button от {{ item.price | money }} ₽
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import SvgArrow from '@/assets/arrow.svg';
-import axios from 'axios';
+import acc from 'accounting';
 
 @Component({
     name: 'card',
