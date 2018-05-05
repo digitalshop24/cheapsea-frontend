@@ -1,8 +1,8 @@
 <template lang="pug">
 .card
     .card-header
-        p {{ item.origin.name }}
-        p {{ item.destination.name }}
+        p {{ item.origin && item.origin.name }}
+        p {{ item.destination && item.destination.name }}
         .card-header__directions
             svg-arrow
     
@@ -34,11 +34,12 @@ import SvgArrow from '@/assets/arrow.svg';
 import axios from 'axios';
 
 @Component({
+    name: 'card',
     components: {
         'svg-arrow': SvgArrow
     }
 })
-export default class Chips extends Vue {
+export default class Card extends Vue {
 
     @Prop() 
     item;

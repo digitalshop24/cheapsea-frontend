@@ -28,13 +28,14 @@
                     .search-type-unit-title авто
                     .search-type-unit-image
     .search-content
-        cs-loader(v-if="!offers.length")
-        template(v-else)
+        template
             card(
                 v-for="offer in offers"
                 :key="offer.id"
                 :item="offer"
             )
+        cs-loader(v-if="processing")
+        
 //- .main
 //-     .container
 //-         .main-banner_search
@@ -120,21 +121,40 @@ import axios from 'axios';
 })
 export default class SearchRoute extends RoutePage {
     title = 'Assign';
+    processing: boolean = false;
+    page: number = 1;
 
     offers: any[] = [];
 
     getOffers() {
-        axios.get('/offers?offer_type=airplane')
+        const { page } = this;
+
+        this.processing = true;
+        
+        axios.get(`/offers?offer_type=airplane&page=${this.page}`)
             .then(res => {
-                this.offers = res.data;
+                this.offers = this.offers.concat(res.data);
+                this.processing = false;
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
 
+    appendOffers() {
+        this.page++;
+        this.getOffers();
+
+        console.log('offers');
+    }
+
     created() {
         this.getOffers();
+        this.$root.$on('scrollend', this.appendOffers);
+    }
+
+    beforeDestroy() {
+        this.$root.$off('scrollend', this.appendOffers);
     }
 }
 </script>

@@ -26,6 +26,10 @@ import SvgMenu from './assets/menu.svg';
 import SvgProfile from './assets/profile.svg';
 import SvgPlus from './assets/plus.svg';
 
+let scrollTimer: any = null;
+const SCROLL_EMIT_HEIGHT = 240;
+const SCROLL_EMIT_INTERVAL = 1000;
+
 @Component({
     name: 'app',
     components: {
@@ -48,7 +52,19 @@ export default class App extends Vue {
     }
 
     onScroll(e) {
-        this.isFixedHeader = !!e.target.scrollingElement.scrollTop;
+        const wrapper = e.target.scrollingElement;
+        const scrollMax = wrapper.scrollHeight - wrapper.clientHeight;
+
+        this.isFixedHeader = !!wrapper.scrollTop;
+
+
+        if (wrapper.scrollTop > scrollMax - SCROLL_EMIT_HEIGHT && scrollTimer === null) {
+            this.$emit('scrollend');
+
+            scrollTimer = setTimeout(() => {
+                scrollTimer = null;
+            }, SCROLL_EMIT_INTERVAL);
+        }
     }
 
     mounted() {
@@ -65,10 +81,6 @@ export default class App extends Vue {
 <style lang="postcss">
 
 $main-color: #888;
-
-
-
-
 
 .sidebar {
     min-height: 100%;
