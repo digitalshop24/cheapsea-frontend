@@ -39,7 +39,7 @@ import acc from 'accounting';
         'svg-arrow': SvgArrow
     }
 })
-export default class Card extends Vue {
+export default class SearchCard extends Vue {
 
     @Prop() 
     item;
@@ -51,6 +51,7 @@ export default class Card extends Vue {
     background-color: #fff;
     border-radius: 4px;
     margin-bottom: 16px;
+    box-shadow: $shadow-2;
     
     &-header {
         position: relative;
@@ -76,16 +77,8 @@ export default class Card extends Vue {
             }
         }
     }
-
-    &-body, &-footer {
-        border-style: solid;
-        border-color: $grey-200;
-        border-width: 1px;
-    }
-
     &-body {
         padding: 16px;
-        border-width: 0 1px 0;
 
         &__path {
             box: horizontal space-between;

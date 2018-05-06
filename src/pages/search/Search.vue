@@ -1,40 +1,19 @@
 <template lang="pug">
 .search
-    .search-filter
-        .search-unit
-            .search-unit-input-wrap
-                input(type="text")
-                span.search-unit-input-placeholder Откуда
-            .search-unit-input-wrap
-                input(type="tel")
-                span.search-unit-input-placeholder Куда
-        .search-unit
-            .search-unit-input-wrap.filled.search-unit-input-wrap_date
-                input(type="date" value="2018-04-10")
-                span.search-unit-input-placeholder Когда
-        .search-type
-            .search-type-title Тип предложения
-            .search-type-wrap
-                .search-type-unit.plane
-                    .search-type-unit-title самолет
-                    .search-type-unit-image
-                .search-type-unit.train.active
-                    .search-type-unit-title поезд
-                    .search-type-unit-image
-                .search-type-unit.tour
-                    .search-type-unit-title тур
-                    .search-type-unit-image
-                .search-type-unit.car
-                    .search-type-unit-title авто
-                    .search-type-unit-image
+    search-filter(
+        @apply="applyFilter"
+    )
     .search-content
         template
-            card(
+            search-card(
                 v-for="offer in offers"
                 :key="offer.id"
                 :item="offer"
             )
         cs-loader(v-if="processing")
+        .search-content__nodata(
+            v-else-if="offers.length === 0"
+        ) Информация не найдена
         
 //- .main
 //-     .container
@@ -110,30 +89,37 @@
 <script lang="ts">
 import RoutePage from '@/core/route';
 import { Component } from 'vue-property-decorator';
-import Card from './Card.vue';
+import Card from './SearchCard.vue';
+import Filter from './SearchFilter.vue';
 import axios from 'axios';
 
 @Component({
     name: 'offers-page',
     components: {
-        'card': Card
+        'search-card': Card,
+        'search-filter': Filter
     }
 })
 export default class SearchRoute extends RoutePage {
     title = 'Assign';
     processing: boolean = false;
     page: number = 1;
-
+    filter: string = '';
     offers: any[] = [];
 
     getOffers() {
-        const { page } = this;
+        const { page, filter } = this;
 
         this.processing = true;
         
-        axios.get(`/offers?offer_type=airplane&page=${this.page}`)
+        axios.get(`/offers?${filter}&page=${page}`)
             .then(res => {
-                this.offers = this.offers.concat(res.data);
+                if (page > 1) {
+                    this.offers = this.offers.concat(res.data);
+                } else {
+                    this.offers = res.data;
+                }
+                
                 this.processing = false;
             })
             .catch(function (error) {
@@ -144,12 +130,14 @@ export default class SearchRoute extends RoutePage {
     appendOffers() {
         this.page++;
         this.getOffers();
+    }
 
-        console.log('offers');
+    applyFilter(filter: string) {
+        this.filter = filter;
+        this.getOffers();
     }
 
     created() {
-        this.getOffers();
         this.$root.$on('scrollend', this.appendOffers);
     }
 
@@ -176,6 +164,11 @@ $filter-width: 420px;
 
     &-content {
         padding-left: calc($filter-width + 24px);
+
+        &__nodata {
+            text-align: center;
+            padding-top: 24px;
+        }
     }
 }
 

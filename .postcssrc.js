@@ -2,7 +2,9 @@
 
 const appColors = {
     'primary-color': '#2F80ED',
-    'primary-text-color': '#FFF'
+    'primary-text-color': '#FFF',
+    'border-color': 'rgb(238,238,238)',
+    'accent-color': '#F08385'
 }
 
 
