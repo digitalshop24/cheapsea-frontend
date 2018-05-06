@@ -1,31 +1,33 @@
 <template lang="pug">
 .card
-    .card-header
-        p {{ item.origin && item.origin.name }}
-        p {{ item.destination && item.destination.name }}
+    .card-header(@click="select")
+        p {{ offer.origin && offer.origin.name }}
+        p {{ offer.destination && offer.destination.name }}
         .card-header__directions
             svg-arrow
     
     .card-body
         .card-body__points
             .card-body__point 
-                p {{ item.date_from | time }}
-                p {{ item.origin.name }}
-                p {{ item.date_from | dateWeek }}
+                p {{ offer.date_from | time }}
+                p {{ offer.origin.name }}
+                p {{ offer.date_from | dateWeek }}
             .card-body__point 
-                p {{ item.date_to | time }}
-                p {{ item.destination.name }}
-                p {{ item.date_to | dateWeek }}
+                p {{ offer.date_to | time }}
+                p {{ offer.destination.name }}
+                p {{ offer.date_to | dateWeek }}
         .card-body__path
-            .card-body__path-item {{ String(item.from_airport) }}
-            .card-body__path-item {{ String(item.to_airport) }}
+            .card-body__path-item {{ String(offer.from_airport) }}
+            .card-body__path-item {{ String(offer.to_airport) }}
 
     .card-footer
         .card-footer__icons
             i.material-icons flight
             i.material-icons local_mall
             i.material-icons local_dining
-        cs-button от {{ item.price | money }} ₽
+        cs-button(
+            @click="select"
+        ) от {{ offer.price | money }} ₽
 </template>
 
 <script lang="ts">
@@ -42,7 +44,11 @@ import acc from 'accounting';
 export default class SearchCard extends Vue {
 
     @Prop() 
-    item;
+    offer;
+
+    select() {
+        this.$emit('select', this.offer);
+    }
 }
 </script>
 
@@ -65,6 +71,7 @@ export default class SearchCard extends Vue {
         background: url(/static/images/more.jpg) no-repeat;
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
+        cursor: pointer;
 
         &__directions {
             position: absolute;
@@ -137,10 +144,10 @@ export default class SearchCard extends Vue {
             }
 
             p {
-
+                font-size: 1em;
                 &:last-child {
                     color: $grey-600;
-                    font-size: 12px;
+                    font-size: 0.8em;
                 }
             }
         }
@@ -154,7 +161,7 @@ export default class SearchCard extends Vue {
 
         i { 
             color: $grey-600;
-            margin-right: 8px;
+            margin-right: 12px;
         }
     }
 }

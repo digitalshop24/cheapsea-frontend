@@ -32,7 +32,6 @@ module.exports = {
             'vue-class-component': resolve('node_modules/vue-class-component'),
             'vue-property-decorator': resolve('node_modules/vue-property-decorator'),
             'reflect-metadata$': resolve('node_modules/reflect-metadata'),
-            'vue-mapp': resolve('node_modules/vue-mapp/es6'),
             '@': resolve('src')
         }
     },

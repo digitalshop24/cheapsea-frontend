@@ -6,12 +6,14 @@ import store from './store';
 import router from './router';
 import components from './components';
 import filters from './helpers/filters';
+import VueMappModal from 'vue-mapp/es5/modal';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://cheapsea.net/api/v1';
 
 Vue.use(components);
 Vue.use(filters);
+Vue.use(VueMappModal);
 
 Vue.config.productionTip = false;
 
