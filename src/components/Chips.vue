@@ -51,34 +51,34 @@
                                         | {{ offer.date_to | dateWeek }}
                             .chips-tickets-unit-segment-unit-icon
                                 |1 ч.
-                        .chips-tickets-unit-transfer
-                            .chips-tickets-unit-transfer-title Пересадка в Франкфурт-на-Майне
-                            .chips-tickets-unit-transfer-time 1 д. 12 ч.
-                        .chips-tickets-unit-segment
-                            .chips-tickets-unit-segment-info
-                                .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Франкфурт-на-Майне, FRA
-                                    .chips-tickets-unit-segment-info-unit-date 22:16, 27 Апр 2018, Пт
+                        //- .chips-tickets-unit-transfer
+                        //-     .chips-tickets-unit-transfer-title Пересадка в Франкфурт-на-Майне
+                        //-     .chips-tickets-unit-transfer-time 1 д. 12 ч.
+                        //- .chips-tickets-unit-segment
+                        //-     .chips-tickets-unit-segment-info
+                        //-         .chips-tickets-unit-segment-info-unit
+                        //-             .chips-tickets-unit-segment-info-unit-title Франкфурт-на-Майне, FRA
+                        //-             .chips-tickets-unit-segment-info-unit-date 22:16, 27 Апр 2018, Пт
 
-                                .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Тегель, TXL
-                                    .chips-tickets-unit-segment-info-unit-date 23:16, 27 Апр 2018, Пт
-                            .chips-tickets-unit-segment-unit-icon
-                                |1 ч.
-                        .chips-tickets-unit-transfer
-                            .chips-tickets-unit-transfer-title Пересадка в Тегель
-                            .chips-tickets-unit-transfer-time 3 часа 30 мин.
-                        .chips-tickets-unit-segment
-                            .chips-tickets-unit-segment-info
-                                .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Тегель, TXL
-                                    .chips-tickets-unit-segment-info-unit-date 22:16, 26 Апр 2018, Пт
+                        //-         .chips-tickets-unit-segment-info-unit
+                        //-             .chips-tickets-unit-segment-info-unit-title Тегель, TXL
+                        //-             .chips-tickets-unit-segment-info-unit-date 23:16, 27 Апр 2018, Пт
+                        //-     .chips-tickets-unit-segment-unit-icon
+                        //-         |1 ч.
+                        //- .chips-tickets-unit-transfer
+                        //-     .chips-tickets-unit-transfer-title Пересадка в Тегель
+                        //-     .chips-tickets-unit-transfer-time 3 часа 30 мин.
+                        //- .chips-tickets-unit-segment
+                        //-     .chips-tickets-unit-segment-info
+                        //-         .chips-tickets-unit-segment-info-unit
+                        //-             .chips-tickets-unit-segment-info-unit-title Тегель, TXL
+                        //-             .chips-tickets-unit-segment-info-unit-date 22:16, 26 Апр 2018, Пт
 
-                                .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Гавана, ХХХ
-                                    .chips-tickets-unit-segment-info-unit-date 23:16, 26 Апр 2018, Пт
-                            .chips-tickets-unit-segment-unit-icon
-                                |1 ч.	
+                        //-         .chips-tickets-unit-segment-info-unit
+                        //-             .chips-tickets-unit-segment-info-unit-title Гавана, ХХХ
+                        //-             .chips-tickets-unit-segment-info-unit-date 23:16, 26 Апр 2018, Пт
+                        //-     .chips-tickets-unit-segment-unit-icon
+                        //-         |1 ч.	
                 .chips-tickets-unit
                     .chips-tickets-unit-header
                         .chips-tickets-unit-title Билет обратно
@@ -91,42 +91,21 @@
                         .chips-tickets-unit-segment
                             .chips-tickets-unit-segment-info
                                 .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Комсомольск-на-Амуре, KMS
-                                    .chips-tickets-unit-segment-info-unit-date 12:31, 26 Апр 2018, Пт
-
+                                    .chips-tickets-unit-segment-info-unit-title
+                                        | {{ offer.origin && offer.origin.name }}, 
+                                        | {{ String(offer.from_airport) }}
+                                    .chips-tickets-unit-segment-info-unit-date
+                                        | {{ offer.date_from | time }}, 
+                                        | {{ offer.date_from | dateWeek }}
                                 .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Франкфурт-на-Майне, FRA
-                                    .chips-tickets-unit-segment-info-unit-date 13:31, 26 Апр 2018, Пт
+                                    .chips-tickets-unit-segment-info-unit-title 
+                                        | {{ offer.destination && offer.destination.name }},
+                                        | {{ String(offer.to_airport) }}
+                                    .chips-tickets-unit-segment-info-unit-date 
+                                        | {{ offer.date_to | time }}, 
+                                        | {{ offer.date_to | dateWeek }}
                             .chips-tickets-unit-segment-unit-icon
                                 |1 ч.
-                        .chips-tickets-unit-transfer
-                            .chips-tickets-unit-transfer-title Пересадка в Франкфурт-на-Майне
-                            .chips-tickets-unit-transfer-time 1 д. 12 ч.
-                        .chips-tickets-unit-segment
-                            .chips-tickets-unit-segment-info
-                                .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Франкфурт-на-Майне, FRA
-                                    .chips-tickets-unit-segment-info-unit-date 22:16, 27 Апр 2018, Пт
-
-                                .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Тегель, TXL
-                                    .chips-tickets-unit-segment-info-unit-date 23:16, 27 Апр 2018, Пт
-                            .chips-tickets-unit-segment-unit-icon
-                                |1 ч.
-                        .chips-tickets-unit-transfer
-                            .chips-tickets-unit-transfer-title Пересадка в Тегель
-                            .chips-tickets-unit-transfer-time 3 часа 30 мин.
-                        .chips-tickets-unit-segment
-                            .chips-tickets-unit-segment-info
-                                .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Тегель, TXL
-                                    .chips-tickets-unit-segment-info-unit-date 22:16, 26 Апр 2018, Пт
-
-                                .chips-tickets-unit-segment-info-unit
-                                    .chips-tickets-unit-segment-info-unit-title Гавана, ХХХ
-                                    .chips-tickets-unit-segment-info-unit-date 23:16, 26 Апр 2018, Пт
-                            .chips-tickets-unit-segment-unit-icon
-                                |1 ч.	
         .chips-description
             .container
                 .chips-description-title Описание
