@@ -1,0 +1,297 @@
+<template lang="pug">
+
+.chips-page
+    header-back(
+        title=""
+        backRouteName="front"
+        @click.native="$emit('close')"
+    )
+    .chips(v-if="offer")
+        .container
+            .chips-main
+                .chips-main-info 2 пересадки. В пути 1 д. 15 ч.
+                .chips-main-title.twoSides
+                    .chips-main-title-unit {{ offer.origin.name }}
+                    .chips-main-title-unit {{ offer.destination.name }}
+                .chips-main-stats
+                    .chips-main-stats-unit.chips-main-stats-unit_form
+                        .chips-main-stats-unit-time {{ offer.date_from | time }}
+                        .chips-main-stats-unit-title {{ offer.origin.name }}
+                        .chips-main-stats-unit-date {{ offer.date_from | dateWeek }}
+                    .chips-main-stats-unit.chips-main-stats-unit_to
+                        .chips-main-stats-unit-time {{ offer.date_to | time }}
+                        .chips-main-stats-unit-title {{ offer.destination.name }}
+                        .chips-main-stats-unit-date {{ offer.date_to | dateWeek }}
+                a(href="#/").chips-main-button
+                    .chips-main-button-title Купить
+                    .chips-main-button-price от ₽ {{ offer.price | money }}
+            .chips-tickets
+                .chips-tickets-unit
+                    .chips-tickets-unit-header
+                        .chips-tickets-unit-title Билет туда
+                        .chips-tickets-unit-path
+                            .chips-tickets-unit-path-unit {{ String(offer.from_airport) }}
+                            .chips-tickets-unit-path-unit {{ String(offer.from_airport) }}
+                    .chips-tickets-unit-body
+                        .chips-tickets-unit-segment
+                            .chips-tickets-unit-segment-info
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title
+                                        | {{ offer.origin && offer.origin.name }}, 
+                                        | {{ String(offer.from_airport) }}
+                                    .chips-tickets-unit-segment-info-unit-date
+                                        | {{ offer.date_from | time }}, 
+                                        | {{ offer.date_from | dateWeek }}
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title 
+                                        | {{ offer.destination && offer.destination.name }},
+                                        | {{ String(offer.to_airport) }}
+                                    .chips-tickets-unit-segment-info-unit-date 
+                                        | {{ offer.date_to | time }}, 
+                                        | {{ offer.date_to | dateWeek }}
+                            .chips-tickets-unit-segment-unit-icon
+                                |1 ч.
+                        .chips-tickets-unit-transfer
+                            .chips-tickets-unit-transfer-title Пересадка в Франкфурт-на-Майне
+                            .chips-tickets-unit-transfer-time 1 д. 12 ч.
+                        .chips-tickets-unit-segment
+                            .chips-tickets-unit-segment-info
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Франкфурт-на-Майне, FRA
+                                    .chips-tickets-unit-segment-info-unit-date 22:16, 27 Апр 2018, Пт
+
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Тегель, TXL
+                                    .chips-tickets-unit-segment-info-unit-date 23:16, 27 Апр 2018, Пт
+                            .chips-tickets-unit-segment-unit-icon
+                                |1 ч.
+                        .chips-tickets-unit-transfer
+                            .chips-tickets-unit-transfer-title Пересадка в Тегель
+                            .chips-tickets-unit-transfer-time 3 часа 30 мин.
+                        .chips-tickets-unit-segment
+                            .chips-tickets-unit-segment-info
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Тегель, TXL
+                                    .chips-tickets-unit-segment-info-unit-date 22:16, 26 Апр 2018, Пт
+
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Гавана, ХХХ
+                                    .chips-tickets-unit-segment-info-unit-date 23:16, 26 Апр 2018, Пт
+                            .chips-tickets-unit-segment-unit-icon
+                                |1 ч.	
+                .chips-tickets-unit
+                    .chips-tickets-unit-header
+                        .chips-tickets-unit-title Билет обратно
+                        .chips-tickets-unit-path
+                            .chips-tickets-unit-path-unit kms
+                            .chips-tickets-unit-path-unit fra
+                            .chips-tickets-unit-path-unit txl 
+                            .chips-tickets-unit-path-unit xxx
+                    .chips-tickets-unit-body
+                        .chips-tickets-unit-segment
+                            .chips-tickets-unit-segment-info
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Комсомольск-на-Амуре, KMS
+                                    .chips-tickets-unit-segment-info-unit-date 12:31, 26 Апр 2018, Пт
+
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Франкфурт-на-Майне, FRA
+                                    .chips-tickets-unit-segment-info-unit-date 13:31, 26 Апр 2018, Пт
+                            .chips-tickets-unit-segment-unit-icon
+                                |1 ч.
+                        .chips-tickets-unit-transfer
+                            .chips-tickets-unit-transfer-title Пересадка в Франкфурт-на-Майне
+                            .chips-tickets-unit-transfer-time 1 д. 12 ч.
+                        .chips-tickets-unit-segment
+                            .chips-tickets-unit-segment-info
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Франкфурт-на-Майне, FRA
+                                    .chips-tickets-unit-segment-info-unit-date 22:16, 27 Апр 2018, Пт
+
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Тегель, TXL
+                                    .chips-tickets-unit-segment-info-unit-date 23:16, 27 Апр 2018, Пт
+                            .chips-tickets-unit-segment-unit-icon
+                                |1 ч.
+                        .chips-tickets-unit-transfer
+                            .chips-tickets-unit-transfer-title Пересадка в Тегель
+                            .chips-tickets-unit-transfer-time 3 часа 30 мин.
+                        .chips-tickets-unit-segment
+                            .chips-tickets-unit-segment-info
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Тегель, TXL
+                                    .chips-tickets-unit-segment-info-unit-date 22:16, 26 Апр 2018, Пт
+
+                                .chips-tickets-unit-segment-info-unit
+                                    .chips-tickets-unit-segment-info-unit-title Гавана, ХХХ
+                                    .chips-tickets-unit-segment-info-unit-date 23:16, 26 Апр 2018, Пт
+                            .chips-tickets-unit-segment-unit-icon
+                                |1 ч.	
+        .chips-description
+            .container
+                .chips-description-title Описание
+                p Очень боялась ехать одна в Кубу, понаслушалась всякого, поэтому тчательно выбирала отель.
+                p Остановилась на Holiday потому что уже отдыхала в этой сети в Тайланде. Просто не хотела рисковать. За 11 дней я не пожалела о своём выборе ни разу! Прилагаю фотки
+                img(src="/static/images/chips-description-image-01.jpg" alt="")
+                .chips-description-list.included
+                    .chips-description-list-title Входит в стоимость
+                    .chips-description-list-body
+                        .chips-description-list-unit Бесплатный трансфер из аэропорта в отель и обратно
+                        .chips-description-list-unit Услуги русскоговорящего гида в течение всего отдыха
+                        .chips-description-list-unit Билеты на двоих в обе стороны
+                .chips-description-list.excluded
+                    .chips-description-list-title Не входит в стоимость
+                    .chips-description-list-body
+                        .chips-description-list-unit Топливный сбор
+                        .chips-description-list-unit Виза
+                        .chips-description-list-unit Экскурсии
+        .chips-tags
+            .container
+                .chips-tags-unit море
+                .chips-tags-unit ксонлнцу
+                .chips-tags-unit безвизы
+                .chips-tags-unit лето
+                .chips-tags-unit отпуск
+        .chips-info
+            .container
+                .chips-info-unit
+                    .chips-info-unit-title ID чипса
+                    .chips-info-unit-text {{ offer.id }}
+                .chips-info-unit
+                    .chips-info-unit-title ID агента
+                    .chips-info-unit-text null
+                .chips-info-unit
+                    .chips-info-unit-title Дата создания
+                    .chips-info-unit-text {{ offer.created_at | dateWeek }}
+                .chips-info-unit
+                    .chips-info-unit-title Дата редактирования
+                    .chips-info-unit-text {{ offer.updated_at | dateWeek }}
+                .chips-info-unit 
+                    .chips-info-unit-title Начало дат полетов
+                    .chips-info-unit-text null
+                .chips-info-unit
+                    .chips-info-unit-title Конец дат полетов
+                    .chips-info-unit-text null
+                .chips-info-unit
+                    .chips-info-unit-title Начало действия акции
+                    .chips-info-unit-text null
+                .chips-info-unit
+                    .chips-info-unit-title Конец действия акции
+                    .chips-info-unit-text null
+                a(href="#/").chips-main-button.chips-info-button
+                        .chips-main-button-title Купить
+                        .chips-main-button-price от ₽ {{ offer.price | money }}
+        .similar
+            .container
+                .similar-title Похожие предложения
+                .card.oneSide
+                    .card-header
+                        .card-header-info 2 пересадки. В пути 1 д. 15 ч.
+                        .card-header-title
+                            .card-header-title-unit.card-header-title-unit_form Самарканд
+                            .card-header-title-unit.card-header-title-unit_to Комсомольск-на-Амуре
+                    .card-body
+                        .card-segment
+                            .card-segment-header
+                                .card-segment-unit.card-segment-unit_from
+                                    .card-segment-unit-time 20:55
+                                    .card-segment-unit-title Самарканд
+                                    .card-segment-unit-date 26 Апр 2018, Чт
+                                .card-segment-unit.card-segment-unit_to
+                                    .card-segment-unit-time 09:35
+                                    .card-segment-unit-title Комсомольск-на-Амуре
+                                    .card-segment-unit-date 27 Апр 2018, Пт
+                            .card-segment-path
+                                .card-segment-path-unit dme
+                                .card-segment-path-unit hrb
+                                .card-segment-path-unit vvo
+                                .card-segment-path-unit khk
+                    
+                    .card-result
+                        .card-result-button от ₽ 926 700
+                        .card-result-icons
+                            .card-result-icons-unit.card-result-icons-unit_wing
+                            .card-result-icons-unit.card-result-icons-unit_wing
+                            .card-result-icons-unit.card-result-icons-unit_weight 8
+                            .card-result-icons-unit.card-result-icons-unit_luggage
+                .card.oneSide
+                    .card-header
+                        .card-header-info 2 пересадки. В пути 1 д. 15 ч.
+                        .card-header-title
+                            .card-header-title-unit.card-header-title-unit_form Самарканд
+                            .card-header-title-unit.card-header-title-unit_to Комсомольск-на-Амуре
+                    .card-body
+                        .card-segment
+                            .card-segment-header
+                                .card-segment-unit.card-segment-unit_from
+                                    .card-segment-unit-time 20:55
+                                    .card-segment-unit-title Самарканд
+                                    .card-segment-unit-date 26 Апр 2018, Чт
+                                .card-segment-unit.card-segment-unit_to
+                                    .card-segment-unit-time 09:35
+                                    .card-segment-unit-title Комсомольск-на-Амуре
+                                    .card-segment-unit-date 27 Апр 2018, Пт
+                            .card-segment-path
+                                .card-segment-path-unit dme
+                                .card-segment-path-unit hrb
+                                .card-segment-path-unit vvo
+                                .card-segment-path-unit khk
+                        
+                    .card-result
+                        .card-result-button от ₽ 926 700
+                        .card-result-icons
+                            .card-result-icons-unit.card-result-icons-unit_wing
+                            .card-result-icons-unit.card-result-icons-unit_wing
+                            .card-result-icons-unit.card-result-icons-unit_weight 8
+                            .card-result-icons-unit.card-result-icons-unit_luggage
+
+</template>
+
+<script lang="ts">
+import RoutePage from '@/core/route';
+import { Component, Prop } from 'vue-property-decorator';
+
+@Component
+export default class CardRoute extends RoutePage {
+
+    @Prop(Object)
+    offer: object;
+
+    private disableBackground() {
+        const html = document.getElementsByTagName('html')[0];
+        html.style.overflow = 'hidden';
+    }
+
+    private enableBackground() {
+        const html = document.getElementsByTagName('html')[0];
+        html.style.overflow = null;
+    }
+
+    mounted() {
+        this.disableBackground();
+    }
+
+    beforeDestroy() {
+        this.enableBackground();
+    }
+}
+</script>
+
+<style lang="postcss">
+
+.chips-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    overflow: auto;
+    background: #FFF;
+
+    header {
+        cursor: pointer;
+    }
+}
+
+</style>

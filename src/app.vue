@@ -1,20 +1,13 @@
 <template lang="pug">
-.app
-    header.app-header(:class="{ 'is--fixed': isFixedHeader }")
-        .app-header__content
-            router-link(to="/")
-                svg-menu.app-header__button.app-header__menu
-                svg-logo.app-header__logo
-            .grow
-            svg-plus.app-header__button
-            svg-profile.app-header__button
 
-    .route-page
-        router-view
+div
+    keep-alive
+    router-view
 
-    //- footer
-    //-     .container
-    //-         .footer-button
+    footer.footer
+        .container
+            .footer-button
+
 </template>
 
 <script lang="ts">
@@ -57,7 +50,6 @@ export default class App extends Vue {
 
         this.isFixedHeader = !!wrapper.scrollTop;
 
-
         if (wrapper.scrollTop > scrollMax - SCROLL_EMIT_HEIGHT && scrollTimer === null) {
             this.$emit('scrollend');
 
@@ -79,34 +71,4 @@ export default class App extends Vue {
 </script>
 
 <style lang="postcss">
-
-$main-color: #888;
-
-.sidebar {
-    min-height: 100%;
-    box: vertical;
-
-    &-content {
-        box: vertical;
-        overflow: auto;
-        flex-grow: 1;
-    }
-
-    &-header {
-        box: vertical center middle;
-        cursor: pointer;
-        padding: 0 !important;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        text-align: center;
-        flex-shrink: 0;
-        @apply --text-large-2;
-    }
-
-    &-nav {
-        margin: 8px 0;
-        flex-shrink: 0;
-    }
-}
-
 </style>

@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Search from '@/pages/search/Search.vue';
-import Front from '@/pages/front/Front.vue';
+import Search from '@/pages/Search.vue';
+import Front from '@/pages/Front.vue';
+import Chips from '@/pages/Chips.vue';
 
 Vue.use(Router)
 
@@ -20,7 +21,7 @@ export default new Router({
         },
         {
             path: '*',
-            redirect: { name: '' }
+            redirect: { name: 'front' }
         }
     ]
 });

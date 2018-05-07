@@ -9,15 +9,6 @@ html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquot
 	background:transparent;
 }
 
-body {
-	font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-decoration: none;
-    text-rendering: optimizeLegibility;
-    --webkit-overflow-scrolling: touch;
-}
-
 article, aside, figure, footer, header, hgroup, nav, section { display:block; }
 header, section, footer { clear:both; }
 html { overflow-y:scroll; }
@@ -32,7 +23,7 @@ ol {
 
 table { border-collapse:collapse; border-spacing:0; }
 td, td img { vertical-align:top; }
-button, input, select, textarea { margin:0; outline:none; border: none; }
+button, input, select, textarea { margin:0; outline:none; }
 input::-moz-focus-inner, button::-moz-focus-inner { padding:0; border:0; }
 input, select { vertical-align:middle; }
 input[type=radio], input[type=checkbox] { margin:1px 4px 4px 0; }
@@ -52,6 +43,7 @@ input[type=button],
 input[type=submit],
 button {
 	cursor:pointer;
+	
 	-webkit-appearance:none;
 }
 
