@@ -9,7 +9,7 @@ export default new Store<RootState>({
     state: {
         title: '',
         subtitle: '',
-        layout: {},
+        fitleredOffers: [],
         menu
     },
     mutations: {

@@ -6,7 +6,7 @@
     )
     .search
         .container
-            form.search-wrap
+            .search-wrap
                 .search-unit
                     .search-unit-input-wrap
                         vm-input(
@@ -61,23 +61,29 @@
                                     @click="select('to', item.name)"
                                 ) {{ item.name }}
                 .search-unit
-                    .search-unit-input-wrap.filled.search-unit-input-wrap_date
+                    .search-unit__date
                         vm-date(
+                            v-model="form.dateFrom"
                             label="Когда"
+                            placeholder="с"
+                            closeOnSelect
                         )
-                        //- input(type="date" value="2018-04-10")
-                        //- span.search-unit-input-placeholder Когда
+                        vm-date(
+                            v-model="form.dateTo"
+                            placeholder="по"
+                            closeOnSelect
+                        )
                 .search-type
                     .search-type-title Тип предложения
                     .search-type-wrap
                         .search-type-unit.plane(
                             v-for="type in types"
                             :key="type.value"
-                            :class="[ type.css, { active: type.value === form.offerType }]"
-                            @click="form.offerType = type.value"
+                            :class="[ type.css, { active: type.value === form.offer_type }]"
+                            @click="select('offer_type', type.value)"
                         ) {{ type.title }}
                             .search-type-unit-image
-                input(type="submit" value="Показать 16 предложений").button.button_blue
+                button.button.button_blue Показать {{ offersCount }} предложений
 </template>
 
 <script lang="ts">
@@ -86,17 +92,19 @@ import axios, { CancelTokenSource } from 'axios';
 
 @Component
 export default class SearchRoute extends Vue {
-
     selecting: boolean = false;
     requesting: boolean = false;
     cancelSource: CancelTokenSource | null = null;
     similarData: any[] = [];
     selectedField: string = '';
+    offersCount: number = 0;
 
     form = {
         from: '',
         to: '',
-        offerType: 'airplane'
+        offer_type: 'airplane',
+        dateFrom: (new Date()).toJSON(),
+        dateTo: ''
     }
 
     types = [{
@@ -121,6 +129,7 @@ export default class SearchRoute extends Vue {
         this.form[prop] = value;
         this.selecting = false;
         this.similarData = [];
+        this.getOffers();
     }
 
     onInput(input: string) {
@@ -171,6 +180,30 @@ export default class SearchRoute extends Vue {
         this.requesting = false;
     }
 
+    getFilterString(filters) {
+
+        return Object.keys(filters)
+                .filter(prop => {
+                    return !!filters[prop];
+                })
+                .map(prop => `${prop}=${filters[prop]}`)
+                .join('&');
+    }
+
+    getOffers() {
+
+        const filter = this.getFilterString(this.form);
+        
+        axios.get(`/offers?${filter}&page=${1}`)
+            .then(res => {
+                this.offersCount = res.data.length;
+                console.log(res.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     @Prop(String)
     title: string;
 }
@@ -190,14 +223,8 @@ export default class SearchRoute extends Vue {
             height: 56px;
         }
 
-        &__entry {
-            font-size: 22px;
-            font-family: inherit;
-            font-weight: 600;
-        }
-
         &__label {
-            font-size: 22px;
+            font-size: 20px;
             text-transform: uppercase;
         }
     }
@@ -209,7 +236,39 @@ export default class SearchRoute extends Vue {
     }
 
     &-unit {
-        padding: 32px 26px;
+        padding: 28px 24px;
+
+        &__label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: #616161;          
+        }
+
+        &__entry {
+            height: 56px;
+            box: horizontal space-between;
+        }
+
+        &__date {
+            box: horizontal bottom;
+            
+            .vm-date:first-child {
+                margin-right: 24px;
+            }
+
+            .vm-date {
+                flex-grow: 1;
+            }
+        }
+    }
+
+    input {
+        font-size: 18px;
+        font-family: inherit;
+        font-weight: 600;
+        border: none;
+        outline: none;
     }
 }
 

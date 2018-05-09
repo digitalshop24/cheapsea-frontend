@@ -21,8 +21,7 @@
         "noImplicitThis": true,
         "removeComments": true,
         "paths": {
-            "@/*": ["src/*"],
-            "vue-mapp/*": ["node_modules/vue-mapp/es6/*"]
+            "@/*": ["src/*"]
         }
     },
     "include": [
