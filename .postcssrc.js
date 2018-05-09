@@ -461,7 +461,10 @@ module.exports = function ({ file, options, env }) {
             'postcss-reporter': {},
             // to edit target browsers: use "browserslist" field in package.json
             'autoprefixer': {},
-            'cssnano': env === 'production' ? {} : false
+            'cssnano': env === 'production' ? {
+                zindex: false,
+                reduceIdents: false
+            } : false
         }
     }
 }

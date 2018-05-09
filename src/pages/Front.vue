@@ -12,7 +12,7 @@ div
         .container
             router-link(:to="{ name: 'search' }").main-banner_search
                     .main-banner_search-title
-                        |Хочу на море дешево!!!
+                        |Хочу на мdоре дешево!!!
                         img(src="/static/images/icons/icon-swimsuit.png" alt="icon")
                         img(src="/static/images/icons/icon-glasses.png" alt="icon")
 

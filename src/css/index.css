@@ -1120,29 +1120,6 @@ input[type=submit], input[type=button] {
 				}
 			}
 		}
-
-		input{
-			height:32px;
-			font-size: 18px;
-			font-weight: 600;
-			width:100%;
-			border:none;
-			border-bottom: 1px solid #CDCDCD;
-			background-color: transparent;
-			outline:none;
-
-			&:focus{
-				+ .search-unit-input-placeholder{
-					transform:translateY(-21px);
-					opacity: 0.7;
-					font-weight: 500;
-					text-transform: uppercase;
-					color: #333333;
-					font-size: 8px;
-
-				}
-			}
-		}
 	}
 	&-wrap{
 

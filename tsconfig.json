@@ -8,7 +8,7 @@
             "dom",
             "scripthost",
             "es5",
-            "es2015.promise"
+            "es2018.promise"
         ],
         "sourceMap": true,
         "noImplicitAny": false,
