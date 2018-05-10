@@ -3,7 +3,8 @@ div.route-page
     app-header(
         title="Предложения по запросу"
     )
-    offers(:offers="offers")
+    .container
+        offers(:offers="offers")
 
 </template>
 
@@ -22,7 +23,6 @@ export default class OffersRoute extends RoutePage {
     offers: Offers = new Offers();
 
     created() {
-        console.log(this.$route.params)
         // @ts-ignore
         this.offers = this.$route.params.offers;
     }

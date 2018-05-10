@@ -7,21 +7,21 @@
         backRouteName="front"
         @click.native="$emit('close')"
     )
-    .chips(v-if="offer")
+    .chips(v-if="offer.destination.data.attributes.name")
         .container
             .chips-main
                 .chips-main-info 2 пересадки. В пути 1 д. 15 ч.
                 .chips-main-title.twoSides
-                    .chips-main-title-unit {{ offer.origin.name }}
-                    .chips-main-title-unit {{ offer.destination.name }}
+                    .chips-main-title-unit {{ offer.origin.data.attributes.name }}
+                    .chips-main-title-unit {{ offer.destination.data.attributes.name }}
                 .chips-main-stats
                     .chips-main-stats-unit.chips-main-stats-unit_form
                         .chips-main-stats-unit-time {{ offer.date_from | time }}
-                        .chips-main-stats-unit-title {{ offer.origin.name }}
+                        .chips-main-stats-unit-title {{ offer.origin.data.attributes.name }}
                         .chips-main-stats-unit-date {{ offer.date_from | dateWeek }}
                     .chips-main-stats-unit.chips-main-stats-unit_to
                         .chips-main-stats-unit-time {{ offer.date_to | time }}
-                        .chips-main-stats-unit-title {{ offer.destination.name }}
+                        .chips-main-stats-unit-title {{ offer.destination.data.attributes.name }}
                         .chips-main-stats-unit-date {{ offer.date_to | dateWeek }}
                 a(href="#/").chips-main-button
                     .chips-main-button-title Купить
@@ -31,22 +31,22 @@
                     .chips-tickets-unit-header
                         .chips-tickets-unit-title Билет туда
                         .chips-tickets-unit-path
-                            .chips-tickets-unit-path-unit {{ String(offer.from_airport) }}
-                            .chips-tickets-unit-path-unit {{ String(offer.from_airport) }}
+                            .chips-tickets-unit-path-unit {{ String(offer.from_airport.data) }}
+                            .chips-tickets-unit-path-unit {{ String(offer.from_airport.data) }}
                     .chips-tickets-unit-body
                         .chips-tickets-unit-segment
                             .chips-tickets-unit-segment-info
                                 .chips-tickets-unit-segment-info-unit
                                     .chips-tickets-unit-segment-info-unit-title
-                                        | {{ offer.origin && offer.origin.name }}, 
-                                        | {{ String(offer.from_airport) }}
+                                        | {{ offer.origin.data.attributes.name }}, 
+                                        | {{ String(offer.from_airport.data) }}
                                     .chips-tickets-unit-segment-info-unit-date
                                         | {{ offer.date_from | time }}, 
                                         | {{ offer.date_from | dateWeek }}
                                 .chips-tickets-unit-segment-info-unit
                                     .chips-tickets-unit-segment-info-unit-title 
-                                        | {{ offer.destination && offer.destination.name }},
-                                        | {{ String(offer.to_airport) }}
+                                        | {{ offer.destination.data.attributes.name }},
+                                        | {{ String(offer.to_airport.data) }}
                                     .chips-tickets-unit-segment-info-unit-date 
                                         | {{ offer.date_to | time }}, 
                                         | {{ offer.date_to | dateWeek }}
@@ -93,15 +93,15 @@
                             .chips-tickets-unit-segment-info
                                 .chips-tickets-unit-segment-info-unit
                                     .chips-tickets-unit-segment-info-unit-title
-                                        | {{ offer.origin && offer.origin.name }}, 
-                                        | {{ String(offer.from_airport) }}
+                                        | {{ offer.origin.data.attributes.name }}, 
+                                        | {{ String(offer.from_airport.data) }}
                                     .chips-tickets-unit-segment-info-unit-date
                                         | {{ offer.date_from | time }}, 
                                         | {{ offer.date_from | dateWeek }}
                                 .chips-tickets-unit-segment-info-unit
                                     .chips-tickets-unit-segment-info-unit-title 
-                                        | {{ offer.destination && offer.destination.name }},
-                                        | {{ String(offer.to_airport) }}
+                                        | {{ offer.destination.data.attributes.name }},
+                                        | {{ String(offer.to_airport.data) }}
                                     .chips-tickets-unit-segment-info-unit-date 
                                         | {{ offer.date_to | time }}, 
                                         | {{ offer.date_to | dateWeek }}

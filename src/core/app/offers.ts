@@ -36,14 +36,18 @@ export default class Offers {
     }
 
     async get() {
-        this.data = await this.request();
+        const { data, meta } = await this.request();
+
+        this.data = data.map(i => i.attributes);
+        this.total = meta.count;
     }
 
     async append() {
         this.page++;
 
-        const newOffers = await this.request();
+        const { data, meta } = await this.request();
 
-        this.data = this.data.concat(newOffers);
+        this.data = this.data.concat(data.map(i => i.attributes));
+        this.total = meta.count;
     }
 }
