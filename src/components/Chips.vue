@@ -1,8 +1,9 @@
 <template lang="pug">
 
 .chips-page
-    header-back(
+    app-header(
         title=""
+        :customEvent="true"
         backRouteName="front"
         @click.native="$emit('close')"
     )

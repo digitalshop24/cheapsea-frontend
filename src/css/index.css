@@ -24,6 +24,10 @@ $transition: all ease-in-out;
   	-moz-osx-font-smoothing: grayscale;
 }
 
+.route-page {
+	padding: 60px 12px 12px;
+}
+
 
 
 /*	-------------------------------------------------
@@ -92,15 +96,17 @@ input[type=submit], input[type=button] {
 /*	-------------------------------------------------
 	Styles
 	------------------------------------------------- */
-.header{
+
+.header {
+	height: 48px;
 	z-index: 3;
 	background-color: #fff;
 	position: fixed;
 	top:0;
 	left:0;
 	width:100%;
-	height:35px;
 	background-color: #fff;
+
 	.container{
 		position: 	relative;
 		height:100%;
@@ -109,6 +115,7 @@ input[type=submit], input[type=button] {
 		justify-content:space-between;
 
 	}
+
 	&_back{
 		box-shadow: 0px 4px 10px rgba(161, 161, 161, 0.25);
 	}
@@ -160,8 +167,9 @@ input[type=submit], input[type=button] {
 		}
 	}
 }
+
 .main{
-	padding-top:35px;
+	padding-top:48px;
 	&-banner{
 		&_search{
 			padding:24px 19px 24px 15px;
@@ -576,7 +584,7 @@ input[type=submit], input[type=button] {
 	}
 }
 .chips{
-	padding-top:35px;
+	padding-top:48px;
 	padding-bottom: 8px;
 	&-main{
 		height:310px;
@@ -1078,7 +1086,7 @@ input[type=submit], input[type=button] {
 	}
 }
 .search{
-	padding-top: 35px;
+	padding-top: 48px;
 	&-unit{
 		box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
 		position: relative;

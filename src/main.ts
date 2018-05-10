@@ -11,6 +11,8 @@ import VueMappInput from 'vue-mapp/es5/input';
 import VueMappDate from 'vue-mapp/es5/date';
 import VueMappPopup from 'vue-mapp/es5/popup';
 import VueMappList from 'vue-mapp/es5/list';
+import VueMappButton from 'vue-mapp/es5/button';
+import VueMappIcon from 'vue-mapp/es5/icon';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://cheapsea.net/api/v1';
@@ -22,6 +24,8 @@ Vue.use(VueMappInput);
 Vue.use(VueMappDate);
 Vue.use(VueMappPopup);
 Vue.use(VueMappList);
+Vue.use(VueMappButton);
+Vue.use(VueMappIcon);
 
 Vue.config.productionTip = false;
 

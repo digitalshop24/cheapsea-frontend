@@ -4,10 +4,6 @@ div
     keep-alive
     router-view
 
-    footer.footer
-        .container
-            .footer-button
-
 </template>
 
 <script lang="ts">

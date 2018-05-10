@@ -10,7 +10,20 @@ export default new Store<RootState>({
         title: '',
         subtitle: '',
         fitleredOffers: [],
-        menu
+        menu,
+        searchData: {
+            destination: {
+                id: '',
+                name: ''
+            },
+            origin: {
+                id: '',
+                name: ''
+            },
+            offerType: 'airplane',
+            dateFrom: '',
+            dateTo: ''
+        }
     },
     mutations: {
         updateTitle(state, data: string[] | string) {
