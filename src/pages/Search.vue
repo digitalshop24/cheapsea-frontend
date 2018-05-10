@@ -83,12 +83,15 @@
                             @click="select('offer_type', type.value)"
                         ) {{ type.title }}
                             .search-type-unit-image
-                button.button.button_blue Показать {{ offersCount }} предложений
+                router-link(
+                    :to="{ name: 'offers', params: { offers: offers } }"
+                ).button.button_blue Показать {{ offersCount }} предложений
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import axios, { CancelTokenSource } from 'axios';
+import Offers from '@/core/app/offers';
 
 @Component
 export default class SearchRoute extends Vue {
@@ -98,6 +101,8 @@ export default class SearchRoute extends Vue {
     similarData: any[] = [];
     selectedField: string = '';
     offersCount: number = 0;
+
+    offers: Offers = new Offers();
 
     form = {
         from: '',
@@ -125,11 +130,14 @@ export default class SearchRoute extends Vue {
         css: 'car'
     }]
 
+    @Prop(String)
+    title: string;
+
     select(prop, value) {
         this.form[prop] = value;
         this.selecting = false;
         this.similarData = [];
-        this.getOffers();
+        // this.getOffers();
     }
 
     onInput(input: string) {
@@ -180,32 +188,7 @@ export default class SearchRoute extends Vue {
         this.requesting = false;
     }
 
-    getFilterString(filters) {
 
-        return Object.keys(filters)
-                .filter(prop => {
-                    return !!filters[prop];
-                })
-                .map(prop => `${prop}=${filters[prop]}`)
-                .join('&');
-    }
-
-    getOffers() {
-
-        const filter = this.getFilterString(this.form);
-        
-        axios.get(`/offers?${filter}&page=${1}`)
-            .then(res => {
-                this.offersCount = res.data.length;
-                console.log(res.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-    @Prop(String)
-    title: string;
 }
 </script>
 

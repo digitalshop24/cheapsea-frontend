@@ -12,7 +12,7 @@ div
         .container
             router-link(:to="{ name: 'search' }").main-banner_search
                     .main-banner_search-title
-                        |Хочу на мdоре дешево!!!
+                        |Хочу на море дешево!!!
                         img(src="/static/images/icons/icon-swimsuit.png" alt="icon")
                         img(src="/static/images/icons/icon-glasses.png" alt="icon")
 
@@ -44,12 +44,12 @@ div
                 .main-list-filter-button Фильтр
             .main-list-wrap
                 card(
-                    v-for="offer in offers"
+                    v-for="offer in offers.data"
                     :key="offer.id"
                     :offer="offer"
                     @select="selectOffer"
                 )
-                cs-loader(v-if="processing")
+                cs-loader(v-if="offers.processing")
     
     chips(
         v-if="selectedOffer"
@@ -64,6 +64,7 @@ import RoutePage from '@/core/route';
 import { Component } from 'vue-property-decorator';
 import Search from './Search.vue';
 import axios from 'axios';
+import Offers from '@/core/app/offers';
 
 @Component({
     name: 'offers-page',
@@ -73,55 +74,27 @@ import axios from 'axios';
 })
 export default class FrontRoute extends RoutePage {
 
-    processing: boolean = false;
-    page: number = 1;
-    offers: any[] = [];
+    offers: Offers = new Offers();
     selectedOffer: any = null;
 
     filters: object = {
         'offer_type': 'airplane'     
     };
 
-    getOffers() {
-        const { page } = this;
+    async getOffers() {
+        const offers = new Offers(this.filters);
+    
+        await offers.get();
+        this.offers = offers;
+    }
 
-        this.processing = true;
-        
-        axios.get(`/offers?${this.filterString}&page=${page}`)
-            .then(res => {
-                if (page > 1) {
-                    this.offers = this.offers.concat(res.data);
-                } else {
-                    this.offers = res.data;
-                }
-                
-                this.processing = false;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    appendOffers() {
+        this.offers.append();
     }
 
     selectOffer(offer) {
         this.selectedOffer = offer;
     }
-
-    get filterString(): string {
-        const filters = this.filters;
-
-        return Object.keys(filters)
-                .filter(prop => {
-                    return !!filters[prop];
-                })
-                .map(prop => `${prop}=${filters[prop]}`)
-                .join('&');
-    }
-
-    appendOffers() {
-        this.page++;
-        this.getOffers();
-    }
-
 
     created() {
         this.getOffers();
