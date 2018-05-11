@@ -1,10 +1,11 @@
 // https://github.com/michael-ciniawsky/postcss-load-config
 
+
 const appColors = {
     'primary-color': '#2F80ED',
     'primary-text-color': '#FFF',
     'border-color': 'rgb(238,238,238)',
-    'accent-color': '#F08385'
+    'accent-color': '#F08385',
 }
 
 
@@ -15,7 +16,8 @@ const commonVars = {
     xl: '1920px',
     transition: '.4s cubic-bezier(.25,.8,.25,1)',
     margin: '24px',
-    'margin-half': '12px'
+    'margin-half': '12px',
+    'header-height': '56px'
 }
 
 const colors = {

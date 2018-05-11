@@ -1,0 +1,64 @@
+$primary:                 #2F80ED;
+$accent:                  $red-a700;
+$success:                 $green-800;
+$warning:                 $orange-900;
+
+$default-bg:              $grey-50;
+$default-text:            $grey-900;
+$default-divider:         $grey-300;
+$default-link:            $primary;
+$default-bg-light:        $white;
+$default-bg-dark:         $blue-grey-50;
+$default-text-light:      $grey-700;
+$default-text-dark:       $black;
+
+$default-action-hover:    rgba(236,239,241,.8);
+$default-action-hover-primary: #eff0f9;
+$default-action-active:   $default-bg-dark;
+$default-action-active-primary: #eaecf9;
+
+$primary-bg:              $primary;
+$primary-text:            #FFF;
+$primary-divider:         $indigo-400;
+$primary-link:            $light-blue-a100;
+$primary-bg-light:        $indigo-400;
+$primary-bg-dark:         $indigo-800;
+$primary-text-light:      $white;
+$primary-text-dark:       $indigo-100;
+$primary-action-hover:    rgba(40,53,147,.9);
+$primary-action-active:   $primary-bg-dark;
+
+$accent-bg:               $accent;
+$accent-text:             $red-50;
+$accent-divider:          $red-600;
+$accent-link:             $pink-100;
+$accent-bg-light:         $white;
+$accent-bg-dark:          $blue-grey-50;
+$accent-text-light:       $white;
+$accent-text-dark:        $red-100;
+
+$scrollbar-background:    $blue-grey-50;
+$scrollbar-thumb:         $blue-grey-100;
+$scrollbar-thumb-hover:   $blue-grey-200;
+
+$loader-bg:               $blue-grey-100;
+$loader-active:           $primary;
+
+$token-comment:           $default-text-light;
+$token-punctuation:       $default-text-light;
+$token-tag:               $pink-800;
+$token-string:            $success;
+$token-operator:          #a67f59;
+$token-keyword:           #07a;
+$token-function:          #DD4A68;
+$token-variable:          #e90;
+
+$snackbar-bg:             #323232;
+$snackbar-color:          #FFF;
+$snackbar-button:         rgb(159,168,218,.12);
+$snackbar-button-text:    rgb(159,168,218);
+
+
+$outline-color:           $indigo-600;
+$disabled-opacity:        .64;
+$readonly-opacity:        .88;

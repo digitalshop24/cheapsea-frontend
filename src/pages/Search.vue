@@ -1,105 +1,106 @@
 <template lang="pug">
-.search-route
-    app-header(
+.search.route-page
+    app-header.box-primary(
         title="Поиск предложений"
         backRouteName="front"
     )
-    .search
-        .container
-            .search-wrap
-                .search-unit
-                    .search-unit-input-wrap
-                        vm-input(
-                            v-model="searchData.origin.name"
-                            slot="trigger"
-                            label="Откуда" 
-                            :loading="requesting"
-                            @input="onInput"
-                            @focus="selectedField = 'from'"
-                        )
 
-                        vm-popup(
-                            v-if="selecting && selectedField === 'from'"
-                            position="bottom"
-                            floatTrigger
-                            fillTrigger
-                            nooverlay
-                            height="320"
-                            @close="stopSelecting"
-                            @outclick="stopSelecting"
-                        )
-                            vm-list
-                                vm-list-item(
-                                    v-for="(item, idx) in similarData"
-                                    :key="idx"
-                                    @click="select('origin', item)"
-                                ) {{ item.name }}
-                    .search-unit-input-wrap
-                        vm-input(
-                            v-model="searchData.destination.name"
-                            slot="trigger"
-                            label="Куда" 
-                            :loading="requesting"
-                            @input="onInput"
-                            @focus="selectedField = 'to'"
-                        )
+    .box-content
+        vm-form
 
-                        vm-popup(
-                            v-if="selecting && selectedField === 'to'"
-                            position="bottom"
-                            floatTrigger
-                            fillTrigger
-                            nooverlay
-                            height="320"
-                            @close="stopSelecting"
-                            @outclick="stopSelecting"
-                        )
-                            vm-list
-                                vm-list-item(
-                                    v-for="(item, idx) in similarData"
-                                    :key="idx"
-                                    @click="select('destination', item)"
-                                ) {{ item.name }}
-                .search-unit
-                    .search-unit__date
-                        vm-date(
-                            v-model="searchData.dateFrom"
-                            label="Когда"
-                            placeholder="с"
-                            closeOnSelect
-                            @input="getOffers"
-                        )
-                        vm-date(
-                            v-model="searchData.dateTo"
-                            placeholder="по"
-                            closeOnSelect
-                            @input="getOffers"
-                        )
-                .search-type
-                    .search-type-title Тип предложения
-                    .search-type-wrap
-                        .search-type-unit.plane(
-                            v-for="type in types"
-                            :key="type.value"
-                            :class="[ type.css, { active: type.value === searchData.offerType }]"
-                            @click="select('offerType', type.value)"
-                        ) {{ type.title }}
-                            .search-type-unit-image
+            vm-input.xs-12(
+                v-model="searchData.origin.name"
+                label="Откуда" 
+                :loading="requesting"
+                @input="onInput"
+                @focus="selectedField = 'from'"
+                size="2"
+                box
+            )
+            vm-popup(
+                v-if="selecting && selectedField === 'from'"
+                position="bottom"
+                floatTrigger
+                fillTrigger
+                nooverlay
+                height="320"
+                @close="stopSelecting"
+                @outclick="stopSelecting"
+            )
+                vm-list
+                    vm-list-item(
+                        v-for="(item, idx) in similarData"
+                        :key="idx"
+                        @click="select('origin', item)"
+                    ) {{ item.name }}
 
-                vm-button.search-submit(
-                    :disabled="offers.data.length === 0"
-                    raised
-                    primary
-                    @click="showOffers"
-                ) 
-                    span(v-if="offers.data.length")
-                        | Показать {{ offers.data.length }} предложений
-                    span(v-else-if="offers.data.length === 0")
-                        | Предложения отсутствуют
+            vm-input.xs-12(
+                v-model="searchData.destination.name"
+                label="Куда" 
+                :loading="requesting"
+                @input="onInput"
+                @focus="selectedField = 'to'"
+                box
+                size="2"
+            )
+                vm-popup(
+                    v-if="selecting && selectedField === 'to'"
+                    position="bottom"
+                    floatTrigger
+                    fillTrigger
+                    nooverlay
+                    height="320"
+                    @close="stopSelecting"
+                    @outclick="stopSelecting"
+                )
+                    vm-list
+                        vm-list-item(
+                            v-for="(item, idx) in similarData"
+                            :key="idx"
+                            @click="select('destination', item)"
+                        ) {{ item.name }}
 
-                vm-button.search-submit.search-clean(
-                    @click="clean"
-                ) Очистить
+            vm-date.xs-12.sm-6(
+                v-model="searchData.dateFrom"
+                placeholder="Дата"
+                closeOnSelect
+                @input="getOffers"
+                size="2"
+            )
+
+            vm-date.xs-12.sm-6(
+                v-model="searchData.dateTo"
+                placeholder="Обратно"
+                closeOnSelect
+                @input="getOffers"
+                size="2"
+            )
+       
+        .search-type
+            .search-type-title Тип предложения
+            .search-type-wrap
+                .search-type-unit.plane(
+                    v-for="type in types"
+                    :key="type.value"
+                    :class="[ type.css, { active: type.value === searchData.offerType }]"
+                    @click="select('offerType', type.value)"
+                ) {{ type.title }}
+                    .search-type-unit-image
+
+            //- vm-button.search-submit(
+            //-     :disabled="offers.data.length === 0"
+            //-     raised
+            //-     primary
+            //-     @click="showOffers"
+            //- ) 
+            //-     span(v-if="offers.data.length")
+            //-         | Показать {{ offers.data.length }} предложений
+            //-     span(v-else-if="offers.data.length === 0")
+            //-         | Предложения отсутствуют
+
+            //- vm-button.search-submit.search-clean(
+            //-     @click="clean"
+            //- ) Очистить
 </template>
 
 <script lang="ts">
@@ -257,66 +258,77 @@ export default class SearchRoute extends Vue {
 </script>
 
 <style lang="postcss">
-    .search {
-        .vm-input__divider-loader {
-            background: $accent-color;
-        }
-        .vm-input {
-            &__container {
-                height: 56px;
-            }
-            &__label {
-                font-size: 20px;
-                text-transform: uppercase;
-            }
-        }
-        &-type-unit {
-            cursor: pointer;
-            font-size: 10px;
-            padding-top: 4px;
-        }
-        &-unit {
-            padding: 28px 24px;
-            &__label {
-                font-size: 12px;
-                font-weight: 500;
-                text-transform: uppercase;
-                color: #616161;
-            }
-            &__entry {
-                height: 56px;
-                box: horizontal space-between;
-            }
-            &__date {
-                box: horizontal bottom;
-                .vm-date:first-child {
-                    margin-right: 24px;
-                }
-                .vm-date {
-                    flex-grow: 1;
-                }
-            }
-        }
-        input {
-            font-size: 18px;
-            font-family: inherit;
-            font-weight: 600;
-            border: none;
-            outline: none;
-        }
-        &-submit {
-            width: 100%;
-            height: 48px !important;
-            &.is--primary:not([disabled]) {
-                background: #2f80ed !important;
-                color: #fff !important;
-            }
-        }
+.search {
+
+    .vm-input {
+        font-size: 20px;
     }
     
-    .vm-input:not(.is--focused) {
-        .vm-input__divider-loader {
-            display: none;
+    .vm-form {
+        box: horizontal wrap;
+
+        & > div {
+            padding: 8px;
         }
     }
+
+    .vm-date {
+
+        &:hover {
+
+            .vm-icon {
+                opacity: 1;
+            }
+        }
+
+        .vm-icon {
+            font-size: 32px;
+            opacity: .64;
+
+            
+        }
+    }
+
+
+    .vm-input__divider-loader {
+        background: $accent-color;
+    }
+
+    &-unit {
+        padding: 28px 24px;
+        &__label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: #616161;
+        }
+        &__entry {
+            height: 56px;
+            box: horizontal space-between;
+        }
+        &__date {
+            box: horizontal bottom;
+            .vm-date:first-child {
+                margin-right: 24px;
+            }
+            .vm-date {
+                flex-grow: 1;
+            }
+        }
+    }
+    &-submit {
+        width: 100%;
+        height: 48px !important;
+        &.is--primary:not([disabled]) {
+            background: #2f80ed !important;
+            color: #fff !important;
+        }
+    }
+}
+
+.vm-input:not(.is--focused) {
+    .vm-input__divider-loader {
+        display: none;
+    }
+}
 </style>

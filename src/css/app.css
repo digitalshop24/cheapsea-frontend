@@ -1,0 +1,15 @@
+@import './vars';
+@import './colors';
+@import 'vue-mapp/src/themes/core/index.css';
+@import 'vue-mapp/src/themes/core/layout.css';
+
+.route-page {
+    min-height: 100%;
+
+    .box-content {
+        max-width: $md;
+        margin: auto;
+        padding: calc($header-height + 8px) 8px 8px;
+        min-height: 100%;
+    }
+}

@@ -1,13 +1,10 @@
 <template lang="pug">
-header.header.header_back
-    .container
-        .header-back(
-            @click="back"
-        )
-            vm-button.header-back(primary)
-                vm-icon arrow_back
+.app-header
+    .app-header__wrapper
+        vm-button.app-header__back
+            vm-icon arrow_back
 
-            h1 {{ title }}
+        h1 {{ title }}
 </template>
 
 <script lang="ts">
@@ -37,32 +34,45 @@ export default class HeaderBack extends Vue {
 
 <style lang="postcss">
 
-.header {
-    height: 48px;
+.app-header {
+    height: $header-height;
     font-size: 14px;
+    position: fixed;
+    top: 0;
+	left: 0;
+    z-index: 100;
+    width: 100%;
+    margin: auto;
+    box-shadow: $shadow-1;
 
-    &-back {
+    + * {
+        padding-top: $header-height;
+    }
 
-        button {
-            width: 56px;
-            height: 48px;
-            color: $primary-color;
-        }
+    &__back {
+        width: 64px;
+        height: 100%;
+    }
 
-        h1 {
-            font-size: 14px;
-            font-weight: 500;
-            color: $primary-color;
-        }
+    &__wrapper {
+        box: horizontal middle;
+        height: 100%;
+        max-width: $md;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: 16px;
+        font-weight: 500;
+        flex-grow: 1;
     }
 }
 
 .header{
-	z-index: 3;
+	
 	background-color: #fff;
-	position: fixed;
-	top:0;
-	left:0;
+	
+	
 	width:100%;
 	background-color: #fff;
 }

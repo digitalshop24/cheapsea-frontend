@@ -1,4 +1,4 @@
-@import "reset";
+@import './app';
 
 /*	-------------------------------------------------
 	Custom fonts
@@ -8,26 +8,6 @@
 /* Variables */
 
 $transition: all ease-in-out;
-
-/* Mixins */
-
-@define-mixin iconfont ($content) {
-	content: $content;
-	//font-family: '' !important;
-	speak: none;
-	font-style: normal;	
-	font-weight: normal;	
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-  	-webkit-font-smoothing: antialiased;
-  	-moz-osx-font-smoothing: grayscale;
-}
-
-.route-page {
-	padding: 60px 12px 12px;
-}
-
 
 
 /*	-------------------------------------------------
@@ -77,11 +57,6 @@ textarea {
 input[type=submit], input[type=button] {
 }
 
-* {box-sizing: border-box}
-* {
-	min-height: 0;
-	min-width: 0;
-}
 
 
 /*	-------------------------------------------------
@@ -1086,7 +1061,7 @@ input[type=submit], input[type=button] {
 	}
 }
 .search{
-	padding-top: 48px;
+
 	&-unit{
 		box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
 		position: relative;
