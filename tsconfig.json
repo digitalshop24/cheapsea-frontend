@@ -6,8 +6,8 @@
         "moduleResolution": "node",
         "lib": [
             "dom",
-            "scripthost",
             "es5",
+            "scripthost",
             "es2015.promise"
         ],
         "sourceMap": true,

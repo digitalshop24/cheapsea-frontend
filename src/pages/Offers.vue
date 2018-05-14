@@ -13,7 +13,7 @@ import RoutePage from '@/core/route';
 import { Component } from 'vue-property-decorator';
 import Search from './Search.vue';
 import axios from 'axios';
-import Offers from '@/core/app/offers';
+import Offers from '@/core/offers';
 
 @Component({
     name: 'offers-page'

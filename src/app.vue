@@ -76,5 +76,4 @@ export default class App extends Vue {
         padding-top: $header-height;
     }
 }
-
 </style>

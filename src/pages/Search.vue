@@ -6,97 +6,53 @@
     )
 
     .box-content
-        vm-form
-
-            vm-input.xs-12(
-                v-model="searchData.origin.name"
-                label="Откуда" 
-                :loading="requesting"
-                @input="onInput"
-                @focus="selectedField = 'from'"
-                size="2"
-                box
-            )
-            vm-popup(
-                v-if="selecting && selectedField === 'from'"
-                position="bottom"
-                floatTrigger
-                fillTrigger
-                nooverlay
-                height="320"
-                @close="stopSelecting"
-                @outclick="stopSelecting"
-            )
-                vm-list
-                    vm-list-item(
-                        v-for="(item, idx) in similarData"
-                        :key="idx"
-                        @click="select('origin', item)"
-                    ) {{ item.name }}
-
-            vm-input.xs-12(
-                v-model="searchData.destination.name"
-                label="Куда" 
-                :loading="requesting"
-                @input="onInput"
-                @focus="selectedField = 'to'"
-                box
-                size="2"
-            )
-                vm-popup(
-                    v-if="selecting && selectedField === 'to'"
-                    position="bottom"
-                    floatTrigger
-                    fillTrigger
-                    nooverlay
-                    height="320"
-                    @close="stopSelecting"
-                    @outclick="stopSelecting"
+        vm-form(box size="2")
+            .xs-12
+                SelectCity(
+                    label="Откуда"
                 )
-                    vm-list
-                        vm-list-item(
-                            v-for="(item, idx) in similarData"
-                            :key="idx"
-                            @click="select('destination', item)"
-                        ) {{ item.name }}
+            .xs-12
+                SelectCity(
+                    label="Куда"
+                )
+            .xs-12.sm-6
+                vm-date(
+                   v-model="searchData.dateFrom"
+                   label="Дата отъезда"
+                   closeOnSelect
+                   @input="getOffers"
+                   size="2"
+                )
+            
+            .xs-12.sm-6
+                vm-date(
+                    v-model="searchData.dateTo"
+                    label="Обратно"
+                    closeOnSelect
+                    @input="getOffers"
+                    size="2"
+                )
+        .search-wrap
+            .search-type
+                .search-type-wrap
+                    .search-type-unit.plane(
+                        v-for="type in types"
+                        :key="type.value"
+                        :class="[ type.css, { active: type.value === searchData.offerType }]"
+                        @click="select('offerType', type.value)"
+                    ) {{ type.title }}
+                        .search-type-unit-image
 
-            vm-date.xs-12.sm-6(
-                v-model="searchData.dateFrom"
-                placeholder="Дата"
-                closeOnSelect
-                @input="getOffers"
-                size="2"
-            )
-
-            vm-date.xs-12.sm-6(
-                v-model="searchData.dateTo"
-                placeholder="Обратно"
-                closeOnSelect
-                @input="getOffers"
-                size="2"
-            )
-       
-        .search-type
-            .search-type-title Тип предложения
-            .search-type-wrap
-                .search-type-unit.plane(
-                    v-for="type in types"
-                    :key="type.value"
-                    :class="[ type.css, { active: type.value === searchData.offerType }]"
-                    @click="select('offerType', type.value)"
-                ) {{ type.title }}
-                    .search-type-unit-image
-
-            //- vm-button.search-submit(
-            //-     :disabled="offers.data.length === 0"
-            //-     raised
-            //-     primary
-            //-     @click="showOffers"
-            //- ) 
-            //-     span(v-if="offers.data.length")
-            //-         | Показать {{ offers.data.length }} предложений
-            //-     span(v-else-if="offers.data.length === 0")
-            //-         | Предложения отсутствуют
+            vm-button.search-submit(
+                :disabled="offers.data.length === 0"
+                raised
+                primary
+                @click="showOffers"
+            ) 
+                span(v-if="offers.data.length")
+                    | Показать {{ offers.data.length }} предложений
+                span(v-else-if="offers.data.length === 0")
+                    | Предложения отсутствуют
 
             //- vm-button.search-submit.search-clean(
             //-     @click="clean"
@@ -104,117 +60,111 @@
 </template>
 
 <script lang="ts">
-import {
-    Vue,
-    Component,
-    Prop
-} from "vue-property-decorator";
-import axios, {
-    CancelTokenSource
-} from "axios";
-import {
-    State
-} from "vuex-class";
-import Offers from "@/core/app/offers";
+import Offers from "@/core/offers";
+import dict from '@/config.json';
+import axios, { CancelTokenSource, Cancel } from "axios";
+import { snackbar } from 'vue-mapp/es5/snackbar';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import { State } from "vuex-class";
 
 @Component
 export default class SearchRoute extends Vue {
-    selecting: boolean = false;
-    requesting: boolean = false;
-    cancelSource: CancelTokenSource | null = null;
-    similarData: any[] = [];
-    selectedField: string = "";
+    // selecting: boolean = false;
+    // requesting: boolean = false;
+    // cancelSource: CancelTokenSource | null = null;
+    // similarData: any[] = [];
+    // selectedField: string = "";
     init: boolean = false;
 
-    offers: Offers = new Offers();
-
-    types = [{
-            title: "Самолет",
-            value: "airplane",
-            css: "plane"
-        },
-        {
-            title: "Поезд",
-            value: "trane",
-            css: "train"
-        },
-        {
-            title: "Тур",
-            value: "bus",
-            css: "tour"
-        },
-        {
-            title: "Авто",
-            value: "car_rent",
-            css: "car"
-        }
-    ];
-
-    @Prop(String) title: string;
+    // changed: boolean = false;
 
     @State searchData;
 
+    form
+
+    offers: Offers = new Offers();
+
+    types = dict.offerTypes;
+
+    @Prop(String) title: string;
+
+    
+
     select(prop, value) {
         this.searchData[prop] = value;
-        this.selecting = false;
-        this.similarData = [];
+        // this.selecting = false;
+        // this.similarData = [];
         this.getOffers();
     }
 
     async getOffers() {
 
-        const { searchData:form } = this;
+        // const { searchData:form } = this;
 
-        const offers = new Offers({
-            'destination_id': form.destination.id,
-            'origin_id': form.origin.id,
-            'offer_type': form.offerType,
-            'date_from': form.dateFrom,
-            'date_to': form.dateTo
-        });
+        // const offers = new Offers({
+        //     'destination_id': form.destination.id,
+        //     'origin_id': form.origin.id,
+        //     'offer_type': form.offerType,
+        //     'date_from': form.dateFrom,
+        //     'date_to': form.dateTo
+        // });
 
-        await offers.get();
-        this.offers = offers;
+        // await offers.get();
+        // this.offers = offers;
     }
 
     onInput(input: string) {
-        if (this.cancelSource) {
-            this.cancelSource.cancel("canceled");
-        }
+        console.log('dsdsd', input)
+
+        // if (this.cancelSource) {
+        //     this.cancelSource.cancel("canceled");
+        // }
 
         if (input.length < 2) {
             this.stopSelecting();
             return;
         }
 
+        console.log('on input', input)
+
         const token = axios.CancelToken;
         const source = token.source();
 
-        this.cancelSource = source;
-        this.requesting = true;
+        // this.cancelSource = source;
+        // this.requesting = true;
 
         axios
             .post(
                 "https://cheapsea.net/api/cities/autocomplete", {
                     query: input.trim()
                 }, {
-                    cancelToken: source.token
+                    cancelToken: source.token,
+                    timeout: 5000
                 }
             )
             .then(res => {
+
                 const data = res.data.slice(0, 100);
 
-                this.selecting = data.length > 0;
-                this.similarData = data;
-                this.requesting = false;
-                this.cancelSource = null;
+                console.log(data);
+                // this.changed = true;
+                // this.selecting = data.length > 0;
+                // this.similarData = data;
+                // this.requesting = false;
+                // this.cancelSource = null;
             })
             .catch(error => {
-                if (error.message) {} else {
-                    this.similarData = [];
-                    this.requesting = false;
+                
+
+                if (error.message && error.message !== 'canceled') {
+                    // this.requesting = false;
+                    snackbar({
+                        text: error.message
+                    })
+                } else {
+                    // this.similarData = [];
                 }
-            });
+            })
     }
 
     showOffers() {
@@ -228,9 +178,9 @@ export default class SearchRoute extends Vue {
     }
 
     stopSelecting() {
-        this.similarData = [];
-        this.selecting = false;
-        this.requesting = false;
+        // this.similarData = [];
+        // this.selecting = false;
+        // this.requesting = false;
     }
 
     clean() {
@@ -260,7 +210,7 @@ export default class SearchRoute extends Vue {
 <style lang="postcss">
 .search {
 
-    .vm-input {
+    & > .vm-input {
         font-size: 20px;
     }
     
@@ -271,24 +221,6 @@ export default class SearchRoute extends Vue {
             padding: 8px;
         }
     }
-
-    .vm-date {
-
-        &:hover {
-
-            .vm-icon {
-                opacity: 1;
-            }
-        }
-
-        .vm-icon {
-            font-size: 32px;
-            opacity: .64;
-
-            
-        }
-    }
-
 
     .vm-input__divider-loader {
         background: $accent-color;

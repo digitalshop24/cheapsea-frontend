@@ -55,7 +55,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import axios, { CancelTokenSource } from "axios";
 import { Offer } from "@/../types/app";
-import Offers from "@/core/app/offers";
+import Offers from "@/core/offers";
 
 @Component
 export default class OffersModule extends Vue {

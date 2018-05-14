@@ -1,0 +1,27 @@
+{
+    "links": {
+        "cities": "https://cheapsea.net/api/cities/autocomplete"
+    },
+    "offerTypes": [
+        {
+            "title": "Самолет",
+            "value": "airplane",
+            "css": "plane"
+        },
+        {
+            "title": "Поезд",
+            "value": "trane",
+            "css": "train"
+        },
+        {
+            "title": "Тур",
+            "value": "bus",
+            "css": "tour"
+        },
+        {
+            "title": "Авто",
+            "value": "car_rent",
+            "css": "car"
+        }
+    ]
+}

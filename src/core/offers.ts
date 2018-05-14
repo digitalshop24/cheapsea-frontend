@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { snackbar } from 'vue-mapp/es5/snackbar';
 import { Offer } from '@/../types/app';
 
 export default class Offers {
@@ -32,6 +33,10 @@ export default class Offers {
             return data;
         } catch (e) {
             this.processing = false;
+
+            snackbar({
+                text: 'Ну ептабля'
+            })
         }
     }
 
