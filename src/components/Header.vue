@@ -1,10 +1,14 @@
 <template lang="pug">
 .app-header
     .app-header__wrapper
-        vm-button.app-header__back
+        vm-button.app-header__back(
+            @click="$emit('back')"
+        )
             vm-icon arrow_back
 
         h1 {{ title }}
+
+        slot(name="right")
 </template>
 
 <script lang="ts">
@@ -45,11 +49,7 @@ export default class HeaderBack extends Vue {
     margin: auto;
     box-shadow: $shadow-1;
 
-    + * {
-        padding-top: $header-height;
-    }
-
-    &__back {
+    button {
         width: 64px;
         height: 100%;
     }
@@ -66,6 +66,8 @@ export default class HeaderBack extends Vue {
         font-weight: 500;
         flex-grow: 1;
     }
+    
+    
 }
 
 .header{

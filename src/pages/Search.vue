@@ -1,49 +1,56 @@
 <template lang="pug">
-.search.route-page
+.search.route-page.box-content
+    
     app-header.box-primary(
         title="Поиск предложений"
-        backRouteName="front"
+        @back="$router.push('/front')"
     )
+        vm-button(
+            icon="refresh"
+            slot="right"
+            @click="clear"
+        )
 
-    .box-content
+    .search-content.box-content
         vm-form(box size="2")
             .xs-12
                 SelectCity(
+                    v-model="searchData.origin_id"
                     label="Откуда"
+                    @select="getOffers"
                 )
             .xs-12
                 SelectCity(
+                    v-model="searchData.destination_id"
                     label="Куда"
+                    @select="getOffers"
                 )
             .xs-12.sm-6
                 vm-date(
-                   v-model="searchData.dateFrom"
+                   v-model="searchData.date_from"
                    label="Дата отъезда"
                    closeOnSelect
-                   @input="getOffers"
-                   size="2"
+                   @select="getOffers"
                 )
-            
             .xs-12.sm-6
                 vm-date(
-                    v-model="searchData.dateTo"
+                    v-model="searchData.date_to"
                     label="Обратно"
                     closeOnSelect
-                    @input="getOffers"
-                    size="2"
+                    @select="getOffers"
                 )
-        .search-wrap
-            .search-type
-                .search-type-wrap
-                    .search-type-unit.plane(
-                        v-for="type in types"
-                        :key="type.value"
-                        :class="[ type.css, { active: type.value === searchData.offerType }]"
-                        @click="select('offerType', type.value)"
-                    ) {{ type.title }}
-                        .search-type-unit-image
-
-            vm-button.search-submit(
+        .xs-12
+            .search-types
+                .search-types__item(
+                    v-for="type in types"
+                    :class="{ 'box-primary': type.value === searchData.offerType }"
+                    @click="select('offerType', type.value)"
+                )
+                    h1 {{ type.title }}
+                    component(:is="'svg-' + type.value")
+        
+        .xs-12.search-submit
+            vm-button(
                 :disabled="offers.data.length === 0"
                 raised
                 primary
@@ -53,34 +60,40 @@
                     | Показать {{ offers.data.length }} предложений
                 span(v-else-if="offers.data.length === 0")
                     | Предложения отсутствуют
-
-            //- vm-button.search-submit.search-clean(
-            //-     @click="clean"
-            //- ) Очистить
 </template>
 
 <script lang="ts">
 import Offers from "@/core/offers";
 import dict from '@/config.json';
+import { OffersSearchData } from '@/../types/app';
 import axios, { CancelTokenSource, Cancel } from "axios";
+import SvgTrain from '@/assets/train.svg';
+import SvgPlane from '@/assets/plane.svg';
+import SvgCar from '@/assets/car.svg';
+import SvgTour from '@/assets/tour.svg';
 import { snackbar } from 'vue-mapp/es5/snackbar';
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { State } from "vuex-class";
 
-@Component
+const searchDefaults = {
+    'destination_id': '',
+    'origin_id': '',
+    'offer_type': 'airplane',
+    'date_from': '',
+    'date_to': ''
+};
+
+@Component({
+    name: 'search-route',
+    components: {
+        'svg-trane': SvgTrain,
+        'svg-airplane': SvgPlane,
+        'svg-car_rent': SvgCar,
+        'svg-bus': SvgTour
+    }
+})
 export default class SearchRoute extends Vue {
-    // selecting: boolean = false;
-    // requesting: boolean = false;
-    // cancelSource: CancelTokenSource | null = null;
-    // similarData: any[] = [];
-    // selectedField: string = "";
-    init: boolean = false;
 
-    // changed: boolean = false;
-
-    @State searchData;
-
-    form
+    searchData: OffersSearchData = searchDefaults;
 
     offers: Offers = new Offers();
 
@@ -88,83 +101,17 @@ export default class SearchRoute extends Vue {
 
     @Prop(String) title: string;
 
-    
 
     select(prop, value) {
         this.searchData[prop] = value;
-        // this.selecting = false;
-        // this.similarData = [];
         this.getOffers();
     }
 
     async getOffers() {
+        const offers = new Offers(this.searchData);
 
-        // const { searchData:form } = this;
-
-        // const offers = new Offers({
-        //     'destination_id': form.destination.id,
-        //     'origin_id': form.origin.id,
-        //     'offer_type': form.offerType,
-        //     'date_from': form.dateFrom,
-        //     'date_to': form.dateTo
-        // });
-
-        // await offers.get();
-        // this.offers = offers;
-    }
-
-    onInput(input: string) {
-        console.log('dsdsd', input)
-
-        // if (this.cancelSource) {
-        //     this.cancelSource.cancel("canceled");
-        // }
-
-        if (input.length < 2) {
-            this.stopSelecting();
-            return;
-        }
-
-        console.log('on input', input)
-
-        const token = axios.CancelToken;
-        const source = token.source();
-
-        // this.cancelSource = source;
-        // this.requesting = true;
-
-        axios
-            .post(
-                "https://cheapsea.net/api/cities/autocomplete", {
-                    query: input.trim()
-                }, {
-                    cancelToken: source.token,
-                    timeout: 5000
-                }
-            )
-            .then(res => {
-
-                const data = res.data.slice(0, 100);
-
-                console.log(data);
-                // this.changed = true;
-                // this.selecting = data.length > 0;
-                // this.similarData = data;
-                // this.requesting = false;
-                // this.cancelSource = null;
-            })
-            .catch(error => {
-                
-
-                if (error.message && error.message !== 'canceled') {
-                    // this.requesting = false;
-                    snackbar({
-                        text: error.message
-                    })
-                } else {
-                    // this.similarData = [];
-                }
-            })
+        await offers.get();
+        this.offers = offers;
     }
 
     showOffers() {
@@ -177,27 +124,8 @@ export default class SearchRoute extends Vue {
         });
     }
 
-    stopSelecting() {
-        // this.similarData = [];
-        // this.selecting = false;
-        // this.requesting = false;
-    }
-
-    clean() {
-        this.$store.state.searchData = {
-            destination: {
-                id: '',
-                name: ''
-            },
-            origin: {
-                id: '',
-                name: ''
-            },
-            offerType: 'airplane',
-            dateFrom: '',
-            dateTo: ''
-        };
-
+    clear() {
+        this.searchData = searchDefaults;
         this.getOffers();
     }
 
@@ -208,59 +136,96 @@ export default class SearchRoute extends Vue {
 </script>
 
 <style lang="postcss">
+
+
 .search {
 
-    & > .vm-input {
-        font-size: 20px;
+    .xs-12 > .vm-input  {
+        font-size: 18px;
     }
     
     .vm-form {
         box: horizontal wrap;
+        margin-top: 8px;
+    }
 
-        & > div {
-            padding: 8px;
+    .vm-input__right {
+
+        .vm-button:not(:hover) {
+            opacity: .4;
         }
     }
 
-    .vm-input__divider-loader {
-        background: $accent-color;
+    &-content {
+        padding: 8px;
     }
 
-    &-unit {
-        padding: 28px 24px;
-        &__label {
-            font-size: 12px;
-            font-weight: 500;
-            text-transform: uppercase;
-            color: #616161;
-        }
-        &__entry {
-            height: 56px;
-            box: horizontal space-between;
-        }
-        &__date {
-            box: horizontal bottom;
-            .vm-date:first-child {
-                margin-right: 24px;
+    &-types {
+        box: horizontal;
+        border-radius: 4px;
+        height: 80px;
+        margin-bottom: 16px;
+        border-width: 1px;
+        border-style: solid;
+        overflow: hidden;
+
+        &__item {
+            flex: 1 1 25%;
+            box: vertical top center;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+            border-width: 0 1px 0 0;
+            border-style: solid;
+
+            &:last-child {
+                border: none;
             }
-            .vm-date {
-                flex-grow: 1;
+
+            &.box-primary {
+
+                svg {
+                    color: #FFF;
+                }
+            }
+
+            h1 {
+                font-size: 12px;
+                line-height: 24px;
+                font-weight: 600;
+                text-transform: uppercase;
+                flex: 0 0 auto;
+            }
+
+            svg {
+                padding: 0 0 16px;
+                color: $primary-color;
             }
         }
     }
+
     &-submit {
-        width: 100%;
-        height: 48px !important;
-        &.is--primary:not([disabled]) {
-            background: #2f80ed !important;
-            color: #fff !important;
+        
+        .vm-button {
+            height: 56px;
+            width: 100%;
+            font-weight: 600;
         }
     }
-}
 
-.vm-input:not(.is--focused) {
-    .vm-input__divider-loader {
-        display: none;
+    .xs-12 {
+        padding: 12px 8px;
+    }
+
+    .vm-input__container {
+
+        input {
+            font-size: 19px;
+        }
+    }
+
+    .vm-input__label {
+        font-size: 19px;
     }
 }
 </style>

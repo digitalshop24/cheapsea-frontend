@@ -1,6 +1,6 @@
 <template lang="pug">
 
-.app
+.app.box
     keep-alive
     router-view
 
@@ -70,10 +70,16 @@ export default class App extends Vue {
 
 .app {
     min-height: 100%;
+    box: vertical top;
+    background: #FFF;
     
     .route-page {
         width: 100%;
         padding-top: $header-height;
+    }
+
+    a {
+        color: #FFF !important;
     }
 }
 </style>

@@ -1,7 +1,8 @@
 <template lang="pug">
-div.route-page
-    app-header(
+div.route-page.offers-page
+    app-header.box(
         title="Предложения по запросу"
+        @back="$router.push('/search')"
     )
     .container
         offers(:offers="offers")
@@ -34,5 +35,12 @@ export default class OffersRoute extends RoutePage {
 </script>
 
 <style lang="postcss">
+
+.offers-page {
+
+    .container {
+        padding: 16px;
+    }
+}
 
 </style>

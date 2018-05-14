@@ -9,7 +9,7 @@
     .box-content {
         max-width: $md;
         margin: auto;
-        padding: calc($header-height + 8px) 8px 8px;
+        padding: 8px;
         min-height: 100%;
     }
 }

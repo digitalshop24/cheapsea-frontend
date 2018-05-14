@@ -9,7 +9,6 @@ export interface RootState {
     subtitle: string;
     menu: MenuItem[];
     fitleredOffers: any[];
-    searchData: any;
 }
 
 export interface MenuItem {

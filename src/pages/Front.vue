@@ -8,7 +8,7 @@ div
             .header-buttons
                 .header-add
                 .header-profile
-    .main
+    .main.front
         .container
             router-link(:to="{ name: 'search' }").main-banner_search
                     .main-banner_search-title

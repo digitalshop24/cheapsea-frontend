@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { snackbar } from 'vue-mapp/es5/snackbar';
-import { Offer } from '@/../types/app';
+import { Offer, OffersSearchData } from '@/../types/app';
 
 export default class Offers {
     
@@ -9,7 +9,7 @@ export default class Offers {
     processing: boolean = false;
     data: Offer[] = [];
 
-    constructor(private filters: object = {}) {}
+    constructor(private filters: OffersSearchData = {}) {}
 
     private get filterString() {
         const { filters } = this;
@@ -35,7 +35,7 @@ export default class Offers {
             this.processing = false;
 
             snackbar({
-                text: 'Ну ептабля'
+                text: e.text || e.message
             })
         }
     }

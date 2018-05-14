@@ -1,4 +1,4 @@
-$primary:                 #2F80ED;
+$primary:                 $blue-600;
 $accent:                  $red-a700;
 $success:                 $green-800;
 $warning:                 $orange-900;
@@ -22,10 +22,10 @@ $primary-text:            #FFF;
 $primary-divider:         $indigo-400;
 $primary-link:            $light-blue-a100;
 $primary-bg-light:        $indigo-400;
-$primary-bg-dark:         $indigo-800;
+$primary-bg-dark:         $blue-a700;
 $primary-text-light:      $white;
 $primary-text-dark:       $indigo-100;
-$primary-action-hover:    rgba(40,53,147,.9);
+$primary-action-hover:    $blue-a700;
 $primary-action-active:   $primary-bg-dark;
 
 $accent-bg:               $accent;

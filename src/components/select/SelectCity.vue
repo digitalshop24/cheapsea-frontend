@@ -1,43 +1,48 @@
 <template lang="pug">
-div
-    vm-select.cities(
-        
-        v-model="selectValue"
-        v-bind="$attrs"
-        filter="field|async"
-        hideArrow
-        showClearButton
-        nooverlay
-        async
-        :loading="requesting"
-        @input="onInput"
-        @select="onSelect"
-        @close="onClose"
-        @focus="onFocus"
-    )
-        vm-option(
-            v-if="cities && cities.length === 0"
-            readonly
-        ) Нет совпадений
+vm-select.cities(
+    v-model="selectValue"
+    v-bind="$attrs"
+    filter="field|async"
+    hideArrow
+    showClearButton
+    nooverlay
+    async
+    :loading="requesting"
+    @input="onInput"
+    @select="onSelect"
+    @close="onClose"
+    @focus="onFocus"
+)
+    vm-option(
+        v-if="cities && cities.length === 0"
+        readonly
+    ) Нет совпадений
 
-        vm-option(
-            v-for="(city, idx) in cities"
-            :key="city.name + idx"
-            :value="city.name"
-        ) {{ city.name }}
-
+    vm-option(
+        v-for="(city, idx) in cities"
+        :key="city.name + idx"
+        :value="city.id"
+    ) {{ city.name }}
 </template>
 
 <script lang="ts">
 import config from '@/config.json';
 import axios, { CancelTokenSource } from "axios";
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import { snackbar } from 'vue-mapp/es5/snackbar';
+import { get } from 'http';
 
 let cancelSource: CancelTokenSource | null = null;
 
-@Component
+@Component({
+    model: {
+        prop: 'value',
+        event: 'select'
+    }
+})
 export default class OffersModule extends Vue {
+
+    @Prop() value: string;
 
     focused: boolean = false;
     cities: any[] | null = null;
@@ -53,14 +58,13 @@ export default class OffersModule extends Vue {
         }
 
         if (value.length > 2) {
-            this.getCities();
+            this.getCities(value);
         } else {
             this.requesting = false;
         }
     }
 
     private onSelect() {
-        console.log('select');
         this.cities = null;
         this.$emit('select', this.selectValue);
     }
@@ -72,11 +76,10 @@ export default class OffersModule extends Vue {
     private onClose() {
         this.cities = null;
         this.focused = false;
-        console.log('close');
     }
 
-    async getCities() {
-        
+    async getCities(inputValue) {
+
         const token = axios.CancelToken;
         const source = token.source();
 
@@ -85,7 +88,7 @@ export default class OffersModule extends Vue {
         
         try {
             const res = await axios.post(config.links.cities, {
-                query: this.selectValue.trim()
+                query: inputValue.trim()
             }, {
                 cancelToken: source.token,
                 timeout: 5000

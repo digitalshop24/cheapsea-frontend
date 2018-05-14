@@ -28,3 +28,11 @@ export interface Offer {
     description: string;
     two_sides: number;
 }
+
+export interface OffersSearchData {
+    origin_id?: number | string;
+    destination_id?: number | string;
+    offer_Type?: string;
+    dateFrom?: string;
+    dateTo?: string;
+}

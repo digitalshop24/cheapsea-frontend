@@ -5,23 +5,19 @@
     "offerTypes": [
         {
             "title": "Самолет",
-            "value": "airplane",
-            "css": "plane"
+            "value": "airplane"
         },
         {
             "title": "Поезд",
-            "value": "trane",
-            "css": "train"
+            "value": "trane"
         },
         {
             "title": "Тур",
-            "value": "bus",
-            "css": "tour"
+            "value": "bus"
         },
         {
             "title": "Авто",
-            "value": "car_rent",
-            "css": "car"
+            "value": "car_rent"
         }
     ]
 }
