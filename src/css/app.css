@@ -8,6 +8,7 @@
 .app {
     min-height: 100%;
     box: vertical top;
+    font-family: 'Montserrat', sans-serif;
     
     .route-page {
         width: 100%;

@@ -1,5 +1,13 @@
 <template lang="pug">
-.card-modal
+Modal
+
+    template(slot="header")
+        vm-button(
+            icon="arrow_back"
+            @click="$emit('close')"
+        )
+        h1 JSsdsdsd
+
     .card-modal__header
         p {{ offer.origin && offer.origin.name }}
         p {{ offer.destination && offer.destination.name }}
@@ -126,12 +134,14 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import SvgArrow from '@/assets/arrow.svg';
 import OfferCard from './OfferCard.vue';
 import acc from 'accounting';
+import Modal from './Modal.vue';
 
 @Component({
     name: 'card-modal',
     components: {
         'svg-arrow': SvgArrow,
-        OfferCard
+        OfferCard,
+        Modal
     }
 })
 export default class OfferView extends Vue {
