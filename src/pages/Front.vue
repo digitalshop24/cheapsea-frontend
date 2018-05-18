@@ -1,49 +1,46 @@
 <template lang="pug">
-div
-    header.header
-        .container
-            .header-menu
-            a(href="#/").header-logo
-                img(src="/static/images/logo.svg" alt="cheapsea")
-            .header-buttons
-                .header-add
-                .header-profile
-    .main.front
-        .container
-            router-link(:to="{ name: 'search' }").main-banner_search
-                    .main-banner_search-title
-                        |Хочу на море дешево!!!
-                        img(src="/static/images/icons/icon-swimsuit.png" alt="icon")
-                        img(src="/static/images/icons/icon-glasses.png" alt="icon")
+.front
 
-                    .main-banner_search-icon
-            .main-weekly
-                .main-weekly-title Лучшие предложения недели
-                .main-weekly-wrap-outer
-                    .main-weekly-wrap(style="min-width:450px")
-                        .main-weekly-unit(style="background-image:url(/static/images/main-weekly-01.png)")
-                            .main-weekly-unit-filter
-                            .main-weekly-unit-content
-                                .main-weekly-unit-info 16 часов. Без пересадок. Из Москвы
-                                a(href="#/").main-weekly-unit-title Комсомольск-на-Амуре
-                                .main-weekly-unit-price от 6 500 руб.
-                        .main-weekly-unit(style="background-image:url(/static/images/main-weekly-01.png)")
-                            .main-weekly-unit-filter
-                            .main-weekly-unit-content
-                                .main-weekly-unit-info 16 часов. Без
-                                a(href="#/").main-weekly-unit-title Кефлавик
-                                .main-weekly-unit-price от 7 900 руб.
-            .main-list
-                .main-list-tabs
-                    .main-list-tabs-unit Турция
-                    .main-list-tabs-unit.active Индия
-                    .main-list-tabs-unit Ю. Америка
-                    .main-list-tabs-next
-                .main-list-filter
-                    .main-list-filter-title Сначала дешевые
-                    .main-list-filter-button Фильтр
-                .main-list-wrap
-                    offers(:offers="offers")
+    app-header.front-header
+        vm-button.front-header__menu(
+            icon="menu"
+        )
+        .front-header__logo
+            Logo
+        
+        .front-header__actions
+            vm-button(icon="add")
+            vm-button(icon="person")
+
+    router-link.front-search.box-primary(
+        to="/search"
+        @click="$router.push"
+    )
+        | Поиск предложений
+        vm-icon search
+
+
+    .front-best
+        .front-best__title
+            vm-icon grade
+            h1 Лучшие предложения недели
+
+        .front-best__offers
+            .front-best__offer(
+                v-for="i in [0,1,2,3,4,5]"
+            )
+                h1 Комсомольск-на-Амуре
+                small 16 часов. Без пересадок. Из Москвы
+                p от 6500 ₽
+
+    .main-list
+        .main-list-tabs
+            .main-list-tabs-unit Турция
+            .main-list-tabs-unit.active Индия
+            .main-list-tabs-unit Ю. Америка
+            .main-list-tabs-next
+            
+    offers(:offers="offers")
 
     footer.footer
         .container
@@ -51,16 +48,18 @@ div
 </template>
 
 <script lang="ts">
+import axios from "axios";
 import RoutePage from "@/core/route";
 import { Component } from "vue-property-decorator";
 import Search from "./Search.vue";
-import axios from "axios";
+import Logo from '@/assets/logo.svg';
 import Offers from "@/core/offers";
 
 @Component({
   name: "offers-page",
   components: {
-    search: Search
+    search: Search,
+    Logo
   }
 })
 export default class FrontRoute extends RoutePage {
@@ -78,5 +77,109 @@ export default class FrontRoute extends RoutePage {
 </script>
 
 <style lang="postcss">
+@import 'css/colors';
+
+.front {
+
+    &-header {
+
+        &__menu {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        &__logo {
+            flex: 1 1 auto;
+            text-align: center;
+
+            svg {
+                width: 124px;
+            }
+        }
+
+        &__actions {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+
+            @media (--xs-view) {
+                display: none;
+            }
+        }
+    }
+
+    &-search {
+        height: 64px;
+        border-radius: 4px;
+        box: horizontal middle space-between;
+        padding: 16px 24px;
+        font-size: 17px;
+        line-height: 1;
+        cursor: pointer;
+        font-weight: 500;
+        margin: 16px;
+    }
+
+    &-best {
+
+        &__title {
+            box: horizontal left middle;
+            padding: 16px;
+            padding: 8px 16px;
+            margin: 0;
+            color: $warning;
+
+            h1 {
+                font-size: 14px;
+                line-height: 24px;
+                padding-left: 8px;
+                margin: 0;
+            }
+        }
+       
+        &__offers {
+            width: 100%;
+            overflow-y: auto;
+            box: horizontal left;
+            padding: 8px;
+        }
+
+        &__offer {
+            border-radius: 4px;
+            width: 256px;
+            background: rgba(0,0,0,.8);
+            height: 124px;
+            color: #FFF;
+            padding: 16px;
+            position: relative;
+            flex: 0 0 auto;
+            margin: 8px;
+
+            h1 {
+                font-size: 16px;
+                margin: 0 0 6px;
+            }
+
+            h2 {
+                font-size: 12px;
+            }
+
+            p {
+                font-weight: 500;
+                font-size: 16px;
+                position: absolute;
+                bottom: 16px;
+                left: 16px;
+                margin: 0;
+            }
+        }
+    }
+
+    .app-header {
+        color: $primary;
+    }
+}
 
 </style>

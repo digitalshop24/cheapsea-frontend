@@ -1,7 +1,6 @@
 <template lang="pug">
 
 .app.box
-    keep-alive
     router-view
 
 </template>
@@ -68,18 +67,14 @@ export default class App extends Vue {
 
 <style lang="postcss">
 
-.app {
-    min-height: 100%;
-    box: vertical top;
-    background: #FFF;
-    
-    .route-page {
-        width: 100%;
-        padding-top: $header-height;
-    }
+@import 'css/vars.css';
 
-    a {
-        color: #FFF !important;
-    }
+.app {
+    max-width: $md;
+    margin: auto;
+    min-height: 100%;
+    padding-top: $header-height;
 }
+
+
 </style>

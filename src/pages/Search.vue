@@ -1,7 +1,8 @@
 <template lang="pug">
-.search.route-page.box-content
+.search
     
     app-header.box-primary(
+        type="back"
         title="Поиск предложений"
         @back="$router.push('/front')"
     )

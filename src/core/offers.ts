@@ -2,7 +2,7 @@ import axios from 'axios';
 import { snackbar } from 'vue-mapp/es5/snackbar';
 import { Offer, OffersSearchData } from '@/../types/app';
 
-export default class Offers {
+export default class OffersContainer {
     
     page: number = 1;
     total: number = 200;

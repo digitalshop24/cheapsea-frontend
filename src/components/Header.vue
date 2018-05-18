@@ -1,14 +1,16 @@
 <template lang="pug">
-.app-header
+.app-header.box
     .app-header__wrapper
-        vm-button.app-header__back(
-            @click="$emit('back')"
-        )
-            vm-icon arrow_back
+        template(v-if="type === 'back'")
+            vm-button(
+                icon="arrow_back"
+                @click="back"
+            )
+            h1 {{ title }}
+            slot(name="right")
 
-        h1 {{ title }}
-
-        slot(name="right")
+        template(v-else)
+            slot
 </template>
 
 <script lang="ts">
@@ -17,26 +19,20 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 @Component
 export default class HeaderBack extends Vue {
 
-    @Prop(String)
-    title: string;
-
-    @Prop(String)
-    backRouteName: string;
-
-    @Prop(Boolean)
-    customEvent: boolean;
+    @Prop(String) type: string;
+    @Prop(String) title: string;
+    @Prop(String) backRouteName: string;
+    @Prop(Boolean) customEvent: boolean;
 
     back() {
-        if (!this.customEvent) {
-            this.$router.go(-1);
-        }
-        
         this.$emit('back');
     }
 }
 </script>
 
 <style lang="postcss">
+
+@import 'css/colors';
 
 .app-header {
     height: $header-height;
@@ -49,8 +45,8 @@ export default class HeaderBack extends Vue {
     margin: auto;
     box-shadow: $shadow-1;
 
-    button {
-        width: 64px;
+    .vm-button.is--icon {
+        opacity: 1;
         height: 100%;
     }
 
@@ -59,15 +55,26 @@ export default class HeaderBack extends Vue {
         height: 100%;
         max-width: $md;
         margin: auto;
+        position: relative;
+
+        & > .vm-button {
+
+            &:first-child {
+                width: 64px;
+            }
+        }
+
+        .vm-button {
+            width: 56px;
+        }
     }
 
     h1 {
         font-size: 16px;
         font-weight: 500;
         flex-grow: 1;
+        margin-left: 16px;
     }
-    
-    
 }
 
 .header{

@@ -10,6 +10,7 @@ import VueMappPopup from 'vue-mapp/es5/popup';
 import VueMappList from 'vue-mapp/es5/list';
 import VueMappIcon from 'vue-mapp/es5/icon';
 import VueMappSnackbar from 'vue-mapp/es5/snackbar';
+import VueMappLoader from 'vue-mapp/es5/loader';
 
 import VueMappInputPack from 'vue-mapp/es5/pack/input';
 
@@ -26,6 +27,7 @@ Vue.use(VueMappList);
 Vue.use(VueMappIcon);
 Vue.use(VueMappSnackbar);
 Vue.use(VueMappInputPack);
+Vue.use(VueMappLoader);
 
 
 Vue.config.productionTip = false;

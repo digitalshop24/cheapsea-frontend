@@ -31,5 +31,19 @@ export default function(Vue) {
     Vue.filter('money', function(value) {
         
         return acc.formatMoney(value, "", 0, " ", ""); // €4.999,99
-    })
+    });
+
+    Vue.filter('json', function (obj, attrName) {
+        let value = '';
+
+        if (obj) {
+            const attrs = obj.data && obj.data.attributes;
+
+            if (attrs) {
+                value = attrs[attrName];
+            }
+        }
+
+        return value;
+    });
 }

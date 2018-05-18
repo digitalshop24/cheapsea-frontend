@@ -1,50 +1,21 @@
 <template lang="pug">
 .offers
-    template
-        .card.oneSide(
+
+    .offers-header
+        span Сначала дешевые
+        .offers-header__filter Фильтр
+
+    .offers-list
+        OfferCard(
             v-for="offer in offers.data"
             :key="offer.id"
-            
+            :offer="offer"
+            @select="select"
         )
-            template(v-if="offer.destination.data.attributes.name")
-                .card-header(
-                    @click="select(offer)"
-                    
-                )
-                    .card-header-info 2 пересадки. В пути 1 д. 15 ч.
-                    .card-header-title
-                        .card-header-title-unit.card-header-title-unit_form 
-                            | {{ offer.origin.data.attributes.name }}
-                        .card-header-title-unit.card-header-title-unit_to 
-                            | {{ offer.destination.data.attributes.name }}
-                .card-body
-                    .card-segment
-                        .card-segment-header
-                            .card-segment-unit.card-segment-unit_from
-                                .card-segment-unit-time {{ offer.date_from | time }}
-                                .card-segment-unit-title {{ offer.origin.data.attributes.name }}
-                                .card-segment-unit-date {{ offer.date_from | dateWeek }}
-                            .card-segment-unit.card-segment-unit_to
-                                .card-segment-unit-time {{ offer.date_to | time }}
-                                .card-segment-unit-title {{ offer.destination.data.attributes.name }}
-                                .card-segment-unit-date {{ offer.date_to | dateWeek }}
-                        .card-segment-path
-                            .card-segment-path-unit {{ String(offer.from_airport.data) }}
-                            .card-segment-path-unit {{ String(offer.from_airport.data) }}
-                
-                .card-result
-                    .card-result-button(
-                        @click="select(offer)"
-                    ) от ₽ {{ offer.price | money }}
-                    .card-result-icons
-                        .card-result-icons-unit.card-result-icons-unit_wing
-                        .card-result-icons-unit.card-result-icons-unit_wing
-                        .card-result-icons-unit.card-result-icons-unit_weight 8
-                        .card-result-icons-unit.card-result-icons-unit_luggage
 
-    cs-loader(v-if="offers.processing")
+    vm-loader(v-if="offers.processing")
     
-    chips(
+    OfferView(
         v-if="selectedOffer"
         :offer="selectedOffer"
         @close="selectedOffer = null"
@@ -53,47 +24,75 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import axios, { CancelTokenSource } from "axios";
 import { Offer } from "@/../types/app";
 import Offers from "@/core/offers";
+import OfferCard from './OfferCard.vue';
+import OfferView from './OfferView.vue';
 
-@Component
+@Component({
+    components: {
+        OfferCard,
+        OfferView
+    }
+})
 export default class OffersModule extends Vue {
-  selectedOffer: Offer | null = null;
+    selectedOffer: Offer | null = null;
 
-  @Prop({
-      type: Object,
-      default() {
-          return new Offers();
-      }
-  })
-  offers: Offers;
+    @Prop({
+        type: Object,
+        default() {
+            return new Offers();
+        }
+    })
+    offers: Offers;
 
-  select(offer: Offer) {
-    this.selectedOffer = offer;
-  }
+    select(offer: Offer) {
+        console.log(offer);
+        this.selectedOffer = offer;
+    }
 
-  appendOffers() {
-    this.offers.append();
-  }
+    appendOffers() {
+        this.offers.append();
+    }
 
-  created() {
-    this.$root.$on("scrollend", this.appendOffers);
-    this.offers.get();
-  }
+    created() {
+        this.$root.$on("scrollend", this.appendOffers);
+        this.offers.get();
+    }
 
-  beforeDestroy() {
-    this.$root.$off("scrollend", this.appendOffers);
-  }
+    beforeDestroy() {
+        this.$root.$off("scrollend", this.appendOffers);
+    }
 }
 </script>
 
 <style lang="postcss">
-.card-header {
-  cursor: pointer;
-}
+@import 'css/colors';
 
-.card-result-button {
-  cursor: pointer;
+.offers {
+
+    &-header {
+        box: horizontal space-between middle;
+        padding: 16px;
+        font-size: 14px;
+        font-weight: 600;
+
+        &__filter {
+            background: url(/static/images/icons/icon-filters.svg) right 8px center no-repeat;
+            padding-right: 32px;
+            font-size: 12px;
+            padding-left: 12px;
+            height: 32px;
+            line-height: 32px;
+            width: 100px;
+            border-radius: 4px;
+            border: 1px solid $primary;
+            color: $primary;
+        }
+    }
+
+    &-list {
+        padding: 4px 8px;
+    }
 }
 </style>

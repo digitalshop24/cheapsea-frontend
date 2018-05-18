@@ -1,0 +1,175 @@
+<template lang="pug">
+.offer-card
+    .offer-card__header(@click="select")
+        p {{ offer.origin | json('name') }}
+        p {{ offer.destination | json('name') }}
+        .offer-card__header-directions
+            svg-arrow
+    
+    .offer-card__body
+        .offer-card__points
+            .offer-card__point 
+                p {{ offer.date_from | time }}
+                p {{ offer.origin | json('name') }}
+                p {{ offer.date_from | dateWeek }}
+            .offer-card__point 
+                p {{ offer.date_to | time }}
+                p {{ offer.destination | json('name') }}
+                p {{ offer.date_to | dateWeek }}
+        .offer-card__path
+            .offer-card__path-item {{ String(offer.from_airport.data) }}
+            .offer-card__path-item {{ String(offer.to_airport.data) }}
+
+    .offer-card__footer
+        .offer-card__footer-icons
+            i.material-icons flight
+            i.material-icons local_mall
+            i.material-icons local_dining
+        vm-button(
+            primary
+            raised
+            @click="select"
+        ) от {{ offer.price | money }} ₽
+</template>
+
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import SvgArrow from '@/assets/arrow.svg';
+import acc from 'accounting';
+
+@Component({
+    name: 'offer-card',
+    components: {
+        'svg-arrow': SvgArrow
+    }
+})
+export default class OfferCard extends Vue {
+
+    @Prop() 
+    offer;
+
+    select() {
+        this.$emit('select', this.offer);
+    }
+}
+</script>
+
+<style lang="postcss">
+.offer-card {
+    background-color: #fff;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    box-shadow: $shadow-2;
+    
+    &__header {
+        position: relative;
+        font-size: 18px;
+        line-height: 28px;
+        font-weight: 600;
+        padding: 16px;
+        padding-left: 56px;
+        height: 88px;
+        color: #FFF;
+        background: url(/static/images/more.jpg) no-repeat;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        cursor: pointer;
+
+        &-directions {
+            position: absolute;
+            left: 16px;
+            height: 56px;
+            top: 28px;
+
+            svg {
+                width: 12px;
+            }
+        }
+    }
+
+    &__points {
+        box: horizontal space-between;
+    }
+
+    &__path {
+        box: horizontal space-between;
+        font-family: 'Roboto', sans-serif;
+        margin-top: 13px;
+        padding: 0 12px;
+        padding-top: 29px;
+        font-size: 10px;
+        text-transform: uppercase;
+        color: #828282;
+        background-color: #F8F8F8;
+        border-radius: 3px;
+        height: 50px;
+        position: relative;
+
+        &:before {
+            content: "";
+            width: calc(100% - 40px);
+            height: 2px;
+            background-color: $primary-color;
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &-item {
+            position: relative;
+
+            &:before {
+                content: "";
+                size: 10px;
+                box-sizing: border-box;
+                background-color: $primary-color;
+                bottom: calc(100% + 10px);
+                left: 7px;
+                top: -17px;
+                position: absolute;
+                border-radius: 50%;
+                border: 1px solid $primary-color; 
+            }
+        }
+    }
+
+    &__body {
+        padding: 16px;
+    }
+
+    &__point {
+        font-size: 17px;
+        line-height: 22px;
+        font-weight: 500;
+
+        &:last-child {
+            text-align: right;
+        }
+
+        p {
+            font-size: 1em;
+            &:last-child {
+                color: $grey-600;
+                font-size: 0.8em;
+            }
+        }
+    }
+
+    &__footer {
+        box: horizontal middle space-between;
+        padding: 12px 16px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+
+        i { 
+            color: $grey-600;
+            margin-right: 12px;
+        }
+    }
+
+    .vm-button {
+        box-shadow: none;
+    }
+}
+</style>

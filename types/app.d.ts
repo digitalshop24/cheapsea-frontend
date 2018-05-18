@@ -1,4 +1,6 @@
 
+type Dictionary<T> = { [key: string]: T };
+
 export type OfferType = 
     | 'airplane'
     | 'trane'
@@ -35,4 +37,11 @@ export interface OffersSearchData {
     offer_Type?: string;
     dateFrom?: string;
     dateTo?: string;
+}
+
+declare module "vue-router/types/router" {
+
+    export interface Route {
+        
+    }
 }

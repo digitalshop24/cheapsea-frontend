@@ -13,7 +13,7 @@ $default-text-light:      $grey-700;
 $default-text-dark:       $black;
 
 $default-action-hover:    rgba(236,239,241,.8);
-$default-action-hover-primary: #eff0f9;
+$default-action-hover-primary: $blue-50;
 $default-action-active:   $default-bg-dark;
 $default-action-active-primary: #eaecf9;
 

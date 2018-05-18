@@ -10,26 +10,17 @@ div.route-page.offers-page
 </template>
 
 <script lang="ts">
-import RoutePage from '@/core/route';
 import { Component } from 'vue-property-decorator';
-import Search from './Search.vue';
-import axios from 'axios';
-import Offers from '@/core/offers';
+import RoutePage from '@/core/route';
+import OffersContainer from '@/core/offers';
 
 @Component({
     name: 'offers-page'
 })
 export default class OffersRoute extends RoutePage {
 
-    offers: Offers = new Offers();
-
-    created() {
-        // @ts-ignore
-        this.offers = this.$route.params.offers;
-    }
-
-    mounted() {
-        this.$root.$el.scrollTop = 0;
+    get offers() {
+        return this.$route.params.offers;
     }
 }
 </script>
