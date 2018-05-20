@@ -183,7 +183,7 @@ export default class OfferView extends Vue {
                 padding: 0;
 
                 p { 
-                    color: #FFF;
+                    color: #FFF !important;
                 }
             }
             

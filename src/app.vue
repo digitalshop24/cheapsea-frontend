@@ -1,7 +1,10 @@
 <template lang="pug">
 
 .app.box
-    router-view
+    keep-alive(
+        :include="['search-route']"
+    )
+        router-view
 
 </template>
 
