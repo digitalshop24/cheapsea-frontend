@@ -41,14 +41,10 @@
                     @select="getOffers"
                 )
         .xs-12
-            .search-types
-                .search-types__item(
-                    v-for="type in types"
-                    :class="{ 'box-primary': type.value === searchData.offerType }"
-                    @click="select('offerType', type.value)"
-                )
-                    h1 {{ type.title }}
-                    component(:is="'svg-' + type.value")
+            Control(
+                :value="searchData.offerType"
+                @input="select('offerType', $event)"
+            )
         
         .xs-12.search-submit
             vm-button(
@@ -65,13 +61,13 @@
 
 <script lang="ts">
 import Offers from "@/core/offers";
-import dict from '@/config.json';
 import { OffersSearchData } from '@/../types/app';
 import axios, { CancelTokenSource, Cancel } from "axios";
 import SvgTrain from '@/assets/train.svg';
 import SvgPlane from '@/assets/plane.svg';
 import SvgCar from '@/assets/car.svg';
 import SvgTour from '@/assets/tour.svg';
+import Control from '@/components/Control.vue';
 import { snackbar } from 'vue-mapp/es5/snackbar';
 import { Vue, Component, Prop } from "vue-property-decorator";
 
@@ -86,10 +82,7 @@ const searchDefaults = {
 @Component({
     name: 'search-route',
     components: {
-        'svg-trane': SvgTrain,
-        'svg-airplane': SvgPlane,
-        'svg-car_rent': SvgCar,
-        'svg-bus': SvgTour
+        Control
     }
 })
 export default class SearchRoute extends Vue {
@@ -97,8 +90,6 @@ export default class SearchRoute extends Vue {
     searchData: OffersSearchData = searchDefaults;
 
     offers: Offers = new Offers();
-
-    types = dict.offerTypes;
 
     @Prop(String) title: string;
 
@@ -159,50 +150,6 @@ export default class SearchRoute extends Vue {
 
     &-content {
         padding: 8px;
-    }
-
-    &-types {
-        box: horizontal;
-        border-radius: 4px;
-        height: 80px;
-        margin-bottom: 16px;
-        border-width: 1px;
-        border-style: solid;
-        overflow: hidden;
-
-        &__item {
-            flex: 1 1 25%;
-            box: vertical top center;
-            height: 100%;
-            cursor: pointer;
-            position: relative;
-            border-width: 0 1px 0 0;
-            border-style: solid;
-
-            &:last-child {
-                border: none;
-            }
-
-            &.box-primary {
-
-                svg {
-                    color: #FFF;
-                }
-            }
-
-            h1 {
-                font-size: 12px;
-                line-height: 24px;
-                font-weight: 600;
-                text-transform: uppercase;
-                flex: 0 0 auto;
-            }
-
-            svg {
-                padding: 0 0 16px;
-                color: $primary-color;
-            }
-        }
     }
 
     &-submit {

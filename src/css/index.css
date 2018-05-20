@@ -1357,7 +1357,7 @@ input[type=submit], input[type=button] {
 	}
 
 }
-.filter{
+/* .filter{
 	
 	&-body{
 		background-color: #fff;
@@ -1555,5 +1555,5 @@ input[type=submit], input[type=button] {
 		background-color: #fff;
 		padding:18px 15px;
 	}
-}
+} */
 

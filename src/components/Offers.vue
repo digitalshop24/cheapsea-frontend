@@ -3,7 +3,8 @@
 
     .offers-header
         span Сначала дешевые
-        .offers-header__filter Фильтр
+        //- .offers-header__filter(@click="showFilter") Фильтр
+        button.offers-header__filter(@click="toggleFilter(true)") Фильтр
 
     .offers-list
         OfferCard(
@@ -20,6 +21,11 @@
         :offer="selectedOffer"
         @close="selectedOffer = null"
     )
+
+    OfferFilter(
+        v-if="showFilter"
+        @close="toggleFilter(false)"
+    )
 </template>
 
 <script lang="ts">
@@ -28,15 +34,18 @@ import { Offer } from "@/../types/app";
 import Offers from "@/core/offers";
 import OfferCard from './OfferCard.vue';
 import OfferView from './OfferView.vue';
+import OfferFilter from './OfferFilter.vue';
 
 @Component({
     components: {
         OfferCard,
-        OfferView
+        OfferView,
+        OfferFilter
     }
 })
 export default class OffersModule extends Vue {
     selectedOffer: Offer | null = null;
+    showFilter: boolean = false;
 
     @Prop({
         type: Object,
@@ -53,6 +62,10 @@ export default class OffersModule extends Vue {
 
     appendOffers() {
         this.offers.append();
+    }
+
+    toggleFilter(value: boolean): void {
+        this.showFilter = value;
     }
 
     created() {
