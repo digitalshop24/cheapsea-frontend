@@ -1,5 +1,5 @@
 <template lang="pug">
-.app-header.box
+.app-header
     .app-header__wrapper
         template(v-if="type === 'back'")
             vm-button(
@@ -36,6 +36,7 @@ export default class HeaderBack extends Vue {
 
 .app-header {
     height: $header-height;
+    min-width: 320px;
     font-size: 14px;
     position: fixed;
     top: 0;
@@ -73,17 +74,7 @@ export default class HeaderBack extends Vue {
         font-size: 16px;
         font-weight: 500;
         flex-grow: 1;
-        margin-left: 16px;
     }
-}
-
-.header{
-	
-	background-color: #fff;
-	
-	
-	width:100%;
-	background-color: #fff;
 }
 
 </style>

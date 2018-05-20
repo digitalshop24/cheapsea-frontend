@@ -1,6 +1,6 @@
 <template lang="pug">
-.control
-    .control__item(
+.offer-type
+    .offer-type__item(
         v-for="type in types"
         :class="{ 'box-primary': type.value === value }"
         @click="click(type.value)"
@@ -39,7 +39,7 @@ export default class Control extends Vue {
 
 <style lang="postcss">
 
-.control {
+.offer-type {
     box: horizontal;
     border-radius: 4px;
     height: 80px;
@@ -77,7 +77,7 @@ export default class Control extends Vue {
         }
 
         svg {
-            padding: 0 0 16px;
+            padding: 14px;
             color: $primary-color;
         }
     }

@@ -2,7 +2,7 @@
 
 Modal.filter-body
 
-    template(slot="header")
+    Header.box-primary(slot="header")
         vm-button(
             icon="arrow_back"
             @click="$emit('close')"
@@ -14,7 +14,7 @@ Modal.filter-body
         .filter-top
 
             h1 Тип предложения
-            Control(
+            OfferType(
                 v-model="activeUnit"
             )
 
@@ -172,14 +172,12 @@ Modal.filter-body
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import Modal from './Modal.vue';
-import Control from '@/components/Control.vue';
+import OfferType from '@/components/controls/OfferType.vue';
 
 @Component({
     name: 'offer-filter',
     components: {
-        Modal,
-        Control
+        OfferType
     }
 })
 export default class OfferFilter extends Vue {
@@ -191,19 +189,18 @@ export default class OfferFilter extends Vue {
 
 .filter {
 
-    padding-top: $header-height;
-    /* убрать */
     border-style: solid;
     border-width: 1px;
 
     &-top {
         padding: 16px;
 
-        h1 {
+        & > h1 {
             text-align: center;
 			font-size: 14px;
 			font-weight: 500;
-			margin-bottom: 15px;
+            line-height: 32px;
+            margin-bottom: 16px;
         }
 	}
 

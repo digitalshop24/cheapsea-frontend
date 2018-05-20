@@ -9,16 +9,15 @@
     .offer-card__body
         .offer-card__points
             .offer-card__point 
-                p {{ offer.date_from | time }}
+                h1 {{ offer.date_from | time }}
                 p {{ offer.origin | json('name') }}
                 p {{ offer.date_from | dateWeek }}
             .offer-card__point 
-                p {{ offer.date_to | time }}
+                h1 {{ offer.date_to | time }}
                 p {{ offer.destination | json('name') }}
                 p {{ offer.date_to | dateWeek }}
-        .offer-card__path
-            .offer-card__path-item {{ String(offer.from_airport.data) }}
-            .offer-card__path-item {{ String(offer.to_airport.data) }}
+        
+        OfferPath(:offer="offer")
 
     .offer-card__footer
         .offer-card__footer-icons
@@ -35,12 +34,14 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import SvgArrow from '@/assets/arrow.svg';
+import OfferPath from './OfferPath.vue';
 import acc from 'accounting';
 
 @Component({
     name: 'offer-card',
     components: {
-        'svg-arrow': SvgArrow
+        'svg-arrow': SvgArrow,
+        OfferPath
     }
 })
 export default class OfferCard extends Vue {
@@ -58,14 +59,17 @@ export default class OfferCard extends Vue {
 .offer-card {
     background-color: #fff;
     border-radius: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     box-shadow: $shadow-2;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
     
     &__header {
         position: relative;
         font-size: 18px;
         line-height: 28px;
-        font-weight: 600;
         padding: 16px;
         padding-left: 56px;
         height: 88px;
@@ -74,6 +78,7 @@ export default class OfferCard extends Vue {
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         cursor: pointer;
+        font-weight: 700;
 
         &-directions {
             position: absolute;
@@ -85,61 +90,25 @@ export default class OfferCard extends Vue {
                 width: 12px;
             }
         }
+
+        p {
+            font-weight: 700;
+        }
     }
 
     &__points {
         box: horizontal space-between;
+        margin-bottom: 16px;
     }
 
-    &__path {
-        box: horizontal space-between;
-        font-family: 'Roboto', sans-serif;
-        margin-top: 13px;
-        padding: 0 12px;
-        padding-top: 29px;
-        font-size: 10px;
-        text-transform: uppercase;
-        color: #828282;
-        background-color: #F8F8F8;
-        border-radius: 3px;
-        height: 50px;
-        position: relative;
-
-        &:before {
-            content: "";
-            width: calc(100% - 40px);
-            height: 2px;
-            background-color: $primary-color;
-            position: absolute;
-            top: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        &-item {
-            position: relative;
-
-            &:before {
-                content: "";
-                size: 10px;
-                box-sizing: border-box;
-                background-color: $primary-color;
-                bottom: calc(100% + 10px);
-                left: 7px;
-                top: -17px;
-                position: absolute;
-                border-radius: 50%;
-                border: 1px solid $primary-color; 
-            }
-        }
-    }
+    
 
     &__body {
         padding: 16px;
     }
 
     &__point {
-        font-size: 17px;
+        
         line-height: 22px;
         font-weight: 500;
 
@@ -147,11 +116,21 @@ export default class OfferCard extends Vue {
             text-align: right;
         }
 
+        h1, p {
+            @apply --text-nowrap;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
         p {
-            font-size: 1em;
+            font-size: 12px;
+            line-height: 18px;
+
             &:last-child {
                 color: $grey-600;
-                font-size: 0.8em;
             }
         }
     }
@@ -164,7 +143,8 @@ export default class OfferCard extends Vue {
 
         i { 
             color: $grey-600;
-            margin-right: 12px;
+            font-size: 20px;
+            margin-right: 8px;
         }
     }
 

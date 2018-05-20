@@ -39,9 +39,6 @@ export interface OffersSearchData {
     dateTo?: string;
 }
 
-declare module "vue-router/types/router" {
-
-    export interface Route {
-        
-    }
+export interface RootState {
+    fitleredOffers: any[];
 }

@@ -4,7 +4,7 @@
     .offers-header
         span Сначала дешевые
         //- .offers-header__filter(@click="showFilter") Фильтр
-        button.offers-header__filter(@click="toggleFilter(true)") Фильтр
+        button.offers-header__filter(@click="toggleFilter") Фильтр
 
     .offers-list
         OfferCard(
@@ -13,8 +13,10 @@
             :offer="offer"
             @select="select"
         )
-
-    vm-loader(v-if="offers.processing")
+    
+    vm-loader.pad(
+        v-if="offers.processing"
+    )
     
     OfferView(
         v-if="selectedOffer"
@@ -22,25 +24,23 @@
         @close="selectedOffer = null"
     )
 
-    OfferFilter(
+    OffersFilter(
         v-if="showFilter"
-        @close="toggleFilter(false)"
+        @close="toggleFilter"
     )
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { Offer } from "@/../types/app";
-import Offers from "@/core/offers";
-import OfferCard from './OfferCard.vue';
-import OfferView from './OfferView.vue';
-import OfferFilter from './OfferFilter.vue';
+import Offers from '@/core/offers';
+import OfferView from '../offer/OfferView.vue';
+import OffersFilter from './OffersFilter.vue';
 
 @Component({
     components: {
-        OfferCard,
         OfferView,
-        OfferFilter
+        OffersFilter
     }
 })
 export default class OffersModule extends Vue {
@@ -56,7 +56,6 @@ export default class OffersModule extends Vue {
     offers: Offers;
 
     select(offer: Offer) {
-        console.log(offer);
         this.selectedOffer = offer;
     }
 
@@ -92,15 +91,17 @@ export default class OffersModule extends Vue {
 
         &__filter {
             background: url(/static/images/icons/icon-filters.svg) right 8px center no-repeat;
-            padding-right: 32px;
             font-size: 12px;
             padding-left: 12px;
+            padding-right: 32px;
             height: 32px;
-            line-height: 32px;
             width: 100px;
+            font-weight: 600;
             border-radius: 4px;
-            border: 1px solid $primary;
+            border: 2px solid $primary;
             color: $primary;
+            outline: none;
+            cursor: pointer;
         }
     }
 

@@ -1,7 +1,7 @@
 <template lang="pug">
 .front
 
-    app-header.front-header
+    Header.front-header
         vm-button.front-header__menu(
             icon="menu"
         )
@@ -26,12 +26,13 @@
             h1 Лучшие предложения недели
 
         .front-best__offers
-            .front-best__offer(
+            .pad-h(
                 v-for="i in [0,1,2,3,4,5]"
             )
-                h1 Комсомольск-на-Амуре
-                small 16 часов. Без пересадок. Из Москвы
-                p от 6500 ₽
+                .front-best__offer
+                    h1 Комсомольск-на-Амуре
+                    small 16 часов. Без пересадок. Из Москвы
+                    p от 6500 ₽
 
     .main-list
         .main-list-tabs
@@ -48,31 +49,28 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
-import RoutePage from "@/core/route";
 import { Component } from "vue-property-decorator";
-import Search from "./Search.vue";
-import Logo from '@/assets/logo.svg';
+import RoutePage from "@/core/route";
 import Offers from "@/core/offers";
+import Logo from '@/assets/logo.svg';
 
 @Component({
-  name: "offers-page",
-  components: {
-    search: Search,
-    Logo
-  }
+    name: "offers-page",
+    components: {
+        Logo
+    }
 })
 export default class FrontRoute extends RoutePage {
-  offers: Offers = new Offers();
-  selectedOffer: any = null;
+    offers: Offers = new Offers();
+    selectedOffer: any = null;
 
-  filters: object = {
-    offer_type: "airplane"
-  };
-  
-  created() {
-      this.offers = new Offers(this.filters);
-  }
+    filters: object = {
+        offer_type: "airplane"
+    };
+    
+    created() {
+        this.offers = new Offers(this.filters);
+    }
 }
 </script>
 
@@ -82,6 +80,7 @@ export default class FrontRoute extends RoutePage {
 .front {
 
     &-header {
+        background: #FFF;
 
         &__menu {
             position: absolute;
@@ -92,9 +91,10 @@ export default class FrontRoute extends RoutePage {
         &__logo {
             flex: 1 1 auto;
             text-align: center;
+            height: 14px;
 
             svg {
-                width: 124px;
+                height: 100%;
             }
         }
 
@@ -111,15 +111,17 @@ export default class FrontRoute extends RoutePage {
     }
 
     &-search {
-        height: 64px;
+        height: 56px;
         border-radius: 4px;
         box: horizontal middle space-between;
-        padding: 16px 24px;
+        padding: 12px 24px;
         font-size: 17px;
         line-height: 1;
         cursor: pointer;
         font-weight: 500;
         margin: 16px;
+        box-shadow: $shadow-1;
+        color: #FFF !important;
     }
 
     &-best {
@@ -155,7 +157,23 @@ export default class FrontRoute extends RoutePage {
             padding: 16px;
             position: relative;
             flex: 0 0 auto;
-            margin: 8px;
+            background: url(/static/images/front-demo.jpg) center;
+            z-index: 5;
+            overflow: hidden;
+
+            &:after {
+                content: '';
+                background: rgba(0,0,0,.54);
+                z-index: -1;
+                size: 100%;
+                top: 0;
+                left: 0;
+                position: absolute;
+            }
+
+            &:last-child {
+                margin-right: 8px;
+            }
 
             h1 {
                 font-size: 16px;
@@ -174,11 +192,46 @@ export default class FrontRoute extends RoutePage {
                 left: 16px;
                 margin: 0;
             }
+
+            small {
+                font-weight: 500;
+            }
         }
     }
 
-    .app-header {
+    & > .app-header {
         color: $primary;
+    }
+}
+
+.main-list-tabs {
+    background-color: #fff;
+    position: relative;
+    border-top:1px solid #e6e6e6;
+    border-bottom:1px solid #e6e6e6;
+    display: flex;
+    line-height: 31px;
+    padding:0 22px;
+    font-size: 10px;
+    
+    &-unit {
+        font-weight: 500;
+        text-align: center;
+        width:calc(100%/3);
+        position: relative;
+        transition: $transition .3s;
+        &.active{
+            color:#000;
+            &:before{
+                content:"";
+                position: absolute;
+                bottom:-1px;
+                left:0;
+                height:1px;
+                width:100%;
+                background-color: #2F80ED;
+            }
+        }
     }
 }
 

@@ -2,6 +2,15 @@ import axios from 'axios';
 import { snackbar } from 'vue-mapp/es5/snackbar';
 import { Offer, OffersSearchData } from '@/../types/app';
 
+function transformOffer(offer) {
+    return {
+        ...offer.attributes,
+        id: offer.id,
+        tags: offer.relationships.tags,
+        transfers: offer.relationships.transfers
+    }
+}
+
 export default class OffersContainer {
     
     page: number = 1;
@@ -43,7 +52,7 @@ export default class OffersContainer {
     async get() {
         const { data, meta } = await this.request();
 
-        this.data = data.map(i => i.attributes);
+        this.data = data.map(i => transformOffer(i));
         this.total = meta.count;
     }
 
@@ -52,7 +61,7 @@ export default class OffersContainer {
 
         const { data, meta } = await this.request();
 
-        this.data = this.data.concat(data.map(i => i.attributes));
+        this.data = this.data.concat(data.map(i => transformOffer(i)));
         this.total = meta.count;
     }
 }

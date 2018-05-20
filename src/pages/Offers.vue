@@ -1,21 +1,21 @@
 <template lang="pug">
-div.route-page.offers-page
-    app-header.box(
+.offers-page
+    Header.box-primary(
+        type="back"
         title="Предложения по запросу"
         @back="$router.push('/search')"
     )
-    .container
-        offers(:offers="offers")
+    Offers(:offers="offers")
 
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 import RoutePage from '@/core/route';
-import OffersContainer from '@/core/offers';
 
 @Component({
-    name: 'offers-page'
+    name: 'offers-page',
+    inheritAttrs: false
 })
 export default class OffersRoute extends RoutePage {
 
@@ -26,12 +26,5 @@ export default class OffersRoute extends RoutePage {
 </script>
 
 <style lang="postcss">
-
-.offers-page {
-
-    .container {
-        padding: 16px;
-    }
-}
 
 </style>

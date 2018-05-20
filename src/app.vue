@@ -29,12 +29,6 @@ const SCROLL_EMIT_INTERVAL = 1000;
 })
 export default class App extends Vue {
 
-    isFixedHeader: boolean = false;
-
-    @State menu;
-    @State title;
-    @State subtitle;
-
     private logout(): void {
         console.log('logout');
     }
@@ -42,8 +36,6 @@ export default class App extends Vue {
     onScroll(e) {
         const wrapper = e.target.scrollingElement;
         const scrollMax = wrapper.scrollHeight - wrapper.clientHeight;
-
-        this.isFixedHeader = !!wrapper.scrollTop;
 
         if (wrapper.scrollTop > scrollMax - SCROLL_EMIT_HEIGHT && scrollTimer === null) {
             this.$emit('scrollend');
@@ -73,8 +65,10 @@ export default class App extends Vue {
     max-width: $md;
     margin: auto;
     min-height: 100%;
+    box: vertical top;
+    font-family: 'Montserrat', sans-serif;
     padding-top: $header-height;
+    background: #FFF;
 }
-
 
 </style>

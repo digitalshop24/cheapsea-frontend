@@ -1,7 +1,7 @@
 <template lang="pug">
 .app-modal.box
-    app-header
-        slot(name="header")
+
+    slot(name="header")
     
     .app-modal__content
         slot
@@ -28,6 +28,7 @@ export default class AppModal extends Vue {
 </script>
 
 <style lang="postcss">
+@import 'css/vars';
 
 .app-modal {
     size: 100%;
@@ -36,8 +37,10 @@ export default class AppModal extends Vue {
     top: 0;
     z-index: 100;
     overflow: auto;
+    background: #FFF;
 
     &__content {
+        padding-top: $header-height;
         max-width: $md;
         margin: auto;
     }

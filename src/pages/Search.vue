@@ -1,7 +1,7 @@
 <template lang="pug">
 .search
     
-    app-header.box-primary(
+    Header.box-primary(
         type="back"
         title="Поиск предложений"
         @back="$router.push('/front')"
@@ -13,7 +13,7 @@
         )
 
     .search-content.box-content
-        vm-form(box size="2")
+        vm-form(box size="2" ref="form")
             .xs-12
                 SelectCity(
                     v-model="searchData.origin_id"
@@ -41,7 +41,7 @@
                     @select="getOffers"
                 )
         .xs-12
-            Control(
+            OfferType(
                 :value="searchData.offerType"
                 @input="select('offerType', $event)"
             )
@@ -60,16 +60,9 @@
 </template>
 
 <script lang="ts">
+import { Vue, Component, Prop } from "vue-property-decorator";
 import Offers from "@/core/offers";
 import { OffersSearchData } from '@/../types/app';
-import axios, { CancelTokenSource, Cancel } from "axios";
-import SvgTrain from '@/assets/train.svg';
-import SvgPlane from '@/assets/plane.svg';
-import SvgCar from '@/assets/car.svg';
-import SvgTour from '@/assets/tour.svg';
-import Control from '@/components/Control.vue';
-import { snackbar } from 'vue-mapp/es5/snackbar';
-import { Vue, Component, Prop } from "vue-property-decorator";
 
 const searchDefaults = {
     'destination_id': '',
@@ -80,10 +73,7 @@ const searchDefaults = {
 };
 
 @Component({
-    name: 'search-route',
-    components: {
-        Control
-    }
+    name: 'search-route'
 })
 export default class SearchRoute extends Vue {
 
@@ -92,7 +82,6 @@ export default class SearchRoute extends Vue {
     offers: Offers = new Offers();
 
     @Prop(String) title: string;
-
 
     select(prop, value) {
         this.searchData[prop] = value;
@@ -117,6 +106,8 @@ export default class SearchRoute extends Vue {
     }
 
     clear() {
+        // @ts-ignore
+        this.$refs.form.clear();
         this.searchData = searchDefaults;
         this.getOffers();
     }
