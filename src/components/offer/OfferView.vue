@@ -86,7 +86,7 @@ Modal.offer-view
         h1 Конец действия акции
         p null
 
-    .pad
+    .pad-h
         vm-button.offer-view__buy(
             primary 
             raised
@@ -99,7 +99,7 @@ Modal.offer-view
     
     h1 Похожие предложения
 
-    .pad
+    .pad-h
         OfferCard(:offer="offer")
         OfferCard(:offer="offer")
 
@@ -231,7 +231,7 @@ export default class OfferView extends Vue {
     &__tickets {
         margin-top: -24px;
         margin-bottom: 24px;
-        padding: 0 16px;
+        padding: 0 8px;
     }
 
     &__about {
@@ -252,7 +252,7 @@ export default class OfferView extends Vue {
         margin: 0 16px;
         border-width: 2px;
         border-style: solid;
-        border-color: #B0DCA5;
+        border-color: #B0DCA5 !important;
         padding: 8px;
         border-radius: 4px;
         
@@ -317,11 +317,7 @@ export default class OfferView extends Vue {
             padding: 16px 24px;
         }
     }
-
-    .offer-card:not(:last-child) {
-        margin-bottom: 16px;
-    }
-
+    
     .app-header {
         color: $primary;
     }

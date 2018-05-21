@@ -38,6 +38,7 @@ export default class AppModal extends Vue {
     z-index: 100;
     overflow: auto;
     background: #FFF;
+    min-width: 320px;
 
     &__content {
         padding-top: $header-height;

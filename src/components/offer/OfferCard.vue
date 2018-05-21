@@ -103,8 +103,8 @@ export default class OfferCard extends Vue {
 
     
 
-    &__body {
-        padding: 16px;
+    &__body, &__footer {
+        padding: 12px;
     }
 
     &__point {
@@ -137,7 +137,6 @@ export default class OfferCard extends Vue {
 
     &__footer {
         box: horizontal middle space-between;
-        padding: 12px 16px;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
 

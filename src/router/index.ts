@@ -4,6 +4,7 @@ import Search from '@/pages/Search.vue';
 import Front from '@/pages/Front.vue';
 import Chips from '@/pages/Chips.vue';
 import Offers from '@/pages/Offers.vue';
+import LocationPage from '@/pages/Location.vue';
 
 Vue.use(Router)
 
@@ -25,6 +26,11 @@ export default new Router({
             name: 'offers',
             props: true,
             component: Offers
+        },
+        {
+            path: '/location',
+            name: 'location',
+            component: LocationPage
         },
         {
             path: '*',

@@ -12,11 +12,6 @@ $default-bg-dark:         $blue-grey-50;
 $default-text-light:      $grey-700;
 $default-text-dark:       $black;
 
-$default-action-hover:    rgba(236,239,241,.8);
-$default-action-hover-primary: $blue-50;
-$default-action-active:   $default-bg-dark;
-$default-action-active-primary: #eaecf9;
-
 $primary-bg:              $primary;
 $primary-text:            #FFF;
 $primary-divider:         $indigo-400;
@@ -25,8 +20,6 @@ $primary-bg-light:        $indigo-400;
 $primary-bg-dark:         $blue-a700;
 $primary-text-light:      $white;
 $primary-text-dark:       $indigo-100;
-$primary-action-hover:    $blue-a700;
-$primary-action-active:   $primary-bg-dark;
 
 $accent-bg:               $accent;
 $accent-text:             $red-50;

@@ -42,7 +42,7 @@ export default class Control extends Vue {
 .offer-type {
     box: horizontal;
     border-radius: 4px;
-    height: 80px;
+    height: 66px;
     margin-bottom: 16px;
     border-width: 1px;
     border-style: solid;
@@ -69,7 +69,7 @@ export default class Control extends Vue {
         }
 
         h1 {
-            font-size: 12px;
+            font-size: 10px;
             line-height: 24px;
             font-weight: 600;
             text-transform: uppercase;
@@ -77,7 +77,7 @@ export default class Control extends Vue {
         }
 
         svg {
-            padding: 14px;
+            padding: 12px;
             color: $primary-color;
         }
     }

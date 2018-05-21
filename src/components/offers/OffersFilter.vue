@@ -32,7 +32,9 @@ Modal.filter-body
                 .filter-slider__button(style="left:50%")
 
             .filter-loc 
-                .filter-loc__title Вы находитесь: <a href="#/">Москва</a>
+                .filter-loc__title 
+                    | Вы находитесь:  
+                    router-link(to="/location") Москва
 
         .filter-list
 
@@ -164,10 +166,7 @@ Modal.filter-body
                 .filter-list__content
 
         .filter-submit
-            input.button.button_blue(
-                type="submit"
-                value="Показать 316 предложений"
-            )
+            vm-button(primary raised) Показать 316 предложений
 </template>
 
 <script lang="ts">

@@ -71,7 +71,7 @@ export default class App extends Vue {
     box: vertical top;
     font-family: 'Montserrat', sans-serif;
     padding-top: $header-height;
-    background: #FFF;
+    background: #FFF !important;
 }
 
 </style>

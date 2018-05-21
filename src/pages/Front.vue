@@ -83,7 +83,7 @@ export default class FrontRoute extends RoutePage {
         background: #FFF;
 
         &__menu {
-            position: absolute;
+            position: absolute !important;
             left: 0;
             top: 0;
         }
@@ -111,16 +111,14 @@ export default class FrontRoute extends RoutePage {
     }
 
     &-search {
-        height: 56px;
-        border-radius: 4px;
+        height: 92px;
         box: horizontal middle space-between;
         padding: 12px 24px;
         font-size: 17px;
         line-height: 1;
         cursor: pointer;
         font-weight: 500;
-        margin: 16px;
-        box-shadow: $shadow-1;
+        margin-bottom: 16px;
         color: #FFF !important;
     }
 
