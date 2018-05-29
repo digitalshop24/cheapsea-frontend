@@ -1,14 +1,14 @@
 
 type Dictionary<T> = { [key: string]: T };
 
-export type OfferType = 
+export type OfferType =
     | 'airplane'
     | 'trane'
     | 'bus'
     | 'car_rent'
     ;
 
-export type DiscountType = 
+export type DiscountType =
     | 'hot'
     | 'seasonal'
     | 'erroneous'
@@ -41,4 +41,6 @@ export interface OffersSearchData {
 
 export interface RootState {
     fitleredOffers: any[];
+    screen: string;
+    layout: any;
 }

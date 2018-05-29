@@ -424,7 +424,7 @@ module.exports = function ({ file, options, env }) {
         sourceMap: env === 'development',
         plugins: {
             'postcss-import': {
-                path: 'src'
+                path: ['src', 'src/css']
             },
             'postcss-size': {},
             'postcss-mixins': {

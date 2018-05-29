@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "vue": "^2.5.2",
+        "vue-carousel": "^0.8.0",
         "vue-router": "^3.0.1",
         "vuejs-datepicker": "^1.1.5",
         "vuex": "^3.0.1"
@@ -65,7 +66,7 @@
         "url-loader": "^0.5.8",
         "vue-class-component": "^6.0.0",
         "vue-loader": "^13.3.0",
-        "vue-mapp": "../temp",
+        "vue-mapp": "../vue-mapp/library",
         "vue-property-decorator": "^6.0.0",
         "vue-style-loader": "^3.0.1",
         "vue-svg-loader": "^0.5.0",

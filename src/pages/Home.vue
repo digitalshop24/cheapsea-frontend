@@ -1,73 +1,107 @@
 <template lang="pug">
+
 .front
+  header-mobile(v-if="layout.smallView")
+  header-desktop(v-else)
 
-    Header.front-header
-        vm-button.front-header__menu(
-            icon="menu"
-        )
-        .front-header__logo
-            Logo
-        
-        .front-header__actions
-            vm-button(icon="add")
-            vm-button(icon="person")
-
-    router-link.front-search.box-primary(
-        to="/search"
-        @click="$router.push"
+  offers-tape.front-best__offers(
+    :offers="[1,2,3,4,5,6,7,8,9]"
+  )
+    template(slot="header")
+      h1 Лучшие предложения недели
+      vm-icon star
+    .front-best__offer(
+      slot="block"
+      slot-scope="{ offer }"
     )
-        | Поиск предложений
-        vm-icon search
+      h1 Комсомольск-на-Амуре
+      small 16 часов. Без пересадок. Из Москвы
+      p от 6500 ₽
+
+  vm-divider
+
+  vm-tabs(align="center")
+    vm-tab(label="Турция")
+    vm-tab(label="Индия")
+
+  offers(:offers="offers")
+//- .front
+
+//-     Header.box-primary.front-header
+//-         vm-button.front-header__menu(
+//-             icon="menu"
+//-         )
+//-         .front-header__logo
+//-             Logo
+
+//-         .front-header__actions
+//-             vm-button(icon="add")
+//-             vm-button(icon="person")
+
+//-     router-link.front-search.box-primary(
+//-         to="/search"
+//-         @click="$router.push"
+//-     )
+//-         | Поиск предложений
+//-         vm-icon search
 
 
-    .front-best
-        .front-best__title
-            vm-icon grade
-            h1 Лучшие предложения недели
+//-     .front-best
+//-         .front-best__title
+//-             vm-icon grade
+//-             h1 Лучшие предложения недели
 
-        .front-best__offers
-            .pad-h(
-                v-for="i in [0,1,2,3,4,5]"
-            )
-                .front-best__offer
-                    h1 Комсомольск-на-Амуре
-                    small 16 часов. Без пересадок. Из Москвы
-                    p от 6500 ₽
+//-         .front-best__offers
+//-             .pad-h(
+//-                 v-for="i in [0,1,2,3,4,5]"
+//-             )
+//-                 .front-best__offer
+//-                     h1 Комсомольск-на-Амуре
+//-                     small 16 часов. Без пересадок. Из Москвы
+//-                     p от 6500 ₽
 
-    .main-list
-        .main-list-tabs
-            .main-list-tabs-unit Турция
-            .main-list-tabs-unit.active Индия
-            .main-list-tabs-unit Ю. Америка
-            .main-list-tabs-next
-            
-    offers(:offers="offers")
+//-     .main-list
+//-         .main-list-tabs
+//-             .main-list-tabs-unit Турция
+//-             .main-list-tabs-unit.active Индия
+//-             .main-list-tabs-unit Ю. Америка
+//-             .main-list-tabs-next
 
-    footer.footer
-        .container
-            .footer-button
+//-
+
+//-     footer.footer
+//-         .container
+//-             .footer-button
 </template>
 
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import RoutePage from "@/core/route";
+import { State } from 'vuex-class';
 import Offers from "@/core/offers";
-import Logo from '@/assets/logo.svg';
+import HeaderDesktop from '@/components/desktop/front-header.vue';
+import HeaderMobile from '@/components/mobile/front-header.vue';
+import OffersTape from '@/components/offers-tape.vue';
+
 
 @Component({
-    name: "offers-page",
+    name: "home",
     components: {
-        Logo
+        HeaderDesktop,
+        HeaderMobile,
+        OffersTape
     }
 })
 export default class FrontRoute extends RoutePage {
     offers: Offers = new Offers();
     selectedOffer: any = null;
 
+    @State layout;
+
     filters: object = {
         offer_type: "airplane"
     };
-    
+
     created() {
         this.offers = new Offers(this.filters);
     }
@@ -77,10 +111,14 @@ export default class FrontRoute extends RoutePage {
 <style lang="postcss">
 @import 'css/colors';
 
+.front-best__offers {
+  color: $accent;
+}
+
 .front {
+    width: 100%;
 
     &-header {
-        background: #FFF;
 
         &__menu {
             position: absolute !important;
@@ -110,18 +148,6 @@ export default class FrontRoute extends RoutePage {
         }
     }
 
-    &-search {
-        height: 92px;
-        box: horizontal middle space-between;
-        padding: 12px 24px;
-        font-size: 17px;
-        line-height: 1;
-        cursor: pointer;
-        font-weight: 500;
-        margin-bottom: 16px;
-        color: #FFF !important;
-    }
-
     &-best {
 
         &__title {
@@ -134,16 +160,15 @@ export default class FrontRoute extends RoutePage {
             h1 {
                 font-size: 14px;
                 line-height: 24px;
-                padding-left: 8px;
                 margin: 0;
             }
         }
-       
+
         &__offers {
-            width: 100%;
-            overflow-y: auto;
-            box: horizontal left;
-            padding: 8px;
+            // width: 100%;
+            // overflow-y: auto;
+            // box: horizontal left;
+            // padding: 8px;
         }
 
         &__offer {
@@ -155,7 +180,7 @@ export default class FrontRoute extends RoutePage {
             padding: 16px;
             position: relative;
             flex: 0 0 auto;
-            background: url(/static/images/front-demo.jpg) center;
+            background: url(https://placeimg.com/320/200/nature) center;
             z-index: 5;
             overflow: hidden;
 
@@ -168,11 +193,6 @@ export default class FrontRoute extends RoutePage {
                 left: 0;
                 position: absolute;
             }
-
-            &:last-child {
-                margin-right: 8px;
-            }
-
             h1 {
                 font-size: 16px;
                 margin: 0 0 6px;
@@ -211,7 +231,7 @@ export default class FrontRoute extends RoutePage {
     line-height: 31px;
     padding:0 22px;
     font-size: 10px;
-    
+
     &-unit {
         font-weight: 500;
         text-align: center;

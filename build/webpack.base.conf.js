@@ -20,7 +20,7 @@ module.exports = {
             if (process.env.NODE_ENV === 'production') {
                 return config.build.assetsPublicPath;
             } else {
-                return config.dev.assetsPublicPath
+                return config.dev.assetsPublicPath;
             }
         })()
     },

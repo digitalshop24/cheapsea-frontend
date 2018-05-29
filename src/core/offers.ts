@@ -3,16 +3,17 @@ import { snackbar } from 'vue-mapp/es5/snackbar';
 import { Offer, OffersSearchData } from '@/../types/app';
 
 function transformOffer(offer) {
-    return {
-        ...offer.attributes,
-        id: offer.id,
-        tags: offer.relationships.tags,
-        transfers: offer.relationships.transfers
-    }
+
+  return {
+    ...offer.attributes,
+    id: offer.id,
+    tags: offer.tags,
+    transfers: offer.transfers
+  }
 }
 
 export default class OffersContainer {
-    
+
     page: number = 1;
     total: number = 200;
     processing: boolean = false;
