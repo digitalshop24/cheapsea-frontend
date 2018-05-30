@@ -1,6 +1,9 @@
 <template lang="pug">
-.offers
+.offers.container
 
+  offers-filter
+
+  .offers-wrapper
     .offers-header
         span Сначала дешевые
         //- .offers-header__filter(@click="showFilter") Фильтр
@@ -13,21 +16,21 @@
             :offer="offer"
             @select="select"
         )
-    
+
     vm-loader.pad(
         v-if="offers.processing"
     )
-    
-    OfferView(
-        v-if="selectedOffer"
-        :offer="selectedOffer"
-        @close="selectedOffer = null"
-    )
 
-    OffersFilter(
-        v-if="showFilter"
-        @close="toggleFilter"
-    )
+    //- OfferView(
+    //-     v-if="selectedOffer"
+    //-     :offer="selectedOffer"
+    //-     @close="selectedOffer = null"
+    //- )
+
+    //- OffersFilter(
+    //-     v-if="showFilter"
+    //-     @close="toggleFilter"
+    //- )
 </template>
 
 <script lang="ts">
@@ -82,12 +85,30 @@ export default class OffersModule extends Vue {
 @import 'css/colors';
 
 .offers {
+  display: flex;
+  margin-top: 32px;
+
+  &-wrapper {
+    flex: 1 1 100%;
+
+    @media (--md-view) {
+      margin-left: 24px;
+    }
+  }
+
+  .filter-body {
+    width: 300px;
+  }
 
     &-header {
         box: horizontal space-between middle;
         padding: 16px;
         font-size: 14px;
         font-weight: 600;
+
+        @media (--md-view) {
+          display: none;
+        }
 
         &__filter {
             background: url(/static/images/icons/icon-filters.svg) right 8px center no-repeat;
@@ -103,10 +124,6 @@ export default class OffersModule extends Vue {
             outline: none;
             cursor: pointer;
         }
-    }
-
-    &-list {
-        padding: 4px 8px;
     }
 }
 </style>

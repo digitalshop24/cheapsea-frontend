@@ -321,7 +321,7 @@ const gridVars = {
 }
 
 function genShadow(arr) {
-    const colors = ['rgba(0,0,0,.2)', 'rgba(0,0,0,.14)', 'rgba(0,0,0,.12)'];
+    const colors = ['rgba(0,0,0,.2)', 'rgba(0,0,0,.12)', 'rgba(0,0,0,.10)'];
     return arr.map((i, idx) => `${i} ${colors[idx]}`).join(', ');
 }
 

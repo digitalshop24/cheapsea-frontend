@@ -8,20 +8,11 @@
 
 vm-app.box(
   ref="layout"
-  :class="{ 'is--scrolled': scrollTop > 0 }"
+  :class="{ 'on-top': scrollTop === 0 }"
 )
   app-header(
     v-if="showHeader"
   )
-    vm-button(icon="menu" primary)
-
-    router-link.app-logo(to="/")
-      svg-logo
-
-    .grow
-
-    vm-button(icon="add" primary)
-    vm-button(icon="person" primary)
 
   keep-alive(
     :include="[ 'search-route' ]"
@@ -33,7 +24,8 @@ vm-app.box(
 import { Vue, Component } from 'vue-property-decorator';
 import { State, Mutation } from 'vuex-class';
 import { throttle } from '@/helpers/optimize';
-import SvgLogo from './assets/logo.svg';
+import AppHeader from '@/components/app-header.vue';
+
 import SvgMenu from './assets/menu.svg';
 import SvgProfile from './assets/profile.svg';
 import SvgPlus from './assets/plus.svg';
@@ -45,10 +37,10 @@ const SCROLL_EMIT_INTERVAL = 1000;
 @Component({
   name: 'app',
   components: {
-    'svg-menu': SvgMenu,
-    'svg-plus': SvgPlus,
-    'svg-profile': SvgProfile,
-    SvgLogo
+    SvgMenu,
+    SvgPlus,
+    SvgProfile,
+    AppHeader
   }
 })
 export default class App extends Vue {
@@ -121,21 +113,12 @@ export default class App extends Vue {
 #vm-app {
   padding-top: $header-height;
 
-  &.is--scrolled {
-
-    .app-header {
-      box-shadow: $shadow-2;
-    }
+  @media (--md-view) {
+    padding-top: $header-height-desktop;
   }
 
-  .app-logo {
-    margin-left: 16px;
-    font-size: 12px;
-    line-height: 1;
+  &.is--scrolled {
 
-    svg {
-      height: 14px;
-    }
   }
 }
 

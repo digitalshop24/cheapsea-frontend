@@ -1,18 +1,25 @@
 @import './vars';
 @import './colors';
+@import './helpers';
 @import 'vue-mapp/src/css/theme.css';
 @import './html';
 @import './override';
 
 
 .pad {
-    padding: 16px;
+  padding: 16px;
 }
 
 .pad-h {
-    padding: 8px;
+  padding: 8px;
 }
 
 .box-light {
-    background: #FFF;
+  background: #FFF;
+}
+
+.container {
+  width: 100%;
+  max-width: $max-content-width;
+  margin: auto;
 }

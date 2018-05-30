@@ -1,7 +1,6 @@
 <template lang="pug">
-.app-header.bg-light
+header.app-header.bg-light
   .app-header__wrapper
-    template(v-if="type === 'back'")
       vm-button(
         icon="arrow_back"
         @click="back"
@@ -37,32 +36,37 @@ export default class HeaderBack extends Vue {
 
 @import '@design';
 
-.app-header {
-    height: $header-height;
-    min-width: 320px;
-    font-size: 14px;
-    position: fixed;
-    top: 0;
-	  left: 0;
-    z-index: 100;
-    width: 100%;
+.header-back {
+  height: $header-height;
+  min-width: 320px;
+  font-size: 14px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  margin: auto;
+  color: $primary;
+  padding: 0 10px;
+  box-shadow: $shadow-1;
+
+  @media (--md-view) {
+    height: $header-height-desktop;
+  }
+
+  &__wrapper {
+    box: horizontal middle;
+    height: 100%;
+    max-width: $max-content-width;
     margin: auto;
-    color: $primary;
-    padding: 0 10px;
+    position: relative;
+  }
 
-    &__wrapper {
-        box: horizontal middle;
-        height: 100%;
-        max-width: $max-content-width;
-        margin: auto;
-        position: relative;
-    }
-
-    h1 {
-        font-size: 16px;
-        font-weight: 500;
-        flex-grow: 1;
-    }
+  h1 {
+    font-size: 16px;
+    font-weight: 500;
+    flex-grow: 1;
+  }
 }
 
 </style>

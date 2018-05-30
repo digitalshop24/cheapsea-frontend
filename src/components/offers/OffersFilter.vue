@@ -1,19 +1,20 @@
 <template lang="pug">
 
-Modal.filter-body
+.filter-body
 
-    Header.box-primary(slot="header")
-        vm-button(
-            icon="arrow_back"
-            @click="$emit('close')"
-        )
-        h1 Фильтр
+  //- Header.box-primary(slot="header")
+  //-     vm-button(
+  //-         icon="arrow_back"
+  //-         @click="$emit('close')"
+  //-     )
+  //-     h1 Фильтр
 
+  vm-card
     form.filter
 
         .filter-top
 
-            h1 Тип предложения
+            //- h1 Тип предложения
             OfferType(
                 v-model="activeUnit"
             )
@@ -31,16 +32,18 @@ Modal.filter-body
                 .filter-slider__button(style="left:20%")
                 .filter-slider__button(style="left:50%")
 
-            .filter-loc 
-                .filter-loc__title 
-                    | Вы находитесь:  
+            .filter-loc
+                .filter-loc__title
+                    | Вы находитесь:
                     router-link(to="/location") Москва
 
         .filter-list
 
             .filter-list__item
-                .filter-list__title Виза не нужна
+                .filter-list__title
+                  vm-toggle Виза не нужна
                 .filter-list__content
+
 
             .filter-list__item
                 .filter-list__title Куда: Вся Исландия — 145
@@ -59,7 +62,7 @@ Modal.filter-body
                                 a(href="#/").location-slider-unit Ж
                         .location-list
                                 .location-list-unit
-                                    .location-list-unit-title 
+                                    .location-list-unit-title
                                         |А
                                         .location-list-unit-title-total 5 предложений
                                     .location-list-unit-body
@@ -70,7 +73,7 @@ Modal.filter-body
                                             | Акюрейри
                                             .location-list-unit-body-item-total 4
                                 .location-list-unit
-                                    .location-list-unit-title 
+                                    .location-list-unit-title
                                         |Б
                                         .location-list-unit-title-total 31 предложение
                                     .location-list-unit-body
@@ -90,7 +93,7 @@ Modal.filter-body
                                             | Будардалур
                                             .location-list-unit-body-item-total 1
                                 .location-list-unit
-                                    .location-list-unit-title 
+                                    .location-list-unit-title
                                         |Г
                                         .location-list-unit-title-total 1 предложение
                                     .location-list-unit-body
@@ -115,7 +118,7 @@ Modal.filter-body
                                 a(href="#/").location-slider-unit Ж
                         .location-list
                                 .location-list-unit
-                                    .location-list-unit-title 
+                                    .location-list-unit-title
                                         |А
                                         .location-list-unit-title-total 5 предложений
                                     .location-list-unit-body
@@ -126,7 +129,7 @@ Modal.filter-body
                                             | Акюрейри
                                             .location-list-unit-body-item-total 4
                                 .location-list-unit
-                                    .location-list-unit-title 
+                                    .location-list-unit-title
                                         |Б
                                         .location-list-unit-title-total 31 предложение
                                     .location-list-unit-body
@@ -146,7 +149,7 @@ Modal.filter-body
                                             | Будардалур
                                             .location-list-unit-body-item-total 1
                                 .location-list-unit
-                                    .location-list-unit-title 
+                                    .location-list-unit-title
                                         |Г
                                         .location-list-unit-title-total 1 предложение
                                     .location-list-unit-body
@@ -166,7 +169,7 @@ Modal.filter-body
                 .filter-list__content
 
         .filter-submit
-            vm-button(primary raised) Показать 316 предложений
+  vm-button(primary raised) Показать 316 предложений
 </template>
 
 <script lang="ts">
@@ -188,8 +191,11 @@ export default class OfferFilter extends Vue {
 
 .filter {
 
-    border-style: solid;
-    border-width: 1px;
+  .vm-button {
+    width: 100%;
+    margin-top: 24px;
+    height: 72px;
+  }
 
     &-top {
         padding: 16px;
@@ -220,7 +226,7 @@ export default class OfferFilter extends Vue {
 
             p {
                 font-size: 8px;
-                text-transform: uppercase;	
+                text-transform: uppercase;
                 font-weight: 500;
                 color: rgba(255,255,255,0.5);
                 margin-bottom: 6px;
@@ -248,12 +254,12 @@ export default class OfferFilter extends Vue {
                 transform: translateY(-50%);
                 left: 0;
             }
-        }		
+        }
 	}
 
 	&-slider {
 		position: relative;
-		
+
 		&__button {
 			position: absolute;
 			top: 0;
@@ -297,7 +303,7 @@ export default class OfferFilter extends Vue {
 			}
 		}
 	}
-    
+
 	&-list {
         background-color: #fff;
 
