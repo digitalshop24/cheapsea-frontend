@@ -19,7 +19,7 @@
 }
 
 .container {
-  width: 100%;
-  max-width: $max-content-width;
+  width: $max-content-width;
+  max-width: calc(100% - 32px);
   margin: auto;
 }

@@ -1,0 +1,14 @@
+<svg width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Canvas" fill="none">
+<g id="Rectangle 3">
+<rect width="16" height="16" rx="3" fill="#D9D9D9"/>
+</g>
+<g id="Line 2">
+<path d="M 0 6L 6 0M 6 6L 0 0" transform="translate(5 6)" stroke="white"/>
+</g>
+<g id="Line 3">
+<line y1="-0.5" x2="16" y2="-0.5" transform="translate(16 3) scale(-1)" stroke="white"/>
+</g>
+</g>
+</svg>
+
