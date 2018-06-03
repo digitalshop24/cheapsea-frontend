@@ -56,6 +56,13 @@ export default class OffersTape extends Vue {
     &:last-child {
       padding-right: 16px;
     }
+
+    & > div {
+      position: relative;
+      border-radius: 4px;
+      flex: 0 0 auto;
+      overflow: hidden;
+    }
   }
 }
 </style>

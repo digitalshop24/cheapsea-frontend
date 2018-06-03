@@ -11,6 +11,9 @@ module.exports = {
     sourceMap: sourceMapEnabled,
     extract: isProduction
   }),
+  cssModules: {
+    localIdentName: '[name]__[local]'
+  },
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,
   transformToRequire: {

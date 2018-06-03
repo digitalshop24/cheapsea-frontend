@@ -1,0 +1,14 @@
+@import './@design';
+@import './helpers';
+@import 'vue-mapp/src/css/theme.css';
+@import './html';
+@import './override';
+
+.box-light {
+  background: #FFF;
+}
+
+.container {
+  max-width: $max-content-width;
+  margin: auto;
+}

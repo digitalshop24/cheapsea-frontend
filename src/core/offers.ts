@@ -51,18 +51,26 @@ export default class OffersContainer {
     }
 
     async get() {
-        const { data, meta } = await this.request();
+        const response = await this.request();
 
-        this.data = data.map(i => transformOffer(i));
-        this.total = meta.count;
+        if (response) {
+          const { data, meta } = response;
+
+          this.data = data.map(i => transformOffer(i));
+          this.total = meta.count;
+        }
     }
 
     async append() {
         this.page++;
 
-        const { data, meta } = await this.request();
+        const response = await this.request();
 
-        this.data = this.data.concat(data.map(i => transformOffer(i)));
-        this.total = meta.count;
+        if (response) {
+          const { data, meta } = response;
+
+          this.data = this.data.concat(data.map(i => transformOffer(i)));
+          this.total = meta.count;
+        }
     }
 }

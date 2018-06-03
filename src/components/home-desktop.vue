@@ -1,37 +1,36 @@
 <template lang="pug">
-.md-header
-  .md-header__wrapper.container
-    vm-tabs(align="justify")
+div(:class="$style.root")
+  .container(:class="$style.wrapper")
+    vm-tabs(
+      align="justify"
+      :class="$style.tabs"
+    )
       vm-tab(
         v-for="(offer, idx) in offers"
         :key="idx"
         :label="offer.label"
       )
-        front-head-tab(
+        home-desktop-tab(
           :title="offer.title"
           :description="offer.description"
           :count="offer.count"
           :price="offer.price"
         )
-    .md-header__search.bg-light
-      vm-input(label="Откуда")
-      vm-input(label="Куда")
-      vm-date(label="Дата заезда")
-        router-link(to="search")
-          vm-button Поиск
+    home-desktop-search
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import FrontHeadTab from './front-head-tab.vue';
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import HomeDesktopTab from './home-desktop-tab.vue';
+import HomeDesktopSearch from './home-desktop-search.vue';
 
 @Component({
   components: {
-    FrontHeadTab
+    HomeDesktopTab,
+    HomeDesktopSearch
   }
 })
-export default class DesktopFrontHeader extends Vue {
-
+export default class HomeDesktop extends Vue {
 
   offers: any[] = [
     {
@@ -49,49 +48,43 @@ export default class DesktopFrontHeader extends Vue {
       count: '98'
     },
     {
-      label: 'до 50000 ₽'
+      label: 'до 50000 ₽',
+      title: 'Цена до 50000 ₽',
+      description: 'Предложения до 50000 ₽',
+      price: '23500',
+      count: '150'
     },
     {
-      label: 'ЧМФ 2018'
+      label: 'ЧМФ 2018',
+      title: 'ЧМФ 2018',
+      description: '21 чемпионат мира по футболу ФИФА, финальная часть которого пройдёт в России с 14 июня по 15 июля 2018 года. Россия в первый раз в своей истории станет страной-хозяйкой мирового чемпионата по футболу, кроме того, он впервые будет проведён в Восточной Европе.',
+      price: '23500',
+      count: '150'
     }
   ]
 }
 </script>
 
-<style lang="postcss">
+<style lang="postcss" module>
 @import '@design';
 
-.md-header {
-  height: 560px;
+.root {
+  height: 600px;
   overflow: hidden;
   position: relative;
   background: url(/static/images/front-head.jpg);
   background-size: cover;
   border-style: solid;
   border-width: 0 0 1px;
+}
 
-  &__wrapper {
-    height: 100%;
-    padding: 40px 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
+.wrapper {
+  padding: 40px 0;
+}
 
-  &__search {
-    box: horizontal middle right;
-    height: 104px;
-    background: #FFF;
-    border-radius: 4px;
-    padding: 24px;
-  }
+.tabs {
 
-  img {
-    width: 100%;
-  }
-
-  .vm-tab {
+  :global(.vm-tab) {
     flex-basis: 25%;
     margin-right: 24px;
 
@@ -105,7 +98,7 @@ export default class DesktopFrontHeader extends Vue {
 
     &:not(.is--active) {
 
-      .vm-tab__label {
+      :global(.vm-tab__label) {
         color: $default-text !important;
       }
 
@@ -132,13 +125,13 @@ export default class DesktopFrontHeader extends Vue {
     }
   }
 
-  .vm-tab__label {
+  :global(.vm-tab__label) {
     text-transform: none;
     font-weight: 500;
     font-size: 16px;
   }
 
-  .vm-tabs__header {
+  :global(.vm-tabs__header) {
     border: none;
   }
 }

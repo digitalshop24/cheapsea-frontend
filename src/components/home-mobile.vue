@@ -1,11 +1,11 @@
 <template lang="pug">
-.md-header
+.xs-header
 
   router-link(
     to="/search"
     @click="$router.push"
   )
-    span.box-primary.front-search
+    span.box-primary.front-search.action
       | Поиск предложений
       vm-icon search
 
@@ -59,9 +59,5 @@ export default class MobileFrontHeader extends Vue {
   line-height: 1;
   cursor: pointer;
   font-weight: 600;
-
-  &:hover {
-    background: $primary-bg-dark;
-  }
 }
 </style>

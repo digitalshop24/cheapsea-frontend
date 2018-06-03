@@ -463,10 +463,10 @@ module.exports = function ({ file, options, env }) {
             'postcss-reporter': {},
             // to edit target browsers: use "browserslist" field in package.json
             'autoprefixer': {},
-            'cssnano': env === 'production' ? {
+            'cssnano': {
                 zindex: false,
                 reduceIdents: false
-            } : false
+            }
         }
     }
 }

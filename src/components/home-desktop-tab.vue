@@ -41,6 +41,7 @@ export default class FrontHeadTab extends Vue {
 
   &-right {
     box: horizontal middle;
+    flex: 1 1 auto;
   }
 
   &-title {
@@ -48,7 +49,7 @@ export default class FrontHeadTab extends Vue {
     line-height: 42px;
     max-width: 640px;
     font-weight: 500;
-    margin: 16px 0 56px;
+    margin: 0 0 56px;
     text-shadow: 0px 1px 1px $default-text-light;
     color: #FFF;
   }
@@ -59,6 +60,14 @@ export default class FrontHeadTab extends Vue {
     border-radius: 4px;
     line-height: 20px;
     box-shadow: $shadow-1;
+    width: 100%;
+  }
+
+  &-price {
+
+    .vm-button {
+      height: 48px;
+    }
   }
 }
 

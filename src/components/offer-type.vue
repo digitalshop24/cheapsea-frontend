@@ -10,12 +10,13 @@
 </template>
 
 <script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import dict from '@/config.json';
 import SvgTrain from '@/assets/train.svg';
 import SvgPlane from '@/assets/plane.svg';
 import SvgCar from '@/assets/car.svg';
 import SvgTour from '@/assets/tour.svg';
-import { Vue, Component, Prop } from "vue-property-decorator";
+
 
 @Component({
     name: 'control',
