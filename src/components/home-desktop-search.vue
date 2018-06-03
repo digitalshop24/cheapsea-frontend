@@ -38,7 +38,7 @@ vm-form.bg-light(
       :class="$style.offerType"
     )
 
-    router-link(to="search")
+    router-link(to="offers")
       vm-button(
         primary
         raised
@@ -96,7 +96,6 @@ export default class HomeDesktopSearch extends Vue {
 
 .left {
   flex: 1 1 65%;
-  font-size: 16px;
 }
 
 .right {

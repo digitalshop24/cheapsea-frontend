@@ -5,17 +5,21 @@
         title="Предложения по запросу"
         @back="$router.push('/search')"
     )
-    Offers(:offers="offers")
+    offers-list(:offers="offers")
 
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 import RoutePage from '@/core/route';
+import OffersList from '@/components/offers-list.vue';
 
 @Component({
     name: 'offers-page',
-    inheritAttrs: false
+    inheritAttrs: false,
+    components: {
+      OffersList
+    }
 })
 export default class OffersRoute extends RoutePage {
 

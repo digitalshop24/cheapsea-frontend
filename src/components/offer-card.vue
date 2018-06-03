@@ -5,18 +5,18 @@
         p {{ offer.destination | json('name') }}
         .offer-card__header-directions
             svg-arrow
-    
+
     .offer-card__body
         .offer-card__points
-            .offer-card__point 
+            .offer-card__point
                 h1 {{ offer.date_from | time }}
                 p {{ offer.origin | json('name') }}
                 p {{ offer.date_from | dateWeek }}
-            .offer-card__point 
+            .offer-card__point
                 h1 {{ offer.date_to | time }}
                 p {{ offer.destination | json('name') }}
                 p {{ offer.date_to | dateWeek }}
-        
+
         OfferPath(:offer="offer")
 
     .offer-card__footer
@@ -34,7 +34,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import SvgArrow from '@/assets/arrow.svg';
-import OfferPath from './OfferPath.vue';
+import OfferPath from './offer-path.vue';
 import acc from 'accounting';
 
 @Component({
@@ -46,7 +46,7 @@ import acc from 'accounting';
 })
 export default class OfferCard extends Vue {
 
-    @Prop() 
+    @Prop()
     offer;
 
     select() {
@@ -65,7 +65,7 @@ export default class OfferCard extends Vue {
     &:last-child {
         margin-bottom: 0;
     }
-    
+
     &__header {
         position: relative;
         font-size: 18px;
@@ -101,14 +101,14 @@ export default class OfferCard extends Vue {
         margin-bottom: 16px;
     }
 
-    
+
 
     &__body, &__footer {
         padding: 12px;
     }
 
     &__point {
-        
+
         line-height: 22px;
         font-weight: 500;
 
@@ -140,7 +140,7 @@ export default class OfferCard extends Vue {
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
 
-        i { 
+        i {
             color: $grey-600;
             font-size: 20px;
             margin-right: 8px;

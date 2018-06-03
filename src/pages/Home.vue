@@ -4,16 +4,19 @@
   home-mobile(v-if="layout.smallView")
   home-desktop(v-else)
 
-  offers-tape.home-best(
+  offers-tape(
+    :class="$style.best"
     :offers="[1,2,3,4,5,6,7,8,9]"
+    :headCenter="!layout.smallView"
   )
     template(slot="header")
       h1 Лучшие предложения недели
       vm-icon star
 
-    .front-best__offer(
+    div(
       slot="block"
       slot-scope="{ offer }"
+      :class="$style.bestOffer"
     )
       h1 Комсомольск-на-Амуре
       small 16 часов. Без пересадок. Из Москвы
@@ -21,14 +24,17 @@
 
   vm-divider
 
-  vm-tabs.home-tabs(align="center")
+  vm-tabs.bg-dark(
+    :class="$style.tabs"
+    align="center"
+  )
     vm-tab(label="Турция")
     vm-tab(label="Индия")
     vm-tab(label="Ю.Америка")
     vm-tab(label="Китай")
     vm-tab(label="Япония")
 
-  offers-list
+  offers-list(:class="$style.offersList")
 
 </template>
 
@@ -54,87 +60,77 @@ export default class HomeRoute extends RoutePage {
 }
 </script>
 
-<style lang="postcss">
+<style lang="postcss" module>
 @import '@design';
 
-.home {
 
-  &-best {
+.best {
 
-    @media (--md-view) {
-
-      .offers-tape__header {
-        justify-content: center;
-      }
-    }
-
-    .vm-icon {
-      color: $orange-600;
-      margin-left: 16px;
-    }
-  }
-
-  &-tabs {
-    background: $default-bg-dark;
-
-    .vm-tab {
-      padding: 0 32px;
-
-      &__label {
-        text-transform: none;
-        font-weight: 500;
-      }
-    }
+  :global(.vm-icon) {
+    color: $orange-600;
+    margin-left: 16px;
   }
 }
 
-.front {
+.bestOffer {
+  border-radius: 4px;
+  width: 256px;
+  background: rgba(0,0,0,.8);
+  height: 124px;
+  color: #FFF;
+  padding: 16px;
+  background: $orange-a700;
+  z-index: 5;
+  box-shadow: $shadow-1;
 
-    &-best {
+  &:after {
+    content: '';
+    background: rgba(0,0,0,.54);
+    z-index: -1;
+    size: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
 
-        &__offer {
-            border-radius: 4px;
-            width: 256px;
-            background: rgba(0,0,0,.8);
-            height: 124px;
-            color: #FFF;
-            padding: 16px;
-            background: url(https://placeimg.com/320/200/nature) center;
-            z-index: 5;
-            box-shadow: $shadow-1;
+  h1 {
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
 
-            &:after {
-                content: '';
-                background: rgba(0,0,0,.54);
-                z-index: -1;
-                size: 100%;
-                top: 0;
-                left: 0;
-                position: absolute;
-            }
-            h1 {
-                font-size: 16px;
-                margin: 0 0 6px;
-            }
+  h2 {
+    font-size: 12px;
+  }
 
-            h2 {
-                font-size: 12px;
-            }
+  p {
+    font-weight: 500;
+    font-size: 16px;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    margin: 0;
+  }
 
-            p {
-                font-weight: 500;
-                font-size: 16px;
-                position: absolute;
-                bottom: 16px;
-                left: 16px;
-                margin: 0;
-            }
+  small {
+    font-weight: 500;
+  }
+}
 
-            small {
-                font-weight: 500;
-            }
-        }
-    }
+.tabs {
+  margin-bottom: 32px;
+
+  :global(.vm-tab) {
+    padding: 0 32px;
+  }
+
+  :global(.vm-tab__label) {
+    text-transform: none;
+    font-weight: 500;
+  }
+}
+
+.offersList {
+  padding-bottom: 40px;
 }
 
 </style>

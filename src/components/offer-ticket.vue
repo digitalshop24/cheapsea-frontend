@@ -2,47 +2,47 @@
 .offer-ticket
     .offer-ticket__header
         h1 {{ title }}
-    
+
     OfferPath(:offer="offer")
 
     .offer-ticket__unit
         .offer-ticket__unit-wrapper
             .offer-ticket__point
                 h1
-                    | {{ offer.origin | json('name') }}, 
+                    | {{ offer.origin | json('name') }},
                     | {{ String(offer.from_airport.data) }}
                 p
-                    | {{ offer.date_from | time }}, 
+                    | {{ offer.date_from | time }},
                     | {{ offer.date_from | dateWeek }}
             .offer-ticket__point
-                h1 
+                h1
                     | {{ offer.destination | json('name') }},
                     | {{ String(offer.to_airport.data) }}
-                p 
-                    | {{ offer.date_to | time }}, 
+                p
+                    | {{ offer.date_to | time }},
                     | {{ offer.date_to | dateWeek }}
         .offer-ticket__unit-time
             | 1 ч
 
-    .offer-ticket__transfer 
+    .offer-ticket__transfer
         span Пересадка
         span 1 ч
-    
+
     .offer-ticket__unit
         .offer-ticket__unit-wrapper
             .offer-ticket__point
                 h1
-                    | {{ offer.origin | json('name') }}, 
+                    | {{ offer.origin | json('name') }},
                     | {{ String(offer.from_airport.data) }}
                 p
-                    | {{ offer.date_from | time }}, 
+                    | {{ offer.date_from | time }},
                     | {{ offer.date_from | dateWeek }}
             .offer-ticket__point
-                h1 
+                h1
                     | {{ offer.destination | json('name') }},
                     | {{ String(offer.to_airport.data) }}
-                p 
-                    | {{ offer.date_to | time }}, 
+                p
+                    | {{ offer.date_to | time }},
                     | {{ offer.date_to | dateWeek }}
         .offer-ticket__unit-time
             | 1 ч
@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import OfferPath from './OfferPath.vue';
+import OfferPath from './offer-path.vue';
 
 @Component({
     name: 'offer-ticket',
@@ -154,11 +154,11 @@ export default class OfferTicket extends Vue {
         position: relative;
 
         &:after, &:before {
-            
+
             top: 100%;
-            
+
         }
-        
+
         &:before {
             left: 0;
             border-bottom-left-radius: 4px;
@@ -171,7 +171,7 @@ export default class OfferTicket extends Vue {
     }
 
     &__point {
-        
+
         & + & {
             margin-top: 8px;
         }

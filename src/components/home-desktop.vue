@@ -96,7 +96,7 @@ export default class HomeDesktop extends Vue {
       background: currentColor !important;
     }
 
-    &:not(.is--active) {
+    &:not(:global(.is--active)) {
 
       :global(.vm-tab__label) {
         color: $default-text !important;

@@ -1,6 +1,8 @@
 <template lang="pug">
 .offers-tape
-  .offers-tape__header
+  .offers-tape__header(
+    :class="{ 'is--center': headCenter }"
+  )
     slot(name="header")
   .offers-tape__list
     .offers-tape__block(
@@ -16,6 +18,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 export default class OffersTape extends Vue {
 
   @Prop(Array) offers;
+  @Prop([String, Boolean]) headCenter: string | boolean;
 
 }
 </script>
@@ -28,8 +31,12 @@ export default class OffersTape extends Vue {
 
   &__header {
     box: horizontal left space-between;
-    padding: 20px;
+    padding: 20px 16px;
     margin: 0;
+
+    &.is--center {
+      justify-content: center;
+    }
 
     h1 {
       font-size: 14px;

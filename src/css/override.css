@@ -1,8 +1,16 @@
 
 .vm-button {
   text-transform: none;
+  font-weight: 600;
 }
 
 .vm-tab__label {
   font-weight: 600;
+}
+
+.vm-switch {
+
+  .vm-option {
+    font-weight: 600;
+  }
 }
