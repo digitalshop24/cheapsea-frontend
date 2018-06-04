@@ -5,6 +5,7 @@ import Home from '@/pages/Home.vue';
 import Chips from '@/pages/Chips.vue';
 import Offers from '@/pages/Offers.vue';
 import LocationPage from '@/pages/Location.vue';
+import OfferView from '@/pages/Offer.vue';
 
 Vue.use(Router)
 
@@ -35,6 +36,12 @@ export default new Router({
         name: 'location',
         component: LocationPage
     },
+    {
+      path: '/offers/:id',
+      name: 'offer',
+      props: true,
+      component: OfferView
+    }
     // {
     //     path: '*',
     //     redirect: { name: 'front' }

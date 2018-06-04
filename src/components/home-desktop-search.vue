@@ -52,15 +52,8 @@ vm-form.bg-light(
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import SelectCity from '@/components/select-city.vue';
-import OfferType from '@/components/offer-type.vue';
 
-@Component({
-  components: {
-    SelectCity,
-    OfferType
-  }
-})
+@Component
 export default class HomeDesktopSearch extends Vue {
   offerType: string = 'airplane';
 }

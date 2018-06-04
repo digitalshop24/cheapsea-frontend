@@ -1,25 +1,25 @@
 <template lang="pug">
-Modal.offer-view
-    Header.box-light(slot="header")
+.offer-view
+    app-header.box-light(slot="header")
         vm-button(
             icon="arrow_back"
             @click="$emit('close')"
         )
-        h1 
+        h1
             | {{ offer.origin | json('name') }}
-            | - 
+            | -
             | {{ offer.destination | json('name') }}
 
     .offer-view__header
         p {{ offer.origin | json('name') }}
         p {{ offer.destination | json('name') }}
-        
+
         .offer-view__header-directions
             SvgArrow
 
         .offer-card__body
             .offer-card__points
-                .offer-card__point 
+                .offer-card__point
                     p {{ offer.date_from | time }}
                     p {{ offer.origin | json('name') }}
                     p {{ offer.date_from | dateWeek }}
@@ -29,7 +29,7 @@ Modal.offer-view
                     p {{ offer.date_to | dateWeek }}
 
         vm-button.offer-view__buy(
-            primary 
+            primary
             raised
             @click="buy"
         )
@@ -88,15 +88,15 @@ Modal.offer-view
 
     .pad-h
         vm-button.offer-view__buy(
-            primary 
+            primary
             raised
             @click="buy"
         )
             span Купить
             span от {{ offer.price | money }} ₽
 
-    
-    
+
+
     h1 Похожие предложения
 
     .pad-h
@@ -108,20 +108,22 @@ Modal.offer-view
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import SvgArrow from '@/assets/arrow.svg';
-import OfferPath from './OfferPath.vue';
-import OfferTicket from './OfferTicket.vue';
+import OfferPath from './offer-path.vue';
+import OfferTicket from './offer-ticket.vue';
+import AppHeader from './app-header.vue';
 
 @Component({
-    name: 'offer-view',
-    components: {
-        SvgArrow,
-        OfferPath,
-        OfferTicket
-    }
+  name: 'offer-view',
+  components: {
+    SvgArrow,
+    OfferPath,
+    OfferTicket,
+    AppHeader
+  }
 })
-export default class OfferView extends Vue {
+export default class OfferViewMobile extends Vue {
 
-    @Prop() 
+    @Prop()
     offer;
 
     buy() {
@@ -165,7 +167,7 @@ export default class OfferView extends Vue {
             padding-left: 56px;
             font-size: 18px;
         }
-        
+
         &-directions {
             position: absolute;
             left: 28px;
@@ -182,11 +184,11 @@ export default class OfferView extends Vue {
                 margin-top: 32px;
                 padding: 0;
 
-                p { 
+                p {
                     color: #FFF !important;
                 }
             }
-            
+
             &__point {
                 font-size: 18px;
 
@@ -204,7 +206,7 @@ export default class OfferView extends Vue {
                 }
             }
 
-            
+
         }
     }
 
@@ -255,7 +257,7 @@ export default class OfferView extends Vue {
         border-color: #B0DCA5 !important;
         padding: 8px;
         border-radius: 4px;
-        
+
         &.is--excluded {
             border-color: #F27C7C;
         }
@@ -264,7 +266,7 @@ export default class OfferView extends Vue {
            padding: 8px;
            font-size: 13px;
            line-height: 20px;
-        }       
+        }
     }
 
     &__tags {
@@ -307,7 +309,7 @@ export default class OfferView extends Vue {
     }
 
     .app-modal__content {
-        
+
         & > h1 {
             text-align: center;
             line-height: 32px;
@@ -317,7 +319,7 @@ export default class OfferView extends Vue {
             padding: 16px 24px;
         }
     }
-    
+
     .app-header {
         color: $primary;
     }

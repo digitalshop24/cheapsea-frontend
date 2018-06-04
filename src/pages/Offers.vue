@@ -1,11 +1,13 @@
 <template lang="pug">
-.offers-page
-    Header.box-primary(
-        type="back"
-        title="Предложения по запросу"
-        @back="$router.push('/search')"
-    )
-    offers-list(:offers="offers")
+div(:class="$style.root")
+  Header.box-primary(
+    type="back"
+    title="Предложения по запросу"
+    @back="$router.push('/search')"
+  )
+  offers-list(
+    :offers="offers"
+  )
 
 </template>
 
@@ -29,6 +31,7 @@ export default class OffersRoute extends RoutePage {
 }
 </script>
 
-<style lang="postcss">
+<style lang="postcss" module>
+
 
 </style>

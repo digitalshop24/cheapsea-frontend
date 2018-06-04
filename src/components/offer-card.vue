@@ -1,34 +1,36 @@
 <template lang="pug">
 .offer-card
-    .offer-card__header(@click="select")
+  router-link.offer-card__header.box-primary(
+    :to="{ name: 'offer', params: { offer: offer, id: offer.id } }"
+  )
+    p {{ offer.origin | json('name') }}
+    p {{ offer.destination | json('name') }}
+    .offer-card__header-directions
+      svg-arrow
+
+  .offer-card__body
+    .offer-card__points
+      .offer-card__point
+        h1 {{ offer.date_from | time }}
         p {{ offer.origin | json('name') }}
+        p {{ offer.date_from | dateWeek }}
+      .offer-card__point
+        h1 {{ offer.date_to | time }}
         p {{ offer.destination | json('name') }}
-        .offer-card__header-directions
-            svg-arrow
+        p {{ offer.date_to | dateWeek }}
 
-    .offer-card__body
-        .offer-card__points
-            .offer-card__point
-                h1 {{ offer.date_from | time }}
-                p {{ offer.origin | json('name') }}
-                p {{ offer.date_from | dateWeek }}
-            .offer-card__point
-                h1 {{ offer.date_to | time }}
-                p {{ offer.destination | json('name') }}
-                p {{ offer.date_to | dateWeek }}
+    offer-path(:offer="offer")
 
-        OfferPath(:offer="offer")
-
-    .offer-card__footer
-        .offer-card__footer-icons
-            i.material-icons flight
-            i.material-icons local_mall
-            i.material-icons local_dining
-        vm-button(
-            primary
-            raised
-            @click="select"
-        ) от {{ offer.price | money }} ₽
+  .offer-card__footer
+    .offer-card__footer-icons
+      i.material-icons flight
+      i.material-icons local_mall
+      i.material-icons local_dining
+    vm-button(
+      primary
+      raised
+      @click="select"
+    ) от {{ offer.price | money }} ₽
 </template>
 
 <script lang="ts">
@@ -38,11 +40,11 @@ import OfferPath from './offer-path.vue';
 import acc from 'accounting';
 
 @Component({
-    name: 'offer-card',
-    components: {
-        'svg-arrow': SvgArrow,
-        OfferPath
-    }
+  name: 'offer-card',
+  components: {
+    'svg-arrow': SvgArrow,
+    OfferPath
+  }
 })
 export default class OfferCard extends Vue {
 
@@ -59,7 +61,7 @@ export default class OfferCard extends Vue {
 .offer-card {
     background-color: #fff;
     border-radius: 4px;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     box-shadow: $shadow-2;
 
     &:last-child {
@@ -69,6 +71,7 @@ export default class OfferCard extends Vue {
     &__header {
         position: relative;
         font-size: 18px;
+        display: block;
         line-height: 28px;
         padding: 16px;
         padding-left: 56px;

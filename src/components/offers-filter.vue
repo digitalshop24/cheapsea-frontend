@@ -60,13 +60,8 @@ div(:class="$style.root")
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import OfferType from './offer-type.vue';
 
-@Component({
-  components: {
-    OfferType
-  }
-})
+@Component
 export default class OfferFilter extends Vue {
 
   form = {
