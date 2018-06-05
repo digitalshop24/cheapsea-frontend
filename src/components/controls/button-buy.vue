@@ -1,10 +1,14 @@
 <template lang="pug">
 vm-button(
-  :class="$style.root"
+  :class="[$style.root, large && $style.large]"
+  :noshadow="noshadow"
   primary
   raised
 )
-  span(:class="$style.buy") Купить
+  span(
+    v-if="label"
+    :class="$style.buy"
+  ) {{ label }}
   span(:class="$style.price") от {{ price | money }} ₽
 </template>
 
@@ -15,6 +19,9 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 export default class ButtonBuy extends Vue {
 
   @Prop([Number, String]) price: string | number;
+  @Prop(Boolean) large: boolean;
+  @Prop(String) label: string;
+  @Prop(Boolean) noshadow: boolean;
 
 }
 </script>
@@ -24,15 +31,18 @@ export default class ButtonBuy extends Vue {
 
 .root {
   display: flex;
-  height: 48px;
   padding: 0 24px;
-  font-size: 16px;
   text-transform: none;
 
   :global(.vm-button__label) {
     justify-content: space-between;
     text-transform: normal;
   }
+}
+
+.large {
+  font-size: 16px;
+  height: 48px;
 }
 
 .buy {

@@ -1,158 +1,128 @@
 <template lang="pug">
-.offer-card
-  router-link.offer-card__header.box-primary(
+div(:class="$style.root")
+  router-link.box-primary(
+    :class="$style.header"
     :to="{ name: 'offer', params: { offer: offer, id: offer.id } }"
   )
-    p {{ offer.origin | json('name') }}
-    p {{ offer.destination | json('name') }}
-    .offer-card__header-directions
-      svg-arrow
+    small {{ offer.name }}
+    div(:class="$style.headerTitle")
+      div {{ offer.origin | json('name') }}
+      arrow-directions(
+        :class="[$style.arrows, layout.smallView && $style.arrowsVertical]"
+        :vertical="layout.smallView"
+        :back="true"
+      )
+      div {{ offer.destination | json('name') }}
 
-  .offer-card__body
-    .offer-card__points
-      .offer-card__point
-        h1 {{ offer.date_from | time }}
-        p {{ offer.origin | json('name') }}
-        p {{ offer.date_from | dateWeek }}
-      .offer-card__point
-        h1 {{ offer.date_to | time }}
-        p {{ offer.destination | json('name') }}
-        p {{ offer.date_to | dateWeek }}
-
+  .pad
+    offer-points.mar-b(:offer="offer")
     offer-path(:offer="offer")
 
-  .offer-card__footer
-    .offer-card__footer-icons
-      i.material-icons flight
-      i.material-icons local_mall
-      i.material-icons local_dining
-    vm-button(
-      primary
-      raised
+  .pad(:class="$style.footer")
+    div
+      vm-icon flight
+      vm-icon local_mall
+      vm-icon local_dining
+    button-buy(
+      :price="offer.price"
+      :noshadow="true"
       @click="select"
-    ) от {{ offer.price | money }} ₽
+    )
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import SvgArrow from '@/assets/arrow.svg';
+import { State } from 'vuex-class';
+import ArrowDirections from '@/components/controls/arrow-dirs.vue';
 import OfferPath from './offer-path.vue';
-import acc from 'accounting';
+import OfferPoints from './offer-points.vue';
 
 @Component({
-  name: 'offer-card',
   components: {
-    'svg-arrow': SvgArrow,
-    OfferPath
+    OfferPath,
+    OfferPoints,
+    ArrowDirections
   }
 })
 export default class OfferCard extends Vue {
 
-    @Prop()
-    offer;
+  @State layout;
+  @Prop() offer;
 
-    select() {
-        this.$emit('select', this.offer);
-    }
+  select() {
+    this.$emit('select', this.offer);
+  }
 }
 </script>
 
-<style lang="postcss">
-.offer-card {
+<style lang="postcss" module>
+
+.root {
   width: 100%;
   background-color: #fff;
   border-radius: 4px;
   margin-bottom: 16px;
   box-shadow: $shadow-2;
 
-    &:last-child {
-        margin-bottom: 0;
-    }
-
-    &__header {
-        position: relative;
-        font-size: 18px;
-        display: block;
-        line-height: 28px;
-        padding: 16px;
-        padding-left: 56px;
-        height: 88px;
-        color: #FFF;
-        background: url(/static/images/more.jpg) no-repeat;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        cursor: pointer;
-        font-weight: 700;
-
-        &-directions {
-            position: absolute;
-            left: 16px;
-            height: 56px;
-            top: 28px;
-
-            svg {
-                width: 12px;
-            }
-        }
-
-        p {
-            font-weight: 700;
-        }
-    }
-
-    &__points {
-        box: horizontal space-between;
-        margin-bottom: 16px;
-    }
-
-
-
-    &__body, &__footer {
-        padding: 12px;
-    }
-
-    &__point {
-
-        line-height: 22px;
-        font-weight: 500;
-
-        &:last-child {
-            text-align: right;
-        }
-
-        h1, p {
-            @apply --text-nowrap;
-        }
-
-        h1 {
-            font-size: 18px;
-            margin-bottom: 4px;
-        }
-
-        p {
-            font-size: 12px;
-            line-height: 18px;
-
-            &:last-child {
-                color: $grey-600;
-            }
-        }
-    }
-
-    &__footer {
-        box: horizontal middle space-between;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-
-        i {
-            color: $grey-600;
-            font-size: 20px;
-            margin-right: 8px;
-        }
-    }
-
-    .vm-button {
-        box-shadow: none;
-    }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
+
+.header {
+  position: relative;
+  display: block;
+  padding: 16px;
+  color: #FFF;
+  background: url(/static/images/more.jpg) no-repeat;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  cursor: pointer;
+
+  small {
+    font-weight: 500;
+  }
+}
+
+.headerTitle {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+  padding-left: 40px;
+  box: vertical;
+  margin-top: 4px;
+
+  @media (--md-view) {
+    padding: 0;
+    box: horizontal middle;
+
+    .arrows {
+      margin: 0 16px;
+    }
+  }
+}
+
+.footer {
+  box: horizontal middle space-between;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+
+  i {
+    color: $grey-600;
+    font-size: 20px;
+    margin-right: 8px;
+  }
+}
+
+.arrows {
+  width: 18px;
+}
+
+.arrowsVertical {
+  width: 24px;
+  position: absolute;
+  left: 18px;
+  top: 48px;
+}
+
 </style>

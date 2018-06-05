@@ -3,11 +3,11 @@ div(:class="$style.root")
   div(:class="$style.point")
     p(:class="$style.time") {{ offer.date_from | time }}
     p {{ offer.origin | json('name') }}
-    p {{ offer.date_from | dateWeek }}
+    p.text-light {{ offer.date_from | dateWeek }}
   div(:class="[$style.point, $style.right]")
     p(:class="$style.time") {{ offer.date_to | time }}
     p {{ offer.destination | json('name') }}
-    p {{ offer.date_to | dateWeek }}
+    p.text-light {{ offer.date_to | dateWeek }}
 </template>
 
 <script lang="ts">
@@ -39,7 +39,7 @@ export default class OfferPoints extends Vue {
 
 .time {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 32px;
 }
 

@@ -1,14 +1,14 @@
 <template lang="pug">
 .offer-view
     app-header.box-light(slot="header")
-        vm-button(
-            icon="arrow_back"
-            @click="$emit('close')"
-        )
-        h1
-            | {{ offer.origin | json('name') }}
-            | -
-            | {{ offer.destination | json('name') }}
+      vm-button(
+        icon="arrow_back"
+        @click="$emit('close')"
+      )
+      h1
+        | {{ offer.origin | json('name') }}
+        | -
+        | {{ offer.destination | json('name') }}
 
     .offer-view__header
         p {{ offer.origin | json('name') }}
@@ -109,6 +109,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import SvgArrow from '@/assets/arrow.svg';
 import OfferPath from './offer-path.vue';
+import OfferCard from './offer-card.vue';
 import OfferTicket from './offer-ticket.vue';
 import AppHeader from './app-header.vue';
 
@@ -117,6 +118,7 @@ import AppHeader from './app-header.vue';
   components: {
     SvgArrow,
     OfferPath,
+    OfferCard,
     OfferTicket,
     AppHeader
   }

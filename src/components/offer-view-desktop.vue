@@ -8,6 +8,7 @@ div(
     :style="{ 'background-image': 'url(/static/images/front-head.jpg)' }"
   )
     button-buy(
+      label="Купить"
       :class="$style.buy"
       :price="offer.price"
     )
@@ -105,6 +106,8 @@ div(
       :class="$style.content"
     )
       button-buy(
+        label="Купить"
+        large
         :class="$style.buy"
         :price="offer.price"
       )
@@ -184,6 +187,7 @@ export default class OfferView extends Vue {
 
 .buy {
   width: 290px;
+  height: 48px;
 }
 
 .headTitle {
@@ -224,7 +228,7 @@ export default class OfferView extends Vue {
     height: 26px;
   }
 
-  p {
+  > p {
     line-height: 26px;
     margin-bottom: 24px;
 
@@ -263,7 +267,7 @@ export default class OfferView extends Vue {
 }
 
 .offers {
-  padding: 0 0 240px;
+  padding: 0 0 160px;
   max-width: 640px;
   margin: auto;
 }

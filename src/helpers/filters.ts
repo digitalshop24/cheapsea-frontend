@@ -1,6 +1,7 @@
 import { pad } from './parse';
 import acc from 'accounting';
 import dict from './dict.json';
+import { capitalize } from 'lodash/string';
 
 export default function(Vue) {
 
@@ -14,7 +15,7 @@ export default function(Vue) {
         const year = date.getFullYear();
         const weekday = dict.weekday[date.getDay()][1];
 
-        return `${day} ${month} ${year}, ${weekday}`;
+        return `${day} ${capitalize(month)} ${year}, ${capitalize(weekday)}`;
     });
 
     Vue.filter('time', function(value) {
@@ -46,4 +47,6 @@ export default function(Vue) {
 
         return value;
     });
+
+    Vue.filter('capitalize', )
 }
