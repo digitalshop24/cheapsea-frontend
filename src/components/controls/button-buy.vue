@@ -25,7 +25,6 @@ export default class ButtonBuy extends Vue {
 .root {
   display: flex;
   height: 48px;
-  margin-top: 32px;
   padding: 0 24px;
   font-size: 16px;
   text-transform: none;

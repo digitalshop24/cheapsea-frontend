@@ -3,7 +3,7 @@
     .offer-ticket__header
         h1 {{ title }}
 
-    OfferPath(:offer="offer")
+    offer-path(:offer="offer")
 
     .offer-ticket__unit
         .offer-ticket__unit-wrapper

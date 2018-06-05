@@ -59,10 +59,11 @@ export default class OfferCard extends Vue {
 
 <style lang="postcss">
 .offer-card {
-    background-color: #fff;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    box-shadow: $shadow-2;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  box-shadow: $shadow-2;
 
     &:last-child {
         margin-bottom: 0;
