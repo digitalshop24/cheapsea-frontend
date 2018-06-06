@@ -1,14 +1,14 @@
 <template lang="pug">
 .offer-view
-    app-header.box-light(slot="header")
-      vm-button(
-        icon="arrow_back"
-        @click="$emit('close')"
-      )
-      h1
-        | {{ offer.origin | json('name') }}
-        | -
-        | {{ offer.destination | json('name') }}
+    //- app-header.box-light(slot="header")
+    //-   vm-button(
+    //-     icon="arrow_back"
+    //-     @click="$emit('close')"
+    //-   )
+    //-   h1
+    //-     | {{ offer.origin | json('name') }}
+    //-     | -
+    //-     | {{ offer.destination | json('name') }}
 
     .offer-view__header
         p {{ offer.origin | json('name') }}
@@ -17,16 +17,7 @@
         .offer-view__header-directions
             SvgArrow
 
-        .offer-card__body
-            .offer-card__points
-                .offer-card__point
-                    p {{ offer.date_from | time }}
-                    p {{ offer.origin | json('name') }}
-                    p {{ offer.date_from | dateWeek }}
-                .offer-card__point
-                    p {{ offer.date_to | time }}
-                    p {{ offer.destination | json('name') }}
-                    p {{ offer.date_to | dateWeek }}
+        offer-points.offer-view__points(:offer="offer")
 
         vm-button.offer-view__buy(
             primary
@@ -39,23 +30,23 @@
     .offer-view__tickets
         OfferTicket(title="Билет туда" :offer="offer")
 
-    h1 Описание
+    .offer-view__title Описание
 
-    .offer-view__about
+    .offer-view__content
         p Очень боялась ехать одна в Кубу, понаслушалась всякого, поэтому тщательно выбирала отель.
         p Остановилась на Holiday потому что уже отдыхала в этой сети в Тайланде. Просто не хотела рисковать. За 11 дней я не пожалела о своём выборе ни разу! Прилагаю фотки
 
-        .vm-row(data-align="center").pad
-            img(src="/static/images/chips-description-image-01.jpg" alt="")
+    .vm-row(data-align="center")
+      img(src="/static/images/chips-description-image-01.jpg" alt="")
 
-    h1 Входит в стоимость
+    .offer-view__title Входит в стоимость
 
     .offer-view__box
         p Бесплатный трансфер из аэропорта в отель и обратно
         p Услуги русскоговорящего гида в течение всего отдыха
         p Билеты на двоих в обе стороны
 
-    h1 Не входит в стоимость
+    .offer-view__title Не входит в стоимость
 
     .offer-view__box.is--excluded
         p Топливный сбор
@@ -95,9 +86,7 @@
             span Купить
             span от {{ offer.price | money }} ₽
 
-
-
-    h1 Похожие предложения
+    .offer-view__title Похожие предложения
 
     .pad-h
         OfferCard(:offer="offer")
@@ -111,6 +100,7 @@ import SvgArrow from '@/assets/arrow.svg';
 import OfferPath from './offer-path.vue';
 import OfferCard from './offer-card.vue';
 import OfferTicket from './offer-ticket.vue';
+import OfferPoints from './offer-points.vue';
 import AppHeader from './app-header.vue';
 
 @Component({
@@ -120,6 +110,7 @@ import AppHeader from './app-header.vue';
     OfferPath,
     OfferCard,
     OfferTicket,
+    OfferPoints,
     AppHeader
   }
 })
@@ -140,6 +131,36 @@ export default class OfferViewMobile extends Vue {
 @import 'css/colors';
 
 .offer-view {
+
+  .offer-view__title {
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 32px 0;
+  }
+
+  .offer-view__content {
+    padding: 0 16px 24px;
+
+    p {
+      font-size: 13px;
+      margin-bottom: 8px;
+      line-height: 20px;
+    }
+
+    img {
+      border-radius: 2px;
+    }
+  }
+
+  &__points {
+    margin-top: 32px;
+
+    p {
+      color: #FFF !important;
+    }
+  }
 
     &__header {
         height: 356px;
@@ -190,25 +211,6 @@ export default class OfferViewMobile extends Vue {
                     color: #FFF !important;
                 }
             }
-
-            &__point {
-                font-size: 18px;
-
-                p:first-child {
-                    font-size: 22px;
-                    margin-bottom: 12px;
-                }
-
-                p:nth-child(2) {
-                    font-size: 14px;
-                }
-
-                p:last-child {
-                    opacity: .8;
-                }
-            }
-
-
         }
     }
 
@@ -239,24 +241,14 @@ export default class OfferViewMobile extends Vue {
     }
 
     &__about {
-        padding: 0 16px;
 
-        p {
-            font-size: 13px;
-            margin-bottom: 8px;
-            line-height: 20px;
-        }
-
-        img {
-            border-radius: 2px;
-        }
     }
 
-    &__box {
+    .offer-view__box {
         margin: 0 16px;
         border-width: 2px;
         border-style: solid;
-        border-color: #B0DCA5 !important;
+        border-color: #B0DCA5;
         padding: 8px;
         border-radius: 4px;
 

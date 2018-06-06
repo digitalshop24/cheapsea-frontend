@@ -14,8 +14,8 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import { State } from 'vuex-class';
 import RoutePage from '@/core/route';
 import OffersContainer from '@/core/offers';
-import OfferViewDesktop from '@/components/offer-view-desktop';
-import OfferViewMobile from '@/components/offer-view-mobile';
+import OfferViewDesktop from '@/components/offer-view-desktop.vue';
+import OfferViewMobile from '@/components/offer-view-mobile.vue';
 
 @Component({
   components: {

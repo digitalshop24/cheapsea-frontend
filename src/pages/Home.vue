@@ -130,7 +130,11 @@ export default class HomeRoute extends RoutePage {
 }
 
 .offersList {
-  padding-bottom: 40px;
+  padding: 0 8px 40px;
+
+  @media (--md-view) {
+    padding: 0 0 40px;
+  }
 }
 
 </style>

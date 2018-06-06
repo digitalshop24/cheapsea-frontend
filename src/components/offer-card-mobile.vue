@@ -1,24 +1,47 @@
 <template lang="pug">
-offer-card-mobile(
-  v-if="layout.smallView"
-  :offer="offer"
-)
-offer-card-desktop(
-  v-else
-  :offer="offer"
-)
+div(:class="$style.root")
+  router-link.box-primary(
+    :class="$style.header"
+    :to="{ name: 'offer', params: { offer: offer, id: offer.id } }"
+  )
+    small {{ offer.name }}
+    div(:class="$style.headerTitle")
+      div {{ offer.origin | json('name') }}
+      arrow-directions(
+        :class="[$style.arrows, layout.smallView && $style.arrowsVertical]"
+        :vertical="layout.smallView"
+        :back="true"
+      )
+      div {{ offer.destination | json('name') }}
+
+  .pad
+    offer-points.mar-b(:offer="offer")
+    offer-path(:offer="offer")
+
+  .pad(:class="$style.footer")
+    div
+      vm-icon flight
+      vm-icon local_mall
+      vm-icon local_dining
+    button-buy(
+      :price="offer.price"
+      :noshadow="true"
+      @click="select"
+    )
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import OfferCardMobile from './offer-card-mobile.vue';
-import OfferCardDesktop from './offer-card-desktop.vue';
 import { State } from 'vuex-class';
+import ArrowDirections from '@/components/controls/arrow-dirs.vue';
+import OfferPath from './offer-path.vue';
+import OfferPoints from './offer-points.vue';
 
 @Component({
   components: {
-    OfferCardMobile,
-    OfferCardDesktop
+    OfferPath,
+    OfferPoints,
+    ArrowDirections
   }
 })
 export default class OfferCard extends Vue {
@@ -73,6 +96,7 @@ export default class OfferCard extends Vue {
   line-height: 28px;
   font-weight: 700;
   padding-left: 40px;
+  margin-top: 6px;
   box: vertical;
 
   @media (--md-view) {
@@ -105,7 +129,7 @@ export default class OfferCard extends Vue {
   width: 24px;
   position: absolute;
   left: 18px;
-  top: 48px;
+  top: 46px;
 }
 
 </style>

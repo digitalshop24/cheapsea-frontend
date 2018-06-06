@@ -1,9 +1,13 @@
 <template lang="pug">
 div(:class="$style.root")
+
   div(:class="$style.point")
     p(:class="$style.time") {{ offer.date_from | time }}
     p {{ offer.origin | json('name') }}
     p.text-light {{ offer.date_from | dateWeek }}
+
+  slot
+
   div(:class="[$style.point, $style.right]")
     p(:class="$style.time") {{ offer.date_to | time }}
     p {{ offer.destination | json('name') }}
@@ -28,13 +32,15 @@ export default class OfferPoints extends Vue {
 @import '@design';
 
 .root {
-  box: horizontal space-between;
+  box: horizontal space-between stretch;
   line-height: 18px;
+  height: 70px;
 }
 
 .point {
   font-size: 14px;
   font-weight: 500;
+  padding: 0 40px 0 0;
 }
 
 .time {
@@ -45,5 +51,6 @@ export default class OfferPoints extends Vue {
 
 .right {
   text-align: right;
+  padding: 0 0 0 40px;
 }
 </style>

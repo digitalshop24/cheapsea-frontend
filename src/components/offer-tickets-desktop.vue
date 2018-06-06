@@ -5,11 +5,14 @@ div(:class="$style.root")
       h1(:class="$style.ticketHeadTitle") Билет туда
       svg-fly-desktop(:class="$style.ticketHeadSvg")
       offer-points(:offer="offer")
+
     div(:class="$style.divider")
+
     div(:class="$style.block")
       h1(:class="$style.ticketHeadTitle") Билет обратно
       svg-fly-desktop(:class="$style.ticketHeadSvg")
-      offer-points(:offer="offer")
+      offer-points.pad(:offer="offer")
+
   div(:class="$style.body")
     .container(:class="$style.bodyContainer")
       div(:class="$style.block")

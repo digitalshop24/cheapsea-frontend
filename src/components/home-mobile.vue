@@ -28,8 +28,6 @@ div(:class="$style.root")
       h1 На море, низкие цены
       small
       p от 6500 ₽
-
-
   vm-divider
 
 </template>

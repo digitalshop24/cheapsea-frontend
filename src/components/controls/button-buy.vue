@@ -9,7 +9,7 @@ vm-button(
     v-if="label"
     :class="$style.buy"
   ) {{ label }}
-  span(:class="$style.price") от {{ price | money }} ₽
+  span(:class="$style.price") от ₽ {{ price | money }}
 </template>
 
 <script lang="ts">
