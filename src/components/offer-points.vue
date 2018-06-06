@@ -45,7 +45,7 @@ export default class OfferPoints extends Vue {
 
 .time {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 32px;
 }
 
